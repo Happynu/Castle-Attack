@@ -62,6 +62,7 @@ public class BlobTracking : MonoBehaviour, I_MessageReciever {
 
     public void RecieveMessage(byte[] message)
     {
+        Debug.Log("Blob detected?");
         string smessage = Encoding.ASCII.GetString(message);
         string[] values = smessage.Split('!');
         Blobs.Clear();
@@ -70,10 +71,19 @@ public class BlobTracking : MonoBehaviour, I_MessageReciever {
         //Debug.Log(count.ToString());
         while (i < count)
         {
-            Blob b = new Blob(int.Parse(values[i*8+1]), float.Parse(values[i * 8 + 2]), 1 - float.Parse(values[i * 8 + 3]),
+            try
+            {
+                Blob b = new Blob(int.Parse(values[i*8+1]), float.Parse(values[i * 8 + 2]), 1 - float.Parse(values[i * 8 + 3]),
                 int.Parse(values[i * 8 + 4]), int.Parse(values[i * 8 + 5]), int.Parse(values[i * 8 + 6]), int.Parse(values[i * 8 + 7]), int.Parse(values[i * 8 + 8]));
-            //Debug.Log(b.XPosition + " " + b.YPosition);
-            Blobs.Add(b);
+
+                //Debug.Log(b.XPosition + " " + b.YPosition);
+                Blobs.Add(b);
+            }
+            catch (FormatException e)
+            {
+                Debug.Log("Wat is deze: " + e.Message);
+            }
+            
             i++;
         }
         //GameConsole.Log(Blobs.Count.ToString());
