@@ -78,13 +78,14 @@ public class BlobTracking : MonoBehaviour, I_MessageReciever {
 
                 //Debug.Log(b.XPosition + " " + b.YPosition);
                 Blobs.Add(b);
+                i++;
             }
             catch (FormatException e)
             {
                 Debug.Log("Wat is deze: " + e.Message);
             }
             
-            i++;
+
         }
         //GameConsole.Log(Blobs.Count.ToString());
     }
