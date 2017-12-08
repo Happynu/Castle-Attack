@@ -43,7 +43,7 @@ public class blobPlacer : MonoBehaviour {
         Destroy(blob, 5);
     }
 
-    //Makes sure the object
+    //Translates the kinect coordinates to Unity coordinates.
     private Vector3 Translate(float x, float y)
     {
         float height = 2f * cam.orthographicSize;
@@ -53,6 +53,7 @@ public class blobPlacer : MonoBehaviour {
             ((cam.transform.position.y) + (y * height) - (height / 2)));
     }
 
+    //Spawns a raycast at the position for debugging.
     private RaycastHit Raycast(LayerMask layerMask, Vector3 position)
     {
         RaycastHit hit;
