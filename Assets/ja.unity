@@ -253,6 +253,9 @@ MonoBehaviour:
   blobberPrefap: {fileID: 1022976248895128, guid: a703509ffaf435a4b8a4fdbda27ce05f,
     type: 2}
   cam: {fileID: 632733584}
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1140131857
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +267,7 @@ GameObject:
   - component: {fileID: 1140131860}
   - component: {fileID: 1140131859}
   - component: {fileID: 1140131858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 1140131857}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4.52, y: 3.09, z: 10}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.2, y: 0.31815803, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
