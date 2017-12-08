@@ -20,6 +20,7 @@ public class blobPlacer : MonoBehaviour {
             if (OkayCheck(blob))
             {
                 SpawnCube(blob);
+                Click(blob);
             }
         }
 	}
@@ -34,11 +35,13 @@ public class blobPlacer : MonoBehaviour {
             _blob.Width > 0);
     }
 
+    // Old code used to spawn a cube where an object hit the screen.
     private void SpawnCube(Blob _blob)
     {
         GameObject.Instantiate(blobberPrefap, Translate(_blob.XPosition, _blob.YPosition), Quaternion.identity);
     }
 
+    //Makes sure the object
     private Vector3 Translate(float x, float y)
     {
         float height = 2f * cam.orthographicSize;
@@ -46,5 +49,11 @@ public class blobPlacer : MonoBehaviour {
 
         return new Vector3(((cam.transform.position.x) + (x * width) - (width/2)),
             ((cam.transform.position.y) + (y * height) - (height / 2)));
+    }
+
+    private void Click(Blob b)
+    {
+        if (Physics.Raycast(transform.position, Vector3.forward))
+            print("There is something in front of the object!");
     }
 }
