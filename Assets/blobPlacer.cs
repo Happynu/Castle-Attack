@@ -44,7 +44,7 @@ public class blobPlacer : MonoBehaviour {
         float height = 2f * cam.orthographicSize;
         float width = height * cam.aspect;
 
-        return new Vector3(((cam.transform.position.x - (2 / width)) + (x * width)),
-            ((cam.transform.position.y - (2 / height)) + (y * height)));
+        return new Vector3(((cam.transform.position.x) + (x * width) - (width/2)),
+            ((cam.transform.position.y) + (y * height) - (height / 2)));
     }
 }
