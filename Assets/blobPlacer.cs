@@ -6,6 +6,7 @@ public class blobPlacer : MonoBehaviour {
 
     public GameObject blobberPrefap;
     public Camera cam;
+    public LayerMask objectLayer;
 
     // Use this for initialization
     void Start ()
@@ -20,7 +21,7 @@ public class blobPlacer : MonoBehaviour {
             if (OkayCheck(blob))
             {
                 SpawnCube(blob);
-                Click(blob);
+                Raycast(objectLayer, Translate(blob.XPosition, blob.YPosition));
             }
         }
 	}
@@ -38,7 +39,8 @@ public class blobPlacer : MonoBehaviour {
     // Old code used to spawn a cube where an object hit the screen.
     private void SpawnCube(Blob _blob)
     {
-        GameObject.Instantiate(blobberPrefap, Translate(_blob.XPosition, _blob.YPosition), Quaternion.identity);
+        GameObject blob = Instantiate(blobberPrefap, Translate(_blob.XPosition, _blob.YPosition), Quaternion.identity);
+        Destroy(blob, 5);
     }
 
     //Makes sure the object
@@ -51,10 +53,18 @@ public class blobPlacer : MonoBehaviour {
             ((cam.transform.position.y) + (y * height) - (height / 2)));
     }
 
-    private void Click(Blob b)
+    private RaycastHit Raycast(LayerMask layerMask, Vector3 position)
     {
-        Ray r = cam.ScreenPointToRay(new Vector2(b.XPosition, b.YPosition));
-        if (Physics.Raycast(r.origin, Vector3.forward))
-            Debug.Log("There is something in front of the object!");
+        RaycastHit hit;
+        Ray ray = new Ray(position, Vector3.forward);
+
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 5);
+
+        Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
+        if(hit.transform != null)
+        {
+            Debug.Log("Hit bOII");
+        }
+        return hit;
     }
 }
