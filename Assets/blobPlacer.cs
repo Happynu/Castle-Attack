@@ -21,7 +21,7 @@ public class blobPlacer : MonoBehaviour {
             if (OkayCheck(blob))
             {
                 SpawnCube(blob);
-                Raycast(objectLayer, Translate(blob.XPosition, blob.YPosition));
+                Click(Raycast(objectLayer, blob));
             }
         }
 	}
@@ -54,18 +54,28 @@ public class blobPlacer : MonoBehaviour {
     }
 
     //Spawns a raycast at the position for debugging.
-    private RaycastHit Raycast(LayerMask layerMask, Vector3 position)
+    private RaycastHit Raycast(LayerMask layerMask, Blob blob)
     {
         RaycastHit hit;
+        Vector3 position = Translate(blob.XPosition, blob.YPosition);
         Ray ray = new Ray(position, Vector3.forward);
 
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 5);
-
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
-        if(hit.transform != null)
-        {
-            Debug.Log("Hit bOII");
-        }
+
         return hit;
+    }
+
+    private void Click(RaycastHit hit)
+    {
+        if (hit.transform != null)
+        {
+            Interactable obj = hit.transform.GetComponent<Interactable>();
+
+            if (obj != null)
+            {
+                obj.Interact();
+            }
+        }
     }
 }
