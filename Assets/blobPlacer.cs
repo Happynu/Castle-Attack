@@ -54,6 +54,6 @@ public class blobPlacer : MonoBehaviour {
     private void Click(Blob b)
     {
         if (Physics.Raycast(transform.position, Vector3.forward))
-            print("There is something in front of the object!");
+            Debug.Log("There is something in front of the object!");
     }
 }
