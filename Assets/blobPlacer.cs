@@ -53,7 +53,8 @@ public class blobPlacer : MonoBehaviour {
 
     private void Click(Blob b)
     {
-        if (Physics.Raycast(transform.position, Vector3.forward))
+        Ray r = cam.ScreenPointToRay(new Vector2(b.XPosition, b.YPosition));
+        if (Physics.Raycast(r.origin, Vector3.forward))
             Debug.Log("There is something in front of the object!");
     }
 }
