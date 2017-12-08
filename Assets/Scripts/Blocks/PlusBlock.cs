@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractTest : Interactable
+public class PlusBlock : Interactable
 {
     // Use this for initialization
     void Start ()
