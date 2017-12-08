@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NoiseThreshold>30</NoiseThreshold>
+  <FlipHorizontally>false</FlipHorizontally>
+  <FlipVertically>true</FlipVertically>
+  <DetectionRangeFromWall>250</DetectionRangeFromWall>
+  <MinimalObjectSize>5</MinimalObjectSize>
+  <TcpOutputIp>127.0.0.1</TcpOutputIp>
+  <TcpOutputPort>3000</TcpOutputPort>
+  <CallibratorMargen>100</CallibratorMargen>
+</Settings>
