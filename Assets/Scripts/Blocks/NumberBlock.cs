@@ -6,27 +6,29 @@ using UnityEngine.UI;
 public class NumberBlock : Interactable
 {
     public Text text;
+    public int number;
 
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        UpdateText();
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        UpdateText();
+  
 	}
 
     public override void Interact()
     {
-        Debug.Log("Number block hit");
+        Debug.Log(number + " block hit");
+        Destroy(this.gameObject);
+
     }
 
     void UpdateText()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
-        text.transform.position = screenPos;
+        text.text = number.ToString();
     }
 }
