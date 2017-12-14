@@ -393,6 +393,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7927b35031252468d26253c75b375b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minusBrickPrefab: {fileID: 0}
+  plusBrickPrefab: {fileID: 0}
+  multiplierBrickPrefab: {fileID: 0}
+  numberBrickPrefab: {fileID: 0}
+  multiplierColor: {fileID: 0}
+  teamRedColor: {fileID: 0}
+  teamBlueColor: {fileID: 0}
 --- !u!4 &457844515
 Transform:
   m_ObjectHideFlags: 0
