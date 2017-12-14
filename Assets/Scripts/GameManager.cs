@@ -81,5 +81,15 @@ public class GameManager : MonoBehaviour
         EquationB.text = "";
 
         //randomly select starting team
+        int startteam = Random.Range(0, 1);
+
+        if (startteam == 0)
+        {
+            currentTeam = teamA;
+        }
+        else
+        {
+            currentTeam = teamB;
+        }
     }
 }
