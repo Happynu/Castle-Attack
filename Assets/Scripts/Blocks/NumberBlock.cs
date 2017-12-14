@@ -8,17 +8,10 @@ public class NumberBlock : Interactable
     public Text text;
     public int number;
 
-    // Use this for initialization
     void Start ()
     {
         UpdateText();
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-  
-	}
 
     public override void Interact()
     {
