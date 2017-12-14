@@ -15,8 +15,7 @@ public class MinusBlock : Interactable
     public override void Interact()
     {
         Debug.Log("Minus block hit");
-        Destroy(this.gameObject);
-
+        GameManager.instance.HitBrick(this);
     }
 
     void UpdateText()

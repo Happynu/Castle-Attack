@@ -16,8 +16,11 @@ public class NumberBlock : Interactable
     public override void Interact()
     {
         Debug.Log(number + " block hit");
-        Destroy(this.gameObject);
-
+        bool succes = GameManager.instance.HitBrick(this);
+        if (succes)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void UpdateText()

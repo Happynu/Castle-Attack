@@ -15,8 +15,7 @@ public class PlusBlock : Interactable
     public override void Interact()
     {
         Debug.Log("Plus block hit");
-        Destroy(this.gameObject);
-
+        GameManager.instance.HitBrick(this);
     }
 
     void UpdateText()

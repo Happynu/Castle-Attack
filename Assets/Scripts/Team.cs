@@ -14,10 +14,11 @@ public class Team : MonoBehaviour
 {
     public string color;
     public int goalNumber;
-    public bool won = false;
 
-    public int currentNumber;
-    public Multiplier currentMultiplier = Multiplier.NONE;
+    private bool won = false;
+
+    private int currentNumber;
+    private Multiplier currentMultiplier = Multiplier.NONE;
 
     public bool HitBrick(Interactable brick)
     {
@@ -38,6 +39,7 @@ public class Team : MonoBehaviour
             if (currentMultiplier == Multiplier.NONE)
             {
                 currentMultiplier = Multiplier.PLUS;
+                Debug.Log("Team " + color + " hit multiplier: plus");
                 return true;
             }
             else return false;
@@ -48,6 +50,7 @@ public class Team : MonoBehaviour
             if (currentMultiplier == Multiplier.NONE)
             {
                 currentMultiplier = Multiplier.MINUS;
+                Debug.Log("Team " + color + " hit multiplier: minus");
                 return true;
             }
             else return false;
@@ -58,11 +61,12 @@ public class Team : MonoBehaviour
             if (currentMultiplier == Multiplier.NONE)
             {
                 currentMultiplier = Multiplier.MULTIPLY;
+                Debug.Log("Team " + color + " hit multiplier: multiply");
                 return true;
             }
             else return false;
         }
-        else return false;
+        return false;
     }
 
     void Calculate(NumberBlock num)

@@ -15,7 +15,7 @@ public class MultiplyBlock : Interactable
     public override void Interact()
     {
         Debug.Log("Multiply block hit");
-        Destroy(this.gameObject);
+        GameManager.instance.HitBrick(this);
     }
 
     void UpdateText()

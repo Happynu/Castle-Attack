@@ -977,7 +977,7 @@ RectTransform:
   m_GameObject: {fileID: 1110756444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.81, y: 17.12, z: -5}
-  m_LocalScale: {x: 0.061728396, y: 0.061728396, z: 0.061728396}
+  m_LocalScale: {x: 0.06269593, y: 0.06269593, z: 0.06269593}
   m_Children:
   - {fileID: 505426868}
   - {fileID: 681405552}
@@ -1199,7 +1199,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1362701613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 299, z: 0}
+  m_LocalPosition: {x: 1, y: 294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 987458854}
@@ -1307,6 +1307,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f5e0e9041d2c0543b7f007d3a1d2585, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1558303286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1558303288}
+  - component: {fileID: 1558303287}
+  m_Layer: 0
+  m_Name: TeamBlue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1558303287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1558303286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569fbe37020382748a85e3b25a7a5685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: blue
+  goalNumber: 15
+--- !u!4 &1558303288
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1558303286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.176533, y: 17.30662, z: -10.1875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1750880491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,6 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: red
+  goalNumber: 15
 --- !u!4 &1750880493
 Transform:
   m_ObjectHideFlags: 0

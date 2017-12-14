@@ -32,13 +32,14 @@ public class GameManager : MonoBehaviour
 		
 	}
 
-    void HitBrick(Interactable brick)
+    public bool HitBrick(Interactable brick)
     {
         bool succes = currentTeam.HitBrick(brick);
         if (succes)
         {
             SwitchTeam();
         }
+        return succes;
     }
 
     void SwitchTeam()
@@ -51,5 +52,6 @@ public class GameManager : MonoBehaviour
         {
             currentTeam = teamA;
         }
+        Debug.Log("TEAM " + currentTeam.color + "'s TURN");
     }
 }
