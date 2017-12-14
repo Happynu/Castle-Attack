@@ -1,17 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Space(10)]
     public Team teamA;
     public Team teamB;
 
+    [Space(10)]
     public Team currentTeam;
 
-	void Awake ()
+    [Space(10)]
+    public Text EndNumberA;
+    public Text EndNumberB;
+
+    [Space(10)]
+    public Text EquationA;
+    public Text EquationB;
+
+    void Awake ()
     {
 		if (instance == null)
         {
@@ -25,6 +36,8 @@ public class GameManager : MonoBehaviour
         {
             currentTeam = teamA;
         }
+
+        StartGame();
     }
 
     void Update ()
@@ -52,6 +65,21 @@ public class GameManager : MonoBehaviour
         {
             currentTeam = teamA;
         }
+
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
+    }
+
+    void StartGame()
+    {  
+        teamA.goalNumber = Random.Range(10, 20);
+        EndNumberA.text = teamA.goalNumber.ToString();
+
+        teamB.goalNumber = Random.Range(10, 20);
+        EndNumberB.text = teamB.goalNumber.ToString();
+
+        EquationA.text = "";
+        EquationB.text = "";
+
+        //randomly select starting team
     }
 }
