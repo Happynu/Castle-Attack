@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Algorithm : MonoBehaviour
 {
-    private List<int> blockNumbers = new List<int> { 2, 5, 8 };
+    private List<int> blockNumbers = new List<int> { 2, 5 ,8};
     private List<int> possibleAnswers = new List<int>();
     private int currentNumber = 0;
-    private int goalNumber = 10;
+    private int goalNumber = 402;
     private int nextNewBrick = 0;
 
     private int minBrickValue = 1;
@@ -20,7 +20,6 @@ public class Algorithm : MonoBehaviour
         {
             Debug.Log(i);
         }
-
     }
 
     //This method will calculate the value for a new brick number
