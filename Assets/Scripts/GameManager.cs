@@ -23,6 +23,18 @@ public class GameManager : MonoBehaviour
     //For hitting bricks too many times, don't touch
     public bool timedout = false;
 
+    public IEnumerator HitTimout()
+    {
+        GameManager.instance.timedout = true;
+        yield return new WaitForSeconds(1f);
+        GameManager.instance.timedout = false;
+    }
+
+    public void StartHitTimout()
+    {
+        StartCoroutine(HitTimout());
+    }
+
     void Awake ()
     {
 		if (instance == null)

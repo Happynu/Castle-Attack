@@ -17,10 +17,12 @@ public class NumberBlock : Interactable
     {
         if (GameManager.instance.timedout == false)
         {
-            StartCoroutine(HitTimout());
+            GameManager.instance.StartHitTimout();
             Debug.Log("Multiply block hit");
-            GameManager.instance.HitBrick(this);
-            Destroy(this.gameObject);
+            if (GameManager.instance.HitBrick(this))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
