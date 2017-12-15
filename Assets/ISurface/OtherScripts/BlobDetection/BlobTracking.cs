@@ -62,7 +62,7 @@ public class BlobTracking : MonoBehaviour, I_MessageReciever {
 
     public void RecieveMessage(byte[] message)
     {
-        Debug.Log("Blob detected?");
+        //Debug.Log("Blob detected");
         string smessage = Encoding.ASCII.GetString(message);
         string[] values = smessage.Split('!');
         Blobs.Clear();
