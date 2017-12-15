@@ -17,87 +17,56 @@ public class Team : MonoBehaviour
 
     private bool won = false;
 
-    private bool started = false;
-
     private int currentNumber;
     private Multiplier currentMultiplier = Multiplier.NONE;
 
-    /// <summary>
-    /// Called when this team has hit a brick
-    /// </summary>
-    /// <param name="brick">the brick you hit.</param>
-    /// <returns>whether the move was allowed or not.</returns>
     public bool HitBrick(Interactable brick)
     {
-        //At the start of the game, teams choose their starting number.
-        if (started == false)
+        if (brick is NumberBlock)
         {
-            if (brick is NumberBlock)
+            NumberBlock num = brick as NumberBlock;
+            if (currentMultiplier != Multiplier.NONE)
             {
-                NumberBlock num = brick as NumberBlock;
-                currentNumber = num.number;
-                started = true;
+                Calculate(num);
+                Debug.Log("Team " + color + " hit number: " + num.number);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            else return false;
         }
-        //During the rest of the game, we have to check which brick was hit.
-        else
+        else if (brick is PlusBlock)
         {
-            //A Number block
-            if (brick is NumberBlock)
+            PlusBlock plus = brick as PlusBlock;
+            if (currentMultiplier == Multiplier.NONE)
             {
-                NumberBlock num = brick as NumberBlock;
-                //Only if there is a multiplier selected, you are allowed to hit a number.
-                if (currentMultiplier != Multiplier.NONE)
-                {
-                    Calculate(num);
-                    Debug.Log("Team " + color + " hit number: " + num.number);
-                    return true;
-                }
-                else return false;
+                currentMultiplier = Multiplier.PLUS;
+                Debug.Log("Team " + color + " hit multiplier: plus");
+                return true;
             }
-            //A Plus block
-            else if (brick is PlusBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.PLUS;
-                    Debug.Log("Team " + color + " hit multiplier: plus");
-                    return true;
-                }
-                else return false;
-            }
-            //A Minus block
-            else if (brick is MinusBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.MINUS;
-                    Debug.Log("Team " + color + " hit multiplier: minus");
-                    return true;
-                }
-                else return false;
-            }
-            //A Multiply block
-            else if (brick is MultiplyBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.MULTIPLY;
-                    Debug.Log("Team " + color + " hit multiplier: multiply");
-                    return true;
-                }
-                else return false;
-            }
-            return false;
+            else return false;
         }
+        else if (brick is MinusBlock)
+        {
+            MinusBlock min = brick as MinusBlock;
+            if (currentMultiplier == Multiplier.NONE)
+            {
+                currentMultiplier = Multiplier.MINUS;
+                Debug.Log("Team " + color + " hit multiplier: minus");
+                return true;
+            }
+            else return false;
+        }
+        else if (brick is MultiplyBlock)
+        {
+            MultiplyBlock mult = brick as MultiplyBlock;
+            if (currentMultiplier == Multiplier.NONE)
+            {
+                currentMultiplier = Multiplier.MULTIPLY;
+                Debug.Log("Team " + color + " hit multiplier: multiply");
+                return true;
+            }
+            else return false;
+        }
+        return false;
     }
 
     void Calculate(NumberBlock num)
