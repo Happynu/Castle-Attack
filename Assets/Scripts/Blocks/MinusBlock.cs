@@ -10,16 +10,22 @@ public class MinusBlock : Interactable
     void Start ()
     {
         UpdateText();
-	}
+    }
 
     public override void Interact()
     {
-        Debug.Log("Minus block hit");
-        GameManager.instance.HitBrick(this);
+        if (GameManager.instance.timedout == false)
+        {
+            GameManager.instance.StartHitTimout();
+            Debug.Log("Multiply block hit");
+            GameManager.instance.HitBrick(this);
+        }
     }
 
     public void UpdateText()
     {
         text.text = "-";
     }
+
+
 }

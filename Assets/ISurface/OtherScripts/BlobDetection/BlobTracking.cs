@@ -32,7 +32,7 @@ public class BlobTracking : MonoBehaviour, I_MessageReciever {
     private void Start()
     {
         processor.SetReciever(this);
-        Action method = ToggleDbgBlobs; 
+        //Action method = ToggleDbgBlobs; 
         //GameConsole.RegisterCommand(method, "msg");
     }
 

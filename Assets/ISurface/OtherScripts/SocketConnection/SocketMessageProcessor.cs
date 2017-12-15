@@ -28,7 +28,7 @@ public class SocketMessageProcessor : MonoBehaviour {
     void Start () {
         //Connect();
 
-        UnityAction method = Reconnect;
+        //UnityAction method = Reconnect;
         //GameConsole.RegisterCommand(method, "TCPconn");
 	}
 

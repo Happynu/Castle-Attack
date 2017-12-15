@@ -15,11 +15,14 @@ public class NumberBlock : Interactable
 
     public override void Interact()
     {
-        Debug.Log(number + " block hit");
-        bool succes = GameManager.instance.HitBrick(this);
-        if (succes)
+        if (GameManager.instance.timedout == false)
         {
-            Destroy(this.gameObject);
+            GameManager.instance.StartHitTimout();
+            Debug.Log("Multiply block hit");
+            if (GameManager.instance.HitBrick(this))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
