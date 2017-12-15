@@ -14,12 +14,18 @@ public class MultiplyBlock : Interactable
 
     public override void Interact()
     {
-        Debug.Log("Multiply block hit");
-        GameManager.instance.HitBrick(this);
+        if (!timedout)
+        {
+            Debug.Log("Multiply block hit");
+            GameManager.instance.HitBrick(this);
+            StartCoroutine(HitTimout());
+        }
     }
 
     void UpdateText()
     {
         text.text = "x";
     }
+
+    
 }

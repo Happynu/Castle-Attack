@@ -34,7 +34,7 @@ public class BrickManager : MonoBehaviour
         plusBrick.SetActive(true);
         plusBrick.transform.SetParent(transform);
         plusBrick.isStatic = true;
-        plusBrick.transform.position = locations[randomIndex].transform.position;
+        plusBrick.transform.position = locations[randomIndex];
         activeLocations.Add(locations[randomIndex]);
         locations.RemoveAt(randomIndex);
 
