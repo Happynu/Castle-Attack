@@ -15,12 +15,12 @@ public class NumberBlock : Interactable
 
     public override void Interact()
     {
-        if (!timedout)
+        if (GameManager.instance.timedout == false)
         {
+            StartCoroutine(HitTimout());
             Debug.Log("Multiply block hit");
             GameManager.instance.HitBrick(this);
             Destroy(this.gameObject);
-            StartCoroutine(HitTimout());
         }
     }
 

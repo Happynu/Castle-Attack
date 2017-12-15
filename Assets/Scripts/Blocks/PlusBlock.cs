@@ -14,11 +14,12 @@ public class PlusBlock : Interactable
 
     public override void Interact()
     {
-        if (!timedout)
+        if (GameManager.instance.timedout == false)
         {
+            StartCoroutine(HitTimout());
             Debug.Log("Multiply block hit");
             GameManager.instance.HitBrick(this);
-            StartCoroutine(HitTimout());
+            
         }
     }
 

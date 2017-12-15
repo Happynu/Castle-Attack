@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     [Space(10)]
     public Image Edge;
 
+    //For hitting bricks too many times, don't touch
+    public bool timedout = false;
+
     void Awake ()
     {
 		if (instance == null)
