@@ -21,7 +21,7 @@ public class Team : MonoBehaviour
     private bool won = false;
     private bool started = false;
 
-    private int currentNumber;
+    public int currentNumber;
     private Multiplier currentMultiplier = Multiplier.NONE;
 
     /// <summary>

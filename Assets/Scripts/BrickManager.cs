@@ -11,13 +11,14 @@ public class BrickManager : MonoBehaviour
     private List<Vector2> locations;
     private List<Vector2> activeLocations;
     private List<GameObject> activeBricks;
-
+    private List<GameObject> activeOperationBricks;
 
     void Start()
     {
         locations = new List<Vector2>();
         activeLocations = new List<Vector2>();
         activeBricks = new List<GameObject>();
+        activeOperationBricks = new List<GameObject>();
 
         SetLocations();
     }
@@ -30,39 +31,45 @@ public class BrickManager : MonoBehaviour
     public void SpawnBricks(List<int> brickNumbers)
     {
         int randomIndex = Random.Range(0, locations.Count - 1);
-
-        plusBrick.SetActive(true);
-        plusBrick.transform.SetParent(transform);
-        plusBrick.isStatic = true;
-        plusBrick.transform.position = locations[randomIndex];
-        activeLocations.Add(locations[randomIndex]);
-        locations.RemoveAt(randomIndex);
-
-        randomIndex = Random.Range(0, locations.Count - 1);
-        minusBrick.SetActive(true);
-        minusBrick.transform.SetParent(transform);
-        minusBrick.isStatic = true;
-        minusBrick.transform.position = locations[randomIndex];
-        activeLocations.Add(locations[randomIndex]);
-        locations.RemoveAt(randomIndex);
-
-        randomIndex = Random.Range(0, locations.Count - 1);
-        multiplyBrick.SetActive(true);
-        multiplyBrick.transform.SetParent(transform);
-        multiplyBrick.isStatic = true;
-        multiplyBrick.transform.position = locations[randomIndex];
-        activeLocations.Add(locations[randomIndex]);
-        locations.RemoveAt(randomIndex);
-
         GameObject go;
+
+        go = Instantiate(plusBrick);
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        go.transform.position = locations[randomIndex];
+        go.isStatic = true;
+        activeLocations.Add(locations[randomIndex]);
+        locations.RemoveAt(randomIndex);
+        activeOperationBricks.Add(go);
+
+        randomIndex = Random.Range(0, locations.Count - 1);
+        go = Instantiate(minusBrick);
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        go.transform.position = locations[randomIndex];
+        go.isStatic = true;
+        activeLocations.Add(locations[randomIndex]);
+        locations.RemoveAt(randomIndex);
+        activeOperationBricks.Add(go);
+
+        randomIndex = Random.Range(0, locations.Count - 1);
+        go = Instantiate(multiplyBrick);
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        go.transform.position = locations[randomIndex];
+        go.isStatic = true;
+        activeLocations.Add(locations[randomIndex]);
+        locations.RemoveAt(randomIndex);
+        activeOperationBricks.Add(go);
+
         foreach (int i in brickNumbers)
         {
             randomIndex = Random.Range(0, locations.Count - 1);
             go = Instantiate(numberBrickPrefab);
             go.SetActive(true);
             go.transform.SetParent(transform);
+            go.transform.position = locations[randomIndex];
             go.isStatic = true;
-            multiplyBrick.transform.position = locations[randomIndex];
             activeBricks.Add(go);
 
             activeLocations.Add(locations[randomIndex]);
@@ -91,5 +98,31 @@ public class BrickManager : MonoBehaviour
         locations.Add(new Vector2(55, 8));
         locations.Add(new Vector2(55, 19));
         locations.Add(new Vector2(55, 30));
+    }
+
+    public void RemoveBrick(Vector2 location)
+    {
+        locations.Add(location);
+        activeLocations.Remove(location);
+    }
+
+    public void SpawnNewBrick(int number)
+    {
+        int randomIndex = Random.Range(0, locations.Count - 1);
+        GameObject go;
+
+        go = Instantiate(numberBrickPrefab);
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        go.transform.position = locations[randomIndex];
+        go.isStatic = true;
+        activeBricks.Add(go);
+
+        activeLocations.Add(locations[randomIndex]);
+        locations.RemoveAt(randomIndex);
+
+        NumberBlock numberBlock = go.GetComponent<NumberBlock>();
+        numberBlock.number = number;
+        numberBlock.UpdateText();
     }
 }

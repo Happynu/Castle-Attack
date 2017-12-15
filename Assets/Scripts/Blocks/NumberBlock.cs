@@ -8,7 +8,7 @@ public class NumberBlock : Interactable
     public Text text;
     public int number;
 
-    void Start ()
+    void Start()
     {
         UpdateText();
     }
@@ -18,9 +18,10 @@ public class NumberBlock : Interactable
         if (GameManager.instance.timedout == false)
         {
             GameManager.instance.StartHitTimout();
-            Debug.Log("Multiply block hit");
+            Debug.Log("Number block hit");
             if (GameManager.instance.HitBrick(this))
             {
+                GameManager.instance.SpawnNewNumberBrick(new Vector2(this.transform.position.x, this.transform.position.y), number);
                 Destroy(this.gameObject);
             }
         }
