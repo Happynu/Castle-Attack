@@ -598,7 +598,58 @@ CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 432371290}
+=======
+  m_GameObject: {fileID: 443049074}
+--- !u!1 &457844513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 457844515}
+  - component: {fileID: 457844514}
+  m_Layer: 0
+  m_Name: Brickmanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &457844514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 457844513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7927b35031252468d26253c75b375b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minusBrickPrefab: {fileID: 0}
+  plusBrickPrefab: {fileID: 0}
+  multiplierBrickPrefab: {fileID: 0}
+  numberBrickPrefab: {fileID: 0}
+  multiplierColor: {fileID: 0}
+  teamRedColor: {fileID: 0}
+  teamBlueColor: {fileID: 0}
+--- !u!4 &457844515
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 457844513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.2307744, y: 2.1886, z: 22.429312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> origin/developer
 --- !u!1 &504610372
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +838,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 681405551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -324.89996, y: -206, z: 0}
+=======
+  m_LocalPosition: {x: -498.90002, y: -185.5, z: 0}
+>>>>>>> origin/developer
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432371291}
@@ -798,7 +853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 75.100006, y: 94}
+  m_AnchoredPosition: {x: 75.099976, y: 94}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &726908665
@@ -1102,7 +1157,47 @@ CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 858915404}
+=======
+  m_GameObject: {fileID: 844715065}
+--- !u!1 &984601013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 984601014}
+  m_Layer: 5
+  m_Name: Red
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &984601014
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984601013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 298.99915, y: -185.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 443049075}
+  - {fileID: 844715066}
+  - {fileID: 1636141389}
+  m_Father: {fileID: 1110756448}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -275.00085, y: 94}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+>>>>>>> origin/developer
 --- !u!1 &1110756444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,7 +1281,11 @@ RectTransform:
   m_GameObject: {fileID: 1110756444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.81, y: 17.12, z: -5}
+<<<<<<< HEAD
   m_LocalScale: {x: 0.06666667, y: 0.06666667, z: 0.06666667}
+=======
+  m_LocalScale: {x: 0.07155635, y: 0.07155635, z: 0.07155635}
+>>>>>>> origin/developer
   m_Children:
   - {fileID: 681405552}
   - {fileID: 1246306313}
@@ -2053,10 +2152,17 @@ MonoBehaviour:
   teamA: {fileID: 1750880492}
   teamB: {fileID: 1558303287}
   currentTeam: {fileID: 0}
+<<<<<<< HEAD
   EndNumberA: {fileID: 1118810695}
   EndNumberB: {fileID: 1397458485}
   EquationA: {fileID: 1517680204}
   EquationB: {fileID: 265920169}
+=======
+  EndNumberA: {fileID: 0}
+  EndNumberB: {fileID: 0}
+  EquationA: {fileID: 0}
+  EquationB: {fileID: 0}
+>>>>>>> origin/developer
 --- !u!4 &1659455407
 Transform:
   m_ObjectHideFlags: 0
