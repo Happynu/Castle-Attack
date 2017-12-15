@@ -57,7 +57,6 @@ public class Team : MonoBehaviour
                 if (currentMultiplier != Multiplier.NONE)
                 {
                     Calculate(num);
-                    equationText.text = GetEquation();
                     return true;
                 }
                 else return false;
@@ -104,7 +103,7 @@ public class Team : MonoBehaviour
 
     void Calculate(NumberBlock num)
     {
-        string text = GetEquation();
+        string text = GetEquation(num);
 
         switch (currentMultiplier)
         {
@@ -131,6 +130,22 @@ public class Team : MonoBehaviour
         {
             won = true;
         }
+    }
+
+    public string GetEquation(NumberBlock num)
+    {
+        switch (currentMultiplier)
+        {
+            case Multiplier.NONE:
+                return currentNumber.ToString();
+            case Multiplier.PLUS:
+                return currentNumber + " + " + num.number;
+            case Multiplier.MINUS:
+                return currentNumber + " - " + num.number;
+            case Multiplier.MULTIPLY:
+                return currentNumber + " x " + num.number;
+        }
+        return "";
     }
 
     public string GetEquation()
