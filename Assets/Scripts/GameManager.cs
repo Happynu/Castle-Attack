@@ -101,16 +101,15 @@ public class GameManager : MonoBehaviour
 
         if (color == "Blue")
         {
-            ColorUtility.TryParseHtmlString("2A7CCDFF", out myColor);
+            ColorUtility.TryParseHtmlString("#2A7CCDFF", out myColor);
         }
         else if (color == "Red")
         {
-            ColorUtility.TryParseHtmlString("CD2A2AFF", out myColor);
-
+            ColorUtility.TryParseHtmlString("#CD2A2AFF", out myColor);
         }
         else //Set color to white
         {
-            ColorUtility.TryParseHtmlString("FFFFFFFF", out myColor);
+            ColorUtility.TryParseHtmlString("#FFFFFFFF", out myColor);
         }
 
         Edge.color = myColor;
