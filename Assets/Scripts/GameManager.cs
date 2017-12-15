@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(HitTimout());
     }
 
-    void Awake ()
+    void Awake()
     {
         if (instance == null)
         {
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
-       goalNumber = Random.Range(20, 50); //Temp
+        goalNumber = Random.Range(20, 50); //Temp
         //        teamBlue.goalNumber = goal;
         //   teamRed.goalNumber = goal;
         EndNumber.text = goalNumber.ToString();
@@ -115,13 +115,13 @@ public class GameManager : MonoBehaviour
             ChangeEdgeColor("Red");
         }
 
-	//Generating bricks
+        //Generating bricks
         goalNumber = Random.Range(20, 50); //Temp
         numberOfBricks = 5;
         brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
         brickManager.SpawnBricks(brickNumbers);
 
- 	foreach (int item in brickNumbers)
+        foreach (int item in brickNumbers)
         {
             Debug.Log(item);
         }
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         {
             ColorUtility.TryParseHtmlString("#2A7CCDFF", out myColor);
         }
-       
+
         else if (color == "Red")
         {
             ColorUtility.TryParseHtmlString("#CD2A2AFF", out myColor);
@@ -146,5 +146,14 @@ public class GameManager : MonoBehaviour
         }
 
         Edge.color = myColor;
+    }
+
+    public void SpawnNewNumberBrick(Vector2 oldPosition, int number)
+    {
+        brickNumbers.Remove(number);
+        brickManager.RemoveBrick(oldPosition);
+        int newNumber = algorithm.GenerateNewBrick(currentTeam.currentNumber, brickNumbers);
+        brickManager.SpawnNewBrick(newNumber);
+        brickNumbers.Add(newNumber);
     }
 }

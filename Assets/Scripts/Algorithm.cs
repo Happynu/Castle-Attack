@@ -8,19 +8,9 @@ public class Algorithm : MonoBehaviour
     private List<int> possibleAnswers = new List<int>();
     private int currentNumber = 0;
     private int goalNumber = 0;
-    private int nextNewBrick = 0;
 
     private int minBrickValue = 1;
     private int maxBrickValue = 10;
-
-    void Start()
-    {
-        CreateNewBrick();
-        foreach (int i in possibleAnswers)
-        {
-            Debug.Log(i);
-        }
-    }
 
     public List<int> GenerateBrickNumbers(int goalNumber, int numberOfBricks)
     {
@@ -33,14 +23,13 @@ public class Algorithm : MonoBehaviour
         }
         while (!CheckPossibility() && goalNumber > maxGoalValue)
         {
-            Debug.Log("blah");
             brickNumbers = new List<int>();
-            int randomNumber = Random.Range(minBrickValue, maxBrickValue);
+            int randomNumber = Random.Range(minBrickValue, maxBrickValue + 1);
             for (int i = 0; i < numberOfBricks; i++)
             {
                 while (brickNumbers.Contains(randomNumber) && brickNumbers.Count < ((maxBrickValue - minBrickValue) + 1))
                 {
-                    randomNumber = Random.Range(minBrickValue, maxBrickValue);
+                    randomNumber = Random.Range(minBrickValue, maxBrickValue + 1);
                 }
                 brickNumbers.Add(randomNumber);
             }
@@ -49,13 +38,23 @@ public class Algorithm : MonoBehaviour
     }
 
     //This method will calculate the value for a new brick number
-    private void CreateNewBrick()
+    public int GenerateNewBrick(int currentNumber, List<int> gameBrickNumbers)
     {
-        nextNewBrick = 0;
+        this.currentNumber = currentNumber;
+        int nextNewBrick = 0;
+        brickNumbers = gameBrickNumbers;
+        foreach (int item in brickNumbers)
+        {
+            Debug.Log("Brick Number: " + item);
+        }
         List<int> possibleBricks = new List<int>();
         if (CheckPossibility())
         {
-            nextNewBrick = Random.Range(minBrickValue, maxBrickValue);
+            nextNewBrick = Random.Range(minBrickValue, maxBrickValue + 1);
+            while (brickNumbers.Contains(nextNewBrick) && brickNumbers.Count < ((maxBrickValue - minBrickValue) + 1))
+            {
+                nextNewBrick = Random.Range(minBrickValue, maxBrickValue + 1);
+            }
             Debug.Log("Random brick: " + nextNewBrick);
         }
         else
@@ -72,7 +71,11 @@ public class Algorithm : MonoBehaviour
             }
             if (possibleBricks.Count == 0)
             {
-                nextNewBrick = Random.Range(minBrickValue, maxBrickValue);
+                nextNewBrick = Random.Range(minBrickValue, maxBrickValue + 1);
+                while (brickNumbers.Contains(nextNewBrick) && brickNumbers.Count < ((maxBrickValue - minBrickValue) + 1))
+                {
+                    nextNewBrick = Random.Range(minBrickValue, maxBrickValue + 1);
+                }
                 Debug.Log("No possible brick, random: " + nextNewBrick);
             }
             else
@@ -81,11 +84,11 @@ public class Algorithm : MonoBehaviour
                 Debug.Log("New possible brick: " + nextNewBrick);
             }
         }
+        return nextNewBrick;
     }
 
     private bool CheckPossibility(int checkNumber = 0)
     {
-        int number = currentNumber;
         List<int> possibleAnswersList = new List<int>();
         List<int> blockNumbersList = new List<int>();
         blockNumbersList.AddRange(brickNumbers);
@@ -96,7 +99,7 @@ public class Algorithm : MonoBehaviour
             {
                 for (int i3 = 0; i3 < 3; i3++)
                 {
-                    Calculate(number, i1, i3, blockNumbersList, possibleAnswersList);
+                    Calculate(currentNumber, i1, i3, blockNumbersList, possibleAnswersList);
                 }
                 int removeNumber = blockNumbersList[0];
                 blockNumbersList.Remove(removeNumber);

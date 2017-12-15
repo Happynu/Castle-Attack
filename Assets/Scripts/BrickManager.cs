@@ -99,4 +99,30 @@ public class BrickManager : MonoBehaviour
         locations.Add(new Vector2(55, 19));
         locations.Add(new Vector2(55, 30));
     }
+
+    public void RemoveBrick(Vector2 location)
+    {
+        locations.Add(location);
+        activeLocations.Remove(location);
+    }
+
+    public void SpawnNewBrick(int number)
+    {
+        int randomIndex = Random.Range(0, locations.Count - 1);
+        GameObject go;
+
+        go = Instantiate(numberBrickPrefab);
+        go.SetActive(true);
+        go.transform.SetParent(transform);
+        go.transform.position = locations[randomIndex];
+        go.isStatic = true;
+        activeBricks.Add(go);
+
+        activeLocations.Add(locations[randomIndex]);
+        locations.RemoveAt(randomIndex);
+
+        NumberBlock numberBlock = go.GetComponent<NumberBlock>();
+        numberBlock.number = number;
+        numberBlock.UpdateText();
+    }
 }
