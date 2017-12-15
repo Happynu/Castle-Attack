@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [Space(10)]
     public Text EndNumber;
 
+    [Space(10)]
+    public Image Edge;
+
     void Awake ()
     {
 		if (instance == null)
@@ -55,10 +58,12 @@ public class GameManager : MonoBehaviour
         if (currentTeam == teamBlue)
         {
             currentTeam = teamRed;
+            ChangeEdgeColor("Red");
         }
         else
         {
             currentTeam = teamBlue;
+            ChangeEdgeColor("Blue");
         }
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
@@ -78,10 +83,33 @@ public class GameManager : MonoBehaviour
         if (startteam == 0)
         {
             currentTeam = teamBlue;
+            ChangeEdgeColor("Blue");
         }
         else
         {
             currentTeam = teamRed;
+            ChangeEdgeColor("Red");
         }
+    }
+
+    void ChangeEdgeColor(string color)
+    {
+        Color myColor = new Color();
+
+        if (color == "Blue")
+        {
+            ColorUtility.TryParseHtmlString("2A7CCDFF", out myColor);
+        }
+        else if (color == "Red")
+        {
+            ColorUtility.TryParseHtmlString("CD2A2AFF", out myColor);
+
+        }
+        else //Set color to white
+        {
+            ColorUtility.TryParseHtmlString("FFFFFFFF", out myColor);
+        }
+
+        Edge.color = myColor;
     }
 }
