@@ -91,9 +91,12 @@ public class GameManager : MonoBehaviour
         teamRed.goalNumber = goal;
         EndNumber.text = goal.ToString();
 
+        teamBlue.equationText.text = "";
+        teamRed.equationText.text = "";
+
 
         //randomly select starting team
-        int startteam = Random.Range(0, 1);
+        int startteam = Random.Range(0, 2);
 
         if (startteam == 0)
         {
