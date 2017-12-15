@@ -23,7 +23,7 @@ public class NumberBlock : Interactable
         }
     }
 
-    void UpdateText()
+    public void UpdateText()
     {
         text.text = number.ToString();
     }
