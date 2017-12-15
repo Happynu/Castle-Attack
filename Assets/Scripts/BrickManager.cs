@@ -67,6 +67,10 @@ public class BrickManager : MonoBehaviour
 
             activeLocations.Add(locations[randomIndex]);
             locations.RemoveAt(randomIndex);
+
+            NumberBlock numberBlock = go.GetComponent<NumberBlock>();
+            numberBlock.number = i;
+            numberBlock.UpdateText();
         }
     }
 

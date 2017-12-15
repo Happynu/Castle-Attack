@@ -22,8 +22,10 @@ public class MinusBlock : Interactable
         }
     }
 
-    void UpdateText()
+    public void UpdateText()
     {
         text.text = "-";
     }
+
+
 }
