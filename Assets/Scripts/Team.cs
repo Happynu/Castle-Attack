@@ -96,5 +96,19 @@ public class Team : MonoBehaviour
             won = true;
         }
     }
-        
+
+    public string GetEquation()
+    {
+        switch (currentMultiplier)
+        {
+            case Multiplier.PLUS:
+                return currentNumber + "+";
+            case Multiplier.MINUS:
+                return currentNumber + "-";
+            case Multiplier.MULTIPLY:
+                return currentNumber + "x";
+        }
+
+        return currentNumber.ToString();
+    } 
 }

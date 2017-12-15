@@ -15,8 +15,7 @@ public class GameManager : MonoBehaviour
     public Team currentTeam;
 
     [Space(10)]
-    public Text EndNumberA;
-    public Text EndNumberB;
+    public Text EndNumber;
 
     [Space(10)]
     public Text EquationA;
@@ -71,14 +70,10 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {  
-        teamA.goalNumber = Random.Range(10, 20);
-        EndNumberA.text = teamA.goalNumber.ToString();
-
-        teamB.goalNumber = Random.Range(10, 20);
-        EndNumberB.text = teamB.goalNumber.ToString();
-
-        EquationA.text = "";
-        EquationB.text = "";
+        int goal = Random.Range(10, 20);
+        teamA.goalNumber = goal;
+        teamB.goalNumber = goal;
+        EndNumber.text = goal.ToString();
 
         //randomly select starting team
         int startteam = Random.Range(0, 1);
@@ -91,5 +86,13 @@ public class GameManager : MonoBehaviour
         {
             currentTeam = teamB;
         }
+
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        EquationA.text = teamA.GetEquation();
+        EquationB.text = teamB.GetEquation();
     }
 }
