@@ -17,13 +17,22 @@ public class GameManager : MonoBehaviour
     [Space(10)]
     public Text EndNumber;
 
-    void Awake ()
+    [Space(10)]
+    private int goalNumber;
+    private int numberOfBricks;
+    private List<int> brickNumbers;
+
+    [Space(10)]
+    private Algorithm algorithm = new Algorithm();
+    private BrickManager brickManager;
+
+    void Awake()
     {
-		if (instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-	}
+    }
 
     void Start()
     {
@@ -32,13 +41,15 @@ public class GameManager : MonoBehaviour
             currentTeam = teamBlue;
         }
 
+        brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
+
         StartGame();
     }
 
-    void Update ()
+    void Update()
     {
-		
-	}
+
+    }
 
     public bool HitBrick(Interactable brick)
     {
@@ -65,12 +76,11 @@ public class GameManager : MonoBehaviour
     }
 
     void StartGame()
-    {  
-        int goal = Random.Range(10, 20);
-        teamBlue.goalNumber = goal;
-        teamRed.goalNumber = goal;
-        EndNumber.text = goal.ToString();
-
+    {
+       goalNumber = Random.Range(20, 50); //Temp
+        //        teamBlue.goalNumber = goal;
+        //   teamRed.goalNumber = goal;
+        EndNumber.text = goalNumber.ToString();
 
         //randomly select starting team
         int startteam = Random.Range(0, 1);
@@ -82,6 +92,17 @@ public class GameManager : MonoBehaviour
         else
         {
             currentTeam = teamRed;
+        }
+
+        //Generating bricks
+        goalNumber = Random.Range(20, 50); //Temp
+        numberOfBricks = 5;
+        brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
+        brickManager.SpawnBricks(brickNumbers);
+
+        foreach (int item in brickNumbers)
+        {
+            Debug.Log(item);
         }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Algorithm : MonoBehaviour
 {
-    private List<int> blockNumbers = new List<int> { 2, 5 ,8};
+    private List<int> brickNumbers = new List<int> { };
     private List<int> possibleAnswers = new List<int>();
     private int currentNumber = 0;
-    private int goalNumber = 402;
+    private int goalNumber = 0;
     private int nextNewBrick = 0;
 
     private int minBrickValue = 1;
@@ -15,19 +15,45 @@ public class Algorithm : MonoBehaviour
 
     void Start()
     {
-        createNewBrick();
+        CreateNewBrick();
         foreach (int i in possibleAnswers)
         {
             Debug.Log(i);
         }
     }
 
+    public List<int> GenerateBrickNumbers(int goalNumber, int numberOfBricks)
+    {
+        this.goalNumber = goalNumber;
+
+        int maxGoalValue = maxBrickValue;
+        for (int i = maxBrickValue - 1; i < maxBrickValue - numberOfBricks - 1; i--)
+        {
+            maxGoalValue *= i;
+        }
+        while (!CheckPossibility() && goalNumber > maxGoalValue)
+        {
+            Debug.Log("blah");
+            brickNumbers = new List<int>();
+            int randomNumber = Random.Range(minBrickValue, maxBrickValue);
+            for (int i = 0; i < numberOfBricks; i++)
+            {
+                while (brickNumbers.Contains(randomNumber) && brickNumbers.Count < ((maxBrickValue - minBrickValue) + 1))
+                {
+                    randomNumber = Random.Range(minBrickValue, maxBrickValue);
+                }
+                brickNumbers.Add(randomNumber);
+            }
+        }
+        return brickNumbers;
+    }
+
     //This method will calculate the value for a new brick number
-    private void createNewBrick()
+    private void CreateNewBrick()
     {
         nextNewBrick = 0;
         List<int> possibleBricks = new List<int>();
-        if (checkPossibility())
+        if (CheckPossibility())
         {
             nextNewBrick = Random.Range(minBrickValue, maxBrickValue);
             Debug.Log("Random brick: " + nextNewBrick);
@@ -36,9 +62,9 @@ public class Algorithm : MonoBehaviour
         {
             for (int i = 1; i < ((maxBrickValue - minBrickValue) + 2); i++)
             {
-                if (!blockNumbers.Contains(i))
+                if (!brickNumbers.Contains(i))
                 {
-                    if (checkPossibility(i))
+                    if (CheckPossibility(i))
                     {
                         possibleBricks.Add(i);
                     }
@@ -57,12 +83,12 @@ public class Algorithm : MonoBehaviour
         }
     }
 
-    private bool checkPossibility(int checkNumber = 0)
+    private bool CheckPossibility(int checkNumber = 0)
     {
         int number = currentNumber;
         List<int> possibleAnswersList = new List<int>();
         List<int> blockNumbersList = new List<int>();
-        blockNumbersList.AddRange(blockNumbers);
+        blockNumbersList.AddRange(brickNumbers);
         if (checkNumber != 0) blockNumbersList.Add(checkNumber);
         for (int i1 = 0; i1 < blockNumbersList.Count - 1; i1++)
         {
@@ -70,7 +96,7 @@ public class Algorithm : MonoBehaviour
             {
                 for (int i3 = 0; i3 < 3; i3++)
                 {
-                    calculate(number, i1, i3, blockNumbersList, possibleAnswersList);
+                    Calculate(number, i1, i3, blockNumbersList, possibleAnswersList);
                 }
                 int removeNumber = blockNumbersList[0];
                 blockNumbersList.Remove(removeNumber);
@@ -86,7 +112,7 @@ public class Algorithm : MonoBehaviour
         return false;
     }
 
-    private void calculate(int number, int index, int operation, List<int> blockNumbersList, List<int> possibleAnswersList)
+    private void Calculate(int number, int index, int operation, List<int> blockNumbersList, List<int> possibleAnswersList)
     {
         int newNumber = number;
         switch (operation)
@@ -122,7 +148,7 @@ public class Algorithm : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                calculate(newNumber, newIndex, i, blockNumbersList, possibleAnswersList);
+                Calculate(newNumber, newIndex, i, blockNumbersList, possibleAnswersList);
             }
         }
     }

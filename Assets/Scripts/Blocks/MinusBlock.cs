@@ -18,7 +18,7 @@ public class MinusBlock : Interactable
         GameManager.instance.HitBrick(this);
     }
 
-    public void UpdateText(string Text)
+    public void UpdateText()
     {
         text.text = "-";
     }
