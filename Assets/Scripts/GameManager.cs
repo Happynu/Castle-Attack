@@ -8,18 +8,19 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Space(10)]
-    public Team teamA;
-    public Team teamB;
+    public Team teamBlue;
+    public Team teamRed;
 
-    [Space(10)]
+    [HideInInspector]
     public Team currentTeam;
 
     [Space(10)]
-    public Text EndNumber;
+    public Text EndNumberRed;
+    public Text EndNumberBlue;
 
     [Space(10)]
-    public Text EquationA;
-    public Text EquationB;
+    public Text EquationBlue;
+    public Text EquationRed;
 
     void Awake ()
     {
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentTeam == null)
         {
-            currentTeam = teamA;
+            currentTeam = teamBlue;
         }
 
         StartGame();
@@ -56,13 +57,13 @@ public class GameManager : MonoBehaviour
 
     void SwitchTeam()
     {
-        if (currentTeam == teamA)
+        if (currentTeam == teamBlue)
         {
-            currentTeam = teamB;
+            currentTeam = teamRed;
         }
         else
         {
-            currentTeam = teamA;
+            currentTeam = teamBlue;
         }
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
@@ -71,20 +72,22 @@ public class GameManager : MonoBehaviour
     void StartGame()
     {  
         int goal = Random.Range(10, 20);
-        teamA.goalNumber = goal;
-        teamB.goalNumber = goal;
-        EndNumber.text = goal.ToString();
+        teamBlue.goalNumber = goal;
+        teamRed.goalNumber = goal;
+        EndNumberBlue.text = goal.ToString();
+        EndNumberRed.text = goal.ToString();
+
 
         //randomly select starting team
         int startteam = Random.Range(0, 1);
 
         if (startteam == 0)
         {
-            currentTeam = teamA;
+            currentTeam = teamBlue;
         }
         else
         {
-            currentTeam = teamB;
+            currentTeam = teamRed;
         }
 
         UpdateUI();
@@ -92,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
-        EquationA.text = teamA.GetEquation();
-        EquationB.text = teamB.GetEquation();
+        EquationBlue.text = teamBlue.GetEquation();
+        EquationRed.text = teamRed.GetEquation();
     }
 }

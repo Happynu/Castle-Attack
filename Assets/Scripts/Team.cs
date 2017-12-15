@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Multiplier
 {
@@ -15,104 +16,14 @@ public class Team : MonoBehaviour
     public string color;
     public int goalNumber;
 
+    public Text equationText;
+
     private bool won = false;
     private bool started = false;
 
     private int currentNumber;
     private Multiplier currentMultiplier = Multiplier.NONE;
 
-    public bool HitBrick(Interactable brick)
-    {
-        if (brick is NumberBlock)
-        {
-            NumberBlock num = brick as NumberBlock;
-            if (currentMultiplier != Multiplier.NONE)
-            {
-                Calculate(num);
-                Debug.Log("Team " + color + " hit number: " + num.number);
-                return true;
-            }
-            else return false;
-        }
-        else if (brick is PlusBlock)
-        {
-            PlusBlock plus = brick as PlusBlock;
-            if (currentMultiplier == Multiplier.NONE)
-            {
-                currentMultiplier = Multiplier.PLUS;
-                Debug.Log("Team " + color + " hit multiplier: plus");
-                return true;
-            }
-            else return false;
-        }
-        else if (brick is MinusBlock)
-        {
-            MinusBlock min = brick as MinusBlock;
-            if (currentMultiplier == Multiplier.NONE)
-            {
-                currentMultiplier = Multiplier.MINUS;
-                Debug.Log("Team " + color + " hit multiplier: minus");
-                return true;
-            }
-            else return false;
-        }
-        else if (brick is MultiplyBlock)
-        {
-            MultiplyBlock mult = brick as MultiplyBlock;
-            if (currentMultiplier == Multiplier.NONE)
-            {
-                currentMultiplier = Multiplier.MULTIPLY;
-                Debug.Log("Team " + color + " hit multiplier: multiply");
-                return true;
-            }
-            else return false;
-        }
-        return false;
-    }
-
-    void Calculate(NumberBlock num)
-    {
-        switch (currentMultiplier)
-        {
-            case Multiplier.PLUS:
-                currentNumber = currentNumber + num.number;
-                break;
-            case Multiplier.MINUS:
-                currentNumber = currentNumber - num.number;
-                break;
-            case Multiplier.MULTIPLY:
-                currentNumber = currentNumber * num.number;
-                break;
-        }
-        currentMultiplier = Multiplier.NONE;
-        CheckWin();
-
-        Debug.Log("currentNumber: " + currentNumber);
-    }
-
-    void CheckWin()
-    {
-        if (currentNumber == goalNumber)
-        {
-            won = true;
-        }
-    }
-
-    public string GetEquation()
-    {
-        switch (currentMultiplier)
-        {
-            case Multiplier.PLUS:
-                return currentNumber + "+";
-            case Multiplier.MINUS:
-                return currentNumber + "-";
-            case Multiplier.MULTIPLY:
-                return currentNumber + "x";
-        }
-
-        return currentNumber.ToString();
-    } 
-}
     /// <summary>
     /// Called when this team has hit a brick
     /// </summary>
@@ -128,7 +39,7 @@ public class Team : MonoBehaviour
 
                 currentNumber = num.number;
                 started = true;
-                Debug.Log("Team " + color + " hit number: " + num.number);
+                equationText.text = GetEquation();
                 return true;
             }
             else return false;
@@ -146,7 +57,7 @@ public class Team : MonoBehaviour
                 if (currentMultiplier != Multiplier.NONE)
                 {
                     Calculate(num);
-                    Debug.Log("Team " + color + " hit number: " + num.number);
+                    equationText.text = GetEquation();
                     return true;
                 }
                 else return false;
@@ -158,7 +69,7 @@ public class Team : MonoBehaviour
                 if (currentMultiplier == Multiplier.NONE)
                 {
                     currentMultiplier = Multiplier.PLUS;
-                    Debug.Log("Team " + color + " hit multiplier: plus");
+                    equationText.text = GetEquation();
                     return true;
                 }
                 else return false;
@@ -170,7 +81,7 @@ public class Team : MonoBehaviour
                 if (currentMultiplier == Multiplier.NONE)
                 {
                     currentMultiplier = Multiplier.MINUS;
-                    Debug.Log("Team " + color + " hit multiplier: minus");
+                    equationText.text = GetEquation();
                     return true;
                 }
                 else return false;
@@ -182,10 +93,59 @@ public class Team : MonoBehaviour
                 if (currentMultiplier == Multiplier.NONE)
                 {
                     currentMultiplier = Multiplier.MULTIPLY;
-                    Debug.Log("Team " + color + " hit multiplier: multiply");
+                    equationText.text = GetEquation();
                     return true;
                 }
                 else return false;
             }
         }
-            return false;
+        return false;
+    }
+
+    void Calculate(NumberBlock num)
+    {
+        string text = GetEquation();
+
+        switch (currentMultiplier)
+        {
+            case Multiplier.PLUS:
+                currentNumber = currentNumber + num.number;
+                break;
+            case Multiplier.MINUS:
+                currentNumber = currentNumber - num.number;
+                break;
+            case Multiplier.MULTIPLY:
+                currentNumber = currentNumber * num.number;
+                break;
+        }
+
+        text = text + " = " + currentNumber;
+        equationText.text = text;
+        currentMultiplier = Multiplier.NONE;
+        CheckWin();
+    }
+
+    void CheckWin()
+    {
+        if (currentNumber == goalNumber)
+        {
+            won = true;
+        }
+    }
+
+    public string GetEquation()
+    {
+        switch (currentMultiplier)
+        {
+            case Multiplier.NONE:
+                return currentNumber.ToString();
+            case Multiplier.PLUS:
+                return currentNumber + " +";
+            case Multiplier.MINUS:
+                return currentNumber + " -";
+            case Multiplier.MULTIPLY:
+                return currentNumber + " x";
+        }
+        return "";
+    }
+}
