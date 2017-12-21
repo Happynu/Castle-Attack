@@ -20,6 +20,7 @@ public class Team : MonoBehaviour
 
     private bool won = false;
     private bool started = false;
+    public bool operationRound = false;
 
     public int currentNumber;
     private Multiplier currentMultiplier = Multiplier.NONE;
@@ -40,6 +41,7 @@ public class Team : MonoBehaviour
                 currentNumber = num.number;
                 started = true;
                 equationText.text = GetEquation();
+                operationRound = true;
                 return true;
             }
             else return false;
@@ -57,6 +59,7 @@ public class Team : MonoBehaviour
                 if (currentMultiplier != Multiplier.NONE)
                 {
                     Calculate(num);
+                    operationRound = true;
                     return true;
                 }
                 else return false;
@@ -69,6 +72,7 @@ public class Team : MonoBehaviour
                 {
                     currentMultiplier = Multiplier.PLUS;
                     equationText.text = GetEquation();
+                    operationRound = false;
                     return true;
                 }
                 else return false;
@@ -81,6 +85,7 @@ public class Team : MonoBehaviour
                 {
                     currentMultiplier = Multiplier.MINUS;
                     equationText.text = GetEquation();
+                    operationRound = false;
                     return true;
                 }
                 else return false;
@@ -93,6 +98,7 @@ public class Team : MonoBehaviour
                 {
                     currentMultiplier = Multiplier.MULTIPLY;
                     equationText.text = GetEquation();
+                    operationRound = false;
                     return true;
                 }
                 else return false;
