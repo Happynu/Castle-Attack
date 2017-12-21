@@ -690,7 +690,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504610372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 0, y: -262.52505, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: -263.27496, z: 0}
+>>>>>>> origin/developer
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1191254307}
@@ -923,7 +927,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 681405551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -325.10678, y: -206.15506, z: 0}
+=======
+  m_LocalPosition: {x: -324.90002, y: -206.90497, z: 0}
+>>>>>>> origin/developer
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432371291}
@@ -949,6 +957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: blue
   goalNumber: 15
+<<<<<<< HEAD
   number1: 0
   operation: 0
   number2: 0
@@ -957,6 +966,17 @@ MonoBehaviour:
   won: 0
   started: 0
   operationRound: 0
+=======
+  number1: {fileID: 0}
+  operation: {fileID: 0}
+  number2: {fileID: 0}
+  equals: {fileID: 0}
+  result: {fileID: 0}
+  score: 0
+  operationRound: 0
+  currentNumber: 0
+  currentMultiplier: 3
+>>>>>>> origin/developer
 --- !u!1001 &809035831
 Prefab:
   m_ObjectHideFlags: 0
@@ -1180,7 +1200,11 @@ RectTransform:
   m_GameObject: {fileID: 1110756444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.81, y: 17.12, z: -5}
+<<<<<<< HEAD
   m_LocalScale: {x: 0.066632226, y: 0.066632226, z: 0.066632226}
+=======
+  m_LocalScale: {x: 0.06646617, y: 0.06646617, z: 0.06646617}
+>>>>>>> origin/developer
   m_Children:
   - {fileID: 1764996932}
   - {fileID: 1483123567}
@@ -1427,7 +1451,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1483123566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 174.79324, y: -206.15506, z: 0}
+=======
+  m_LocalPosition: {x: 175, y: -206.90497, z: 0}
+>>>>>>> origin/developer
   m_LocalScale: {x: 0.99998456, y: 0.99998456, z: 0.99998456}
   m_Children:
   - {fileID: 309212151}
@@ -1437,7 +1465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 575, y: 93.99999}
+  m_AnchoredPosition: {x: 575, y: 94}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1483123568
@@ -1453,6 +1481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: red
   goalNumber: 15
+<<<<<<< HEAD
   number1: 0
   operation: 0
   number2: 0
@@ -1461,6 +1490,17 @@ MonoBehaviour:
   won: 0
   started: 0
   operationRound: 0
+=======
+  number1: {fileID: 0}
+  operation: {fileID: 0}
+  number2: {fileID: 0}
+  equals: {fileID: 0}
+  result: {fileID: 0}
+  score: 0
+  operationRound: 0
+  currentNumber: 0
+  currentMultiplier: 3
+>>>>>>> origin/developer
 --- !u!1 &1517680202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1898,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3708cc2a312d6ce4ab99e3ed994258c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb26af99bf13f044ca3324d9b781d200, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
