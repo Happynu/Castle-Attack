@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         {
             SwitchTeam();
         }
+
         return succes;
     }
 
@@ -102,6 +103,7 @@ public class GameManager : MonoBehaviour
             currentTeam = teamBlue;
             ChangeEdgeColor("Blue");
         }
+        ChangeRoundType();
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
     }
@@ -132,14 +134,15 @@ public class GameManager : MonoBehaviour
         numberOfBricks = 5;
         brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
         brickManager.SpawnBricks(brickNumbers);
+        brickManager.StartNumberRound();
 
         foreach (int item in brickNumbers)
         {
             Debug.Log(item);
         }
 
-        teamBlue.equationText.text = "";
-        teamRed.equationText.text = "";
+        teamBlue.ClearUI();
+        teamRed.ClearUI();
     }
 
     void ChangeEdgeColor(string color)
@@ -170,5 +173,18 @@ public class GameManager : MonoBehaviour
         int newNumber = algorithm.GenerateNewBrick(currentTeam.currentNumber, brickNumbers);
         brickManager.SpawnNewBrick(newNumber);
         brickNumbers.Add(newNumber);
+        ChangeRoundType();
+    }
+
+    private void ChangeRoundType()
+    {
+        if (currentTeam.operationRound)
+        {
+            brickManager.StartOperationRound();
+        }
+        else
+        {
+            brickManager.StartNumberRound();
+        }
     }
 }

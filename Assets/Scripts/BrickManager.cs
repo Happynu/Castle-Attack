@@ -9,14 +9,12 @@ public class BrickManager : MonoBehaviour
     public GameObject multiplyBrick;
     public GameObject numberBrickPrefab;
     private List<Vector2> locations;
-    private List<Vector2> activeLocations;
     private List<GameObject> activeBricks;
     private List<GameObject> activeOperationBricks;
 
     void Start()
     {
         locations = new List<Vector2>();
-        activeLocations = new List<Vector2>();
         activeBricks = new List<GameObject>();
         activeOperationBricks = new List<GameObject>();
 
@@ -38,7 +36,6 @@ public class BrickManager : MonoBehaviour
         go.transform.SetParent(transform);
         go.transform.position = locations[randomIndex];
         go.isStatic = true;
-        activeLocations.Add(locations[randomIndex]);
         locations.RemoveAt(randomIndex);
         activeOperationBricks.Add(go);
 
@@ -48,7 +45,6 @@ public class BrickManager : MonoBehaviour
         go.transform.SetParent(transform);
         go.transform.position = locations[randomIndex];
         go.isStatic = true;
-        activeLocations.Add(locations[randomIndex]);
         locations.RemoveAt(randomIndex);
         activeOperationBricks.Add(go);
 
@@ -58,7 +54,6 @@ public class BrickManager : MonoBehaviour
         go.transform.SetParent(transform);
         go.transform.position = locations[randomIndex];
         go.isStatic = true;
-        activeLocations.Add(locations[randomIndex]);
         locations.RemoveAt(randomIndex);
         activeOperationBricks.Add(go);
 
@@ -72,7 +67,6 @@ public class BrickManager : MonoBehaviour
             go.isStatic = true;
             activeBricks.Add(go);
 
-            activeLocations.Add(locations[randomIndex]);
             locations.RemoveAt(randomIndex);
 
             NumberBlock numberBlock = go.GetComponent<NumberBlock>();
@@ -84,8 +78,9 @@ public class BrickManager : MonoBehaviour
     public void SetLocations()
     {
         locations.Add(new Vector2(11, 8));
-        locations.Add(new Vector2(11, 19));
+        locations.Add(new Vector2(11, 22));
         locations.Add(new Vector2(11, 30));
+        locations.Add(new Vector2(16,15));
         locations.Add(new Vector2(22, 8));
         locations.Add(new Vector2(22, 19));
         locations.Add(new Vector2(22, 30));
@@ -102,8 +97,20 @@ public class BrickManager : MonoBehaviour
 
     public void RemoveBrick(Vector2 location)
     {
-        locations.Add(location);
-        activeLocations.Remove(location);
+        GameObject numberObject = null;
+
+        foreach (GameObject go in activeBricks)
+        {
+            if (go.transform.position.x == location.x && go.transform.position.y == location.y)
+            {
+                numberObject = go;
+            }
+        }
+        if (numberObject != null)
+        {
+            activeBricks.Remove(numberObject);
+            locations.Add(location);
+        }
     }
 
     public void SpawnNewBrick(int number)
@@ -118,11 +125,34 @@ public class BrickManager : MonoBehaviour
         go.isStatic = true;
         activeBricks.Add(go);
 
-        activeLocations.Add(locations[randomIndex]);
         locations.RemoveAt(randomIndex);
 
         NumberBlock numberBlock = go.GetComponent<NumberBlock>();
         numberBlock.number = number;
         numberBlock.UpdateText();
+    }
+
+    public void StartNumberRound()
+    {
+        foreach (GameObject go in activeBricks)
+        {
+            go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
+        }
+        foreach (GameObject go in activeOperationBricks)
+        {
+            go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(true);
+        }
+    }
+
+    public void StartOperationRound()
+    {
+        foreach (GameObject go in activeOperationBricks)
+        {
+            go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
+        }
+        foreach (GameObject go in activeBricks)
+        {
+            go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(true);
+        }
     }
 }
