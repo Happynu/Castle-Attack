@@ -129,8 +129,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(item);
         }
 
-        teamBlue.equationText.text = "";
-        teamRed.equationText.text = "";
+        teamBlue.ClearUI();
+        teamRed.ClearUI();
     }
 
     void ChangeEdgeColor(string color)
