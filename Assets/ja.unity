@@ -287,7 +287,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &214530106
 MonoBehaviour:
@@ -442,7 +442,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AAAAAAA
+  m_Text: =
 --- !u!222 &334506973
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -690,7 +690,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504610372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -262.21545, z: 0}
+  m_LocalPosition: {x: 0, y: -262.52505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1191254307}
@@ -762,9 +762,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 56.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1637086609}
-  m_Father: {fileID: 883511322}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -884,7 +883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &632733586
 MonoBehaviour:
@@ -924,13 +923,13 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 681405551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -324.69397, y: -205.84546, z: 0}
+  m_LocalPosition: {x: -325.10678, y: -206.15506, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432371291}
   - {fileID: 1710705372}
   m_Father: {fileID: 1110756448}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -950,12 +949,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: blue
   goalNumber: 15
-  number1: {fileID: 1517680204}
-  operation: {fileID: 1560580134}
-  number2: {fileID: 396689210}
-  equals: {fileID: 1859320239}
-  result: {fileID: 355066977}
-  currentNumber: 0
+  number1: 0
+  operation: 0
+  number2: 0
+  result: 0
+  score: 0
+  won: 0
+  started: 0
+  operationRound: 0
 --- !u!1001 &809035831
 Prefab:
   m_ObjectHideFlags: 0
@@ -1179,15 +1180,14 @@ RectTransform:
   m_GameObject: {fileID: 1110756444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.81, y: 17.12, z: -5}
-  m_LocalScale: {x: 0.066701025, y: 0.066701025, z: 0.066701025}
+  m_LocalScale: {x: 0.066632226, y: 0.066632226, z: 0.066632226}
   m_Children:
   - {fileID: 1764996932}
-  - {fileID: 681405552}
   - {fileID: 1483123567}
+  - {fileID: 681405552}
   - {fileID: 504610373}
-  - {fileID: 883511322}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1328,7 +1328,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191254306
 GameObject:
@@ -1427,13 +1427,13 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1483123566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 175.20605, y: -205.84546, z: 0}
+  m_LocalPosition: {x: 174.79324, y: -206.15506, z: 0}
   m_LocalScale: {x: 0.99998456, y: 0.99998456, z: 0.99998456}
   m_Children:
   - {fileID: 309212151}
   - {fileID: 1769634501}
   m_Father: {fileID: 1110756448}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1451,14 +1451,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569fbe37020382748a85e3b25a7a5685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: blue
+  color: red
   goalNumber: 15
-  number1: {fileID: 2068197519}
-  operation: {fileID: 101994106}
-  number2: {fileID: 2035600271}
-  equals: {fileID: 334506972}
-  result: {fileID: 1520759160}
-  currentNumber: 0
+  number1: 0
+  operation: 0
+  number2: 0
+  result: 0
+  score: 0
+  won: 0
+  started: 0
+  operationRound: 0
 --- !u!1 &1517680202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,8 +1710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f080f30f9ba10043b736ccd44dda29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 1897762532}
   teamBlue: {fileID: 681405553}
   teamRed: {fileID: 1483123568}
+  endRoundScreenManager: {fileID: 0}
   currentTeam: {fileID: 0}
   EndNumber: {fileID: 1118810695}
   Edge: {fileID: 1764996933}
@@ -1725,7 +1729,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710705371
 GameObject:
@@ -2008,13 +2012,68 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AAAAAAA
+  m_Text: =
 --- !u!222 &1859320240
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1859320237}
+--- !u!1 &1897762531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1897762533}
+  - component: {fileID: 1897762532}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897762532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1897762531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2d5e9b5c0aeb94f9c57f5564358dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  number1Red: {fileID: 2068197519}
+  operationRed: {fileID: 101994106}
+  number2Red: {fileID: 2035600271}
+  equalsRed: {fileID: 334506972}
+  resultRed: {fileID: 1520759160}
+  number1Blue: {fileID: 1517680204}
+  operationBlue: {fileID: 1560580134}
+  number2Blue: {fileID: 396689210}
+  equalsBlue: {fileID: 1859320239}
+  resultBlue: {fileID: 355066977}
+  finalValue: {fileID: 1118810695}
+  BlueteamBanner: {fileID: 432371292}
+  RedteamBanner: {fileID: 309212152}
+  Red: {fileID: 1483123568}
+  Blue: {fileID: 681405553}
+--- !u!4 &1897762533
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1897762531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.022278, y: 16.135698, z: -1.90625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930123285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 30.4, y: 0, z: 0}
 --- !u!1 &2035600269
 GameObject:

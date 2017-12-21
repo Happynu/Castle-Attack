@@ -5,19 +5,31 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public Text number1Red;
+    public Text operationRed;
+    public Text number2Red;
+    public Text equalsRed;
+    public Text resultRed;
 
-    public Text sumRed;
-    public Text sumBlue;
+    [Space(10)]
+    public Text number1Blue;
+    public Text operationBlue;
+    public Text number2Blue;
+    public Text equalsBlue;
+    public Text resultBlue;
+
+    [Space(10)]
     public Text finalValue;
     public Image BlueteamBanner;
     public Image RedteamBanner;
 
+    public Team Red;
+    public Team Blue;
+
     // Use this for initialization 
     void Start()
     {
-        sumRed.text = "Sum: ";
-        sumBlue.text = "Sum: ";
-        finalValue.text = "0";
+        
     }
 
     // Update is called once per frame 
@@ -26,36 +38,84 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void SetCurrentTeam(Team team)
+    public void StartUI()
     {
-        switch (team.color)
-        {
-            case "blue":
+        number1Blue.text = "";
+        number2Blue.text = "";
+        operationBlue.text = "";
+        resultBlue.text = "";
 
-                break;
-
-            case "red":
-
-                break;
-
-            default:
-                Debug.Log("Teamcolor is unknown");
-                break;
-        }
+        number1Red.text = "";
+        number2Red.text = "";
+        operationRed.text = "";
+        resultRed.text = "";
     }
 
-    public void UpdateSum(string value, bool reset, Team team)
+
+    public void UpdateUI(Team team)
     {
         switch (team.color)
         {
             case "blue":
-                if (reset) { sumBlue.text = ""; }
-                sumBlue.text += value + " ";
+                if (Blue.number1 != -1)
+                {
+                    number1Blue.text = Blue.number1.ToString();
+                }
+                else
+                {
+                    number1Blue.text = "";
+                }
+
+                operationBlue.text = ConvertMultiplier(Blue.operation);
+
+                if (Blue.number2 != -1)
+                {
+                    number2Blue.text = Blue.number2.ToString();
+                }
+                else
+                {
+                    number2Blue.text = "";
+                }
+
+                if (Blue.result != -1)
+                {
+                    resultBlue.text = Blue.result.ToString();
+                }
+                else
+                {
+                    resultBlue.text = "";
+                }
                 break;
 
             case "red":
-                if (reset) { sumRed.text = ""; }
-                sumRed.text += value + " ";
+                if (Red.number1 != -1)
+                {
+                    number1Red.text = Red.number1.ToString();
+                }
+                else
+                {
+                    number1Red.text = "";
+                }
+
+                operationRed.text = ConvertMultiplier(Red.operation);
+
+                if (Red.number2 != -1)
+                {
+                    number2Red.text = Red.number2.ToString();
+                }
+                else
+                {
+                    number2Red.text = "";
+                }
+
+                if (Red.result != -1)
+                {
+                    resultRed.text = Red.result.ToString();
+                }
+                else
+                {
+                    resultRed.text = "";
+                }
                 break;
 
             default:
@@ -80,17 +140,37 @@ public class UIManager : MonoBehaviour
                 Debug.Log("Teamcolor is unknown");
                 break;
         }
-        
     }
 
     private IEnumerator MoveBrick(Interactable brick, Vector3 dest)
     {
-        while(brick.transform.position != dest)
+        Transform label = brick.transform.Find("Canvas/Text");
+        Transform labelClone = Instantiate(label);
+
+        while(labelClone.transform.position != dest)
         {
-            brick.transform.position = Vector3.MoveTowards(brick.transform.position, dest, 0.0025f);
-            brick.transform.localScale *= 0.95f;
+            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, Time.deltaTime);
+            labelClone.transform.localScale *= 0.95f;
         }
-        Destroy(brick.gameObject);
+
+        Destroy(labelClone.gameObject);
         yield return null;
+    }
+
+    string ConvertMultiplier(Multiplier m)
+    {
+        switch(m)
+        {
+            case Multiplier.PLUS:
+                return "+";
+            case Multiplier.MINUS:
+                return "-";
+            case Multiplier.MULTIPLY:
+                return "x";
+            case Multiplier.NONE:
+                return "";
+            default:
+                throw new System.NotImplementedException();
+        }
     }
 }

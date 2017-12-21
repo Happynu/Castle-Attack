@@ -73,24 +73,6 @@ public class GameManager : MonoBehaviour
     {
         endRoundScreenManager.gameObject.SetActive(true);
         endRoundScreenManager.StartEndRoundScreen(teamRed.score, teamBlue.score);
-
-        teamBlue.currentNumber = 0;
-        teamRed.currentNumber = 0;
-
-        teamBlue.currentMultiplier = Multiplier.NONE;
-        teamRed.currentMultiplier = Multiplier.NONE;
-    }
-
-    public bool HitBrick(Interactable brick)
-    {
-        bool succes = currentTeam.HitBrick(brick);
-        if (succes)
-        {
-            ui.RemoveBrick(brick, currentTeam);
-            SwitchTeam();
-        }
-
-        return succes;
     }
 
     void SwitchTeam()
@@ -131,20 +113,14 @@ public class GameManager : MonoBehaviour
             ChangeEdgeColor("Red");
         }
 
+        ui.StartUI();
+
         //Generating bricks
         goalNumber = Random.Range(20, 50); //Temp
         numberOfBricks = 5;
         brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
         brickManager.SpawnBricks(brickNumbers);
         brickManager.StartNumberRound();
-
-        foreach (int item in brickNumbers)
-        {
-            Debug.Log(item);
-        }
-
-        teamBlue.ClearUI();
-        teamRed.ClearUI();
     }
 
     void ChangeEdgeColor(string color)
@@ -172,7 +148,7 @@ public class GameManager : MonoBehaviour
     {
         brickNumbers.Remove(number);
         brickManager.RemoveBrick(oldPosition);
-        int newNumber = algorithm.GenerateNewBrick(currentTeam.currentNumber, brickNumbers);
+        int newNumber = algorithm.GenerateNewBrick(currentTeam.result, brickNumbers);
         brickManager.SpawnNewBrick(newNumber);
         brickNumbers.Add(newNumber);
         ChangeRoundType();
@@ -188,5 +164,83 @@ public class GameManager : MonoBehaviour
         {
             brickManager.StartNumberRound();
         }
+    }
+
+    /// <summary>
+    /// Called when this team has hit a brick
+    /// </summary>
+    /// <param name="brick">the brick you hit.</param>
+    /// <returns>Whether the move was allowed or not.</returns>
+
+    public bool HitBrick(Interactable brick)
+    {
+        Team t = currentTeam;
+
+        //At the start of the game, pick a start number.
+        if (t.started == false)
+        {
+            if (brick is NumberBlock)
+            {
+                NumberBlock num = brick as NumberBlock;
+                t.started = true;
+                t.number1 = num.number;
+                t.operationRound = true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //During the rest of the game, we have to check which brick was hit.
+        else
+        {
+            //A Number block
+            if (brick is NumberBlock)
+            {
+                NumberBlock num = brick as NumberBlock;
+
+                //Only if there is a multiplier selected, you are allowed to hit a number.
+                if (!t.operationRound)
+                {
+                    t.number2 = num.number;
+                    t.Calculate();
+                    t.operationRound = true;
+
+                    ui.UpdateUI(currentTeam);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            //An operation block
+            else if (brick is OperationBlock)
+            {
+                OperationBlock num = brick as OperationBlock;
+                //Only if there is currently no multiplier you are allowed to hit one.
+                if (t.operationRound)
+                {
+                    if(t.operation != Multiplier.NONE)
+                    {
+                        t.number1 = t.result;
+                        t.number2 = -1;
+                        t.result = -1;
+                    }
+                    t.operation = num.multiplier;
+                    t.operationRound = false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        ui.RemoveBrick(brick, currentTeam);
+        ui.UpdateUI(currentTeam);
+        SwitchTeam();
+
+        return true;
     }
 }
