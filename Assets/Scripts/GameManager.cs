@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public UIManager ui;
 
     [Space(10)]
     public Team teamBlue;
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         bool succes = currentTeam.HitBrick(brick);
         if (succes)
         {
+            ui.RemoveBrick(brick, currentTeam);
             SwitchTeam();
         }
 
