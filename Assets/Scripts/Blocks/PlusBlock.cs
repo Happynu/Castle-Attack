@@ -19,7 +19,6 @@ public class PlusBlock : Interactable
             GameManager.instance.StartHitTimout();
             Debug.Log("Multiply block hit");
             GameManager.instance.HitBrick(this);
-            
         }
     }
 

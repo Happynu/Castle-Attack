@@ -16,13 +16,17 @@ public class Team : MonoBehaviour
     public string color;
     public int goalNumber;
 
+    public int score = 0;
+
     public Text equationText;
 
     private bool won = false;
     private bool started = false;
 
+    [HideInInspector]
     public int currentNumber;
-    private Multiplier currentMultiplier = Multiplier.NONE;
+    [HideInInspector]
+    public Multiplier currentMultiplier = Multiplier.NONE;
 
     /// <summary>
     /// Called when this team has hit a brick
@@ -31,6 +35,7 @@ public class Team : MonoBehaviour
     /// <returns>Whether the move was allowed or not.</returns>
     public bool HitBrick(Interactable brick)
     {
+        //At the start of the game, pick a start number.
         if (started == false)
         {
             if (brick is NumberBlock)
@@ -128,7 +133,12 @@ public class Team : MonoBehaviour
     {
         if (currentNumber == goalNumber)
         {
-            won = true;
+            score++;
+            if (score == 3)
+            {
+                won = true;
+            }
+            GameManager.instance.EndRound();
         }
     }
 

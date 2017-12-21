@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Team teamBlue;
     public Team teamRed;
 
+    [Space(10)]
+    public EndRoundScreenManager endRoundScreenManager;
+
     [HideInInspector]
     public Team currentTeam;
 
@@ -38,6 +41,13 @@ public class GameManager : MonoBehaviour
         GameManager.instance.timedout = false;
     }
 
+    public IEnumerator RoundTimout()
+    {
+        GameManager.instance.timedout = true;
+        yield return new WaitForSeconds(4f);
+        GameManager.instance.timedout = false;
+    }
+
     public void StartHitTimout()
     {
         StartCoroutine(HitTimout());
@@ -53,19 +63,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (currentTeam == null)
-        {
-            currentTeam = teamBlue;
-        }
-
         brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
 
         StartGame();
     }
 
-    void Update()
+    public void EndRound()
     {
+        endRoundScreenManager.gameObject.SetActive(true);
+        endRoundScreenManager.StartEndRoundScreen(teamRed.score, teamBlue.score);
 
+        teamBlue.currentNumber = 0;
+        teamRed.currentNumber = 0;
+
+        teamBlue.currentMultiplier = Multiplier.NONE;
+        teamRed.currentMultiplier = Multiplier.NONE;
     }
 
     public bool HitBrick(Interactable brick)
@@ -96,7 +108,7 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
-        goalNumber = Random.Range(20, 50); //Temp
+        goalNumber = Random.Range(10, 25); //Temp
         teamBlue.goalNumber = goalNumber;
         teamRed.goalNumber = goalNumber;
         EndNumber.text = goalNumber.ToString();

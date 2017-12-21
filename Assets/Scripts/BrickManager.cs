@@ -25,7 +25,7 @@ public class BrickManager : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     public void SpawnBricks(List<int> brickNumbers)
