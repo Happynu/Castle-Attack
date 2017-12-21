@@ -109,6 +109,17 @@ public class Team : MonoBehaviour
         result.text = "";
     }
 
+    void ClearEquation()
+    {
+        operation.text = "";
+        number2.text = "";
+        equals.text = "";
+
+        number1.text = result.text;
+
+        result.text = "";
+    }
+
     public void UpdateUI(Interactable block)
     {
         if (number1.text == "")
@@ -123,7 +134,7 @@ public class Team : MonoBehaviour
         }
         else if (operation.text == "")
         {
-            if (block is NumberBlock)
+            if (block is OperationBlock)
             {
                 OperationBlock num = block as OperationBlock;
                 operation.text = num.text.text;
@@ -133,9 +144,6 @@ public class Team : MonoBehaviour
         {
             NumberBlock num = block as NumberBlock;
             number2.text = num.text.text;
-        }
-        else
-        {
             Calculate();
         }
     }
@@ -172,5 +180,7 @@ public class Team : MonoBehaviour
 
         currentMultiplier = Multiplier.NONE;
         currentNumber = _result;
+
+        ClearEquation();
     }
 }
