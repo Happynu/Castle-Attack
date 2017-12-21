@@ -78,9 +78,8 @@ public class BrickManager : MonoBehaviour
     public void SetLocations()
     {
         locations.Add(new Vector2(11, 8));
-        locations.Add(new Vector2(11, 22));
+        locations.Add(new Vector2(11, 19));
         locations.Add(new Vector2(11, 30));
-        locations.Add(new Vector2(16,15));
         locations.Add(new Vector2(22, 8));
         locations.Add(new Vector2(22, 19));
         locations.Add(new Vector2(22, 30));
