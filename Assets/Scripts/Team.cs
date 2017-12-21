@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,11 @@ public class Team : MonoBehaviour
     public string color;
     public int goalNumber;
 
-    public Text equationText;
+    public Text number1;
+    public Text operation;
+    public Text number2;
+    public Text equals;
+    public Text result;
 
     private bool won = false;
     private bool started = false;
@@ -36,13 +41,10 @@ public class Team : MonoBehaviour
             if (brick is NumberBlock)
             {
                 NumberBlock num = brick as NumberBlock;
-
-                currentNumber = num.number;
                 started = true;
-                equationText.text = GetEquation();
+                UpdateUI(num);
                 return true;
             }
-            else return false;
         }
 
         //During the rest of the game, we have to check which brick was hit.
@@ -56,72 +58,25 @@ public class Team : MonoBehaviour
                 //Only if there is a multiplier selected, you are allowed to hit a number.
                 if (currentMultiplier != Multiplier.NONE)
                 {
-                    Calculate(num);
+                    UpdateUI(num);
                     return true;
                 }
-                else return false;
             }
-            //A Plus block
-            else if (brick is PlusBlock)
+            //An operation block
+            else if (brick is OperationBlock)
             {
+                OperationBlock num = brick as OperationBlock;
                 //Only if there is currently no multiplier you are allowed to hit one.
                 if (currentMultiplier == Multiplier.NONE)
                 {
-                    currentMultiplier = Multiplier.PLUS;
-                    equationText.text = GetEquation();
+                    currentMultiplier = num.multiplier;
+                    UpdateUI(num);
                     return true;
                 }
-                else return false;
-            }
-            //A Minus block
-            else if (brick is MinusBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.MINUS;
-                    equationText.text = GetEquation();
-                    return true;
-                }
-                else return false;
-            }
-            //A Multiply block
-            else if (brick is MultiplyBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.MULTIPLY;
-                    equationText.text = GetEquation();
-                    return true;
-                }
-                else return false;
             }
         }
+
         return false;
-    }
-
-    void Calculate(NumberBlock num)
-    {
-        string text = GetEquation(num);
-
-        switch (currentMultiplier)
-        {
-            case Multiplier.PLUS:
-                currentNumber = currentNumber + num.number;
-                break;
-            case Multiplier.MINUS:
-                currentNumber = currentNumber - num.number;
-                break;
-            case Multiplier.MULTIPLY:
-                currentNumber = currentNumber * num.number;
-                break;
-        }
-
-        text = text + " = " + currentNumber;
-        equationText.text = text;
-        currentMultiplier = Multiplier.NONE;
-        CheckWin();
     }
 
     void CheckWin()
@@ -132,35 +87,77 @@ public class Team : MonoBehaviour
         }
     }
 
-    public string GetEquation(NumberBlock num)
+    public void ClearUI()
     {
-        switch (currentMultiplier)
-        {
-            case Multiplier.NONE:
-                return currentNumber.ToString();
-            case Multiplier.PLUS:
-                return currentNumber + " + " + num.number;
-            case Multiplier.MINUS:
-                return currentNumber + " - " + num.number;
-            case Multiplier.MULTIPLY:
-                return currentNumber + " x " + num.number;
-        }
-        return "";
+        number1.text = "";
+        operation.text = "";
+        number2.text = "";
+        equals.text = "";
+        result.text = "";
     }
 
-    public string GetEquation()
+    public void UpdateUI(Interactable block)
     {
+        if (number1.text == "")
+        {
+            Debug.Log("number 1 is leeg");
+            if (block is NumberBlock)
+            {
+                Debug.Log("gecast naar numberblock");
+                NumberBlock num = block as NumberBlock;
+                number1.text = num.text.text;
+            }
+        }
+        else if (operation.text == "")
+        {
+            if (block is NumberBlock)
+            {
+                OperationBlock num = block as OperationBlock;
+                operation.text = num.text.text;
+            }
+        }
+        else if (number2.text == "")
+        {
+            NumberBlock num = block as NumberBlock;
+            number2.text = num.text.text;
+        }
+        else
+        {
+            Calculate();
+        }
+    }
+
+    void Calculate()
+    {
+        equals.text = "=";
+
+        int _number1;
+        int _number2;
+
+        Int32.TryParse(number1.text, out _number1);
+        Int32.TryParse(number2.text, out _number2);
+
+        int _result;
+
         switch (currentMultiplier)
         {
-            case Multiplier.NONE:
-                return currentNumber.ToString();
             case Multiplier.PLUS:
-                return currentNumber + " +";
+                _result = _number1 + _number2;
+                break;
             case Multiplier.MINUS:
-                return currentNumber + " -";
+                _result = _number1 - _number2;
+                break;
             case Multiplier.MULTIPLY:
-                return currentNumber + " x";
+                _result = _number1 * _number2;
+                break;
+
+            default:
+                throw new NotImplementedException();
         }
-        return "";
+
+        result.text = _result.ToString();
+
+        currentMultiplier = Multiplier.NONE;
+        currentNumber = _result;
     }
 }
