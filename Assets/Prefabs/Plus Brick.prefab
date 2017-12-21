@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 114081404342470514}
+  multiplier: 0
 --- !u!114 &114967991422743450
 MonoBehaviour:
   m_ObjectHideFlags: 1
