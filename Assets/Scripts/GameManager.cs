@@ -203,6 +203,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        StartHitTimout();
         ui.RemoveBrick(brick, currentTeam);
         SwitchTeam();
         return true;

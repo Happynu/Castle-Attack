@@ -17,7 +17,6 @@ public class NumberBlock : Interactable
     {
         if (GameManager.instance.timedout == false)
         {
-            GameManager.instance.StartHitTimout();
             Debug.Log("Number block hit");
             if (GameManager.instance.HitBrick(this))
             {
