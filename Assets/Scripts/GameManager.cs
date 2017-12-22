@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
     private Algorithm algorithm = new Algorithm();
     private BrickManager brickManager;
 
+    [Space(10)]
+    public Image win;
+    public Text textRed;
+    public Text textBlue;
+
     //For hitting bricks too many times, don't touch
     public bool timedout = false;
 
@@ -69,8 +74,17 @@ public class GameManager : MonoBehaviour
 
     public void EndRound()
     {
-        endRoundScreenManager.gameObject.SetActive(true);
-        endRoundScreenManager.StartEndRoundScreen(teamRed.score, teamBlue.score);
+        win.gameObject.SetActive(true);
+        if (teamBlue.score == 1)
+        {
+            textBlue.gameObject.SetActive(true);
+        } else
+        {
+            textRed.gameObject.SetActive(true);
+        }
+        //endRoundScreenManager.gameObject.SetActive(true);
+        //endRoundScreenManager.StartEndRoundScreen(teamRed.score, teamBlue.score);
+        
     }
 
     void SwitchTeam()
