@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.86937124, b: 0.32352942, a: 1}
+  m_Color: {r: 0.6360622, g: 0.16600002, b: 0.803, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1727,7 +1727,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Team Blauw Heeft gewonnen!
+  m_Text: Team Blauw heeft gewonnen!
 --- !u!222 &1553789790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2213,7 +2213,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Team Rood Heeft gewonnen!
+  m_Text: Team Rood heeft gewonnen!
 --- !u!222 &1874621813
 CanvasRenderer:
   m_ObjectHideFlags: 0
