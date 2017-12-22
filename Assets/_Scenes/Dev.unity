@@ -690,7 +690,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504610372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -262.52505, z: 0}
+  m_LocalPosition: {x: 0, y: -262.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1191254307}
@@ -923,7 +923,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 681405551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -325.10678, y: -206.15506, z: 0}
+  m_LocalPosition: {x: -324.90002, y: -206, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432371291}
@@ -1180,7 +1180,7 @@ RectTransform:
   m_GameObject: {fileID: 1110756444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.81, y: 17.12, z: -5}
-  m_LocalScale: {x: 0.066632226, y: 0.066632226, z: 0.066632226}
+  m_LocalScale: {x: 0.06666667, y: 0.06666667, z: 0.06666667}
   m_Children:
   - {fileID: 1764996932}
   - {fileID: 1483123567}
@@ -1427,7 +1427,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1483123566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 174.79324, y: -206.15506, z: 0}
+  m_LocalPosition: {x: 175, y: -206, z: 0}
   m_LocalScale: {x: 0.99998456, y: 0.99998456, z: 0.99998456}
   m_Children:
   - {fileID: 309212151}
@@ -1716,7 +1716,6 @@ MonoBehaviour:
   endRoundScreenManager: {fileID: 0}
   currentTeam: {fileID: 0}
   EndNumber: {fileID: 1118810695}
-  Edge: {fileID: 1764996933}
   timedout: 0
 --- !u!4 &1659455407
 Transform:
@@ -2061,6 +2060,7 @@ MonoBehaviour:
   RedteamBanner: {fileID: 309212152}
   Red: {fileID: 1483123568}
   Blue: {fileID: 681405553}
+  Edge: {fileID: 1764996933}
 --- !u!4 &1897762533
 Transform:
   m_ObjectHideFlags: 0
