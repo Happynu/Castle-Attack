@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
     private Algorithm algorithm = new Algorithm();
     private BrickManager brickManager;
 
-    public Image Edge;
-
     //For hitting bricks too many times, don't touch
     public bool timedout = false;
 
@@ -77,17 +75,20 @@ public class GameManager : MonoBehaviour
 
     void SwitchTeam()
     {
+        ui.UpdateUI(currentTeam);
+
         if (currentTeam == teamBlue)
         {
             currentTeam = teamRed;
-            ChangeEdgeColor("Red");
         }
         else
         {
             currentTeam = teamBlue;
-            ChangeEdgeColor("Blue");
         }
+
+        ui.ChangeEdgeColor(currentTeam);
         ChangeRoundType();
+
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
     }
@@ -105,15 +106,14 @@ public class GameManager : MonoBehaviour
         if (startteam == 0)
         {
             currentTeam = teamBlue;
-            ChangeEdgeColor("Blue");
         }
         else
         {
             currentTeam = teamRed;
-            ChangeEdgeColor("Red");
         }
 
         ui.StartUI();
+        ui.ChangeEdgeColor(currentTeam);
 
         //Generating bricks
         goalNumber = Random.Range(20, 50); //Temp
@@ -123,27 +123,7 @@ public class GameManager : MonoBehaviour
         brickManager.StartNumberRound();
     }
 
-    void ChangeEdgeColor(string color)
-    {
-        Color myColor = new Color();
-
-        if (color == "Blue")
-        {
-            ColorUtility.TryParseHtmlString("#2A7CCDFF", out myColor);
-        }
-
-        else if (color == "Red")
-        {
-            ColorUtility.TryParseHtmlString("#CD2A2AFF", out myColor);
-        }
-        else //Set color to white
-        {
-            ColorUtility.TryParseHtmlString("#FFFFFFFF", out myColor);
-        }
-
-        Edge.color = myColor;
-    }
-
+    //Spawns a new number brick, based om the algorithm
     public void SpawnNewNumberBrick(Vector2 oldPosition, int number)
     {
         brickNumbers.Remove(number);
@@ -154,6 +134,7 @@ public class GameManager : MonoBehaviour
         ChangeRoundType();
     }
 
+    //Changes the currentteam's round type, so they can either hit number or operation bricks
     private void ChangeRoundType()
     {
         if (currentTeam.operationRound)
@@ -223,9 +204,7 @@ public class GameManager : MonoBehaviour
         }
 
         ui.RemoveBrick(brick, currentTeam);
-        ui.UpdateUI(currentTeam);
         SwitchTeam();
-
         return true;
     }
 }

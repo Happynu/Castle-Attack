@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     public Team Red;
     public Team Blue;
 
+    public Image Edge;
+
     // Use this for initialization 
     void Start()
     {
@@ -122,6 +124,30 @@ public class UIManager : MonoBehaviour
                 Debug.Log("Teamcolor is unknown");
                 break;
         }
+
+        ChangeEdgeColor(team);
+        Debug.Log("edge changed");
+    }
+
+    public void ChangeEdgeColor(Team t)
+    {
+        Color myColor = new Color();
+
+        if (t.color == "blue")
+        {
+            ColorUtility.TryParseHtmlString("#2A7CCDFF", out myColor);
+        }
+
+        else if (t.color == "red")
+        {
+            ColorUtility.TryParseHtmlString("#CD2A2AFF", out myColor);
+        }
+        else //Set color to white
+        {
+            ColorUtility.TryParseHtmlString("#FFFFFFFF", out myColor);
+        }
+
+        Edge.color = myColor;
     }
 
     public void RemoveBrick(Interactable brick, Team team)
