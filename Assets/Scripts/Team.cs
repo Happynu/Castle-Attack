@@ -50,6 +50,37 @@ public class Team : MonoBehaviour
         }
     }
 
+    public void HitNumberBrick(Interactable i, bool start = false)
+    {
+        NumberBlock b = i as NumberBlock;
+        if (start)
+        {
+            started = true;
+            number1 = b.number;
+            operationRound = true;
+        }
+        else
+        {
+            number2 = b.number;
+            Calculate();
+            operationRound = true;
+        }
+    }
+
+    public void HitOperationBrick(Interactable i)
+    {
+        OperationBlock b = i as OperationBlock;
+        if (operation != Multiplier.NONE)
+        {
+            number1 = result;
+            number2 = -1;
+            result = -1;
+        }
+
+        operation = b.multiplier;
+        operationRound = false;
+    }
+
     public void Calculate()
     { 
 

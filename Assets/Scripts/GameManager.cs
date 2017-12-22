@@ -174,17 +174,13 @@ public class GameManager : MonoBehaviour
 
     public bool HitBrick(Interactable brick)
     {
-        Team t = currentTeam;
-
         //At the start of the game, pick a start number.
-        if (t.started == false)
+        if (currentTeam.started == false)
         {
             if (brick is NumberBlock)
             {
-                NumberBlock num = brick as NumberBlock;
-                t.started = true;
-                t.number1 = num.number;
-                t.operationRound = true;
+                currentTeam.HitNumberBrick(brick, true);
+                currentTeam.started = true;
             }
             else
             {
@@ -201,13 +197,9 @@ public class GameManager : MonoBehaviour
                 NumberBlock num = brick as NumberBlock;
 
                 //Only if there is a multiplier selected, you are allowed to hit a number.
-                if (!t.operationRound)
+                if (!currentTeam.operationRound)
                 {
-                    t.number2 = num.number;
-                    t.Calculate();
-                    t.operationRound = true;
-
-                    ui.UpdateUI(currentTeam);
+                    currentTeam.HitNumberBrick(num);
                 }
                 else
                 {
@@ -217,18 +209,11 @@ public class GameManager : MonoBehaviour
             //An operation block
             else if (brick is OperationBlock)
             {
-                OperationBlock num = brick as OperationBlock;
+                
                 //Only if there is currently no multiplier you are allowed to hit one.
-                if (t.operationRound)
+                if (currentTeam.operationRound)
                 {
-                    if(t.operation != Multiplier.NONE)
-                    {
-                        t.number1 = t.result;
-                        t.number2 = -1;
-                        t.result = -1;
-                    }
-                    t.operation = num.multiplier;
-                    t.operationRound = false;
+                    currentTeam.HitOperationBrick(brick);
                 }
                 else
                 {
