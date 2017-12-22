@@ -14,13 +14,34 @@ public class Brick : MonoBehaviour {
 	public bool weakened;
 	public Damage damageType;
 
+	public Material rock;
+	public Material rockDamagedWeak;
+	public Material rockDamagedMedium;
+	public Material rockDamagedHeavy;
+
+
 	// Use this for initialization
 	void Start () {
-		
+		damageType = Damage.None;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		switch (damageType) {
+		case Damage.Weak:
+			gameObject.GetComponent<Renderer> ().material = rockDamagedWeak;
+			break;
+		case Damage.Medium:
+			gameObject.GetComponent<Renderer> ().material = rockDamagedMedium;
+			break;
+		case Damage.Heavy:
+			gameObject.GetComponent<Renderer> ().material = rockDamagedHeavy;
+			break;
+		default:
+			gameObject.GetComponent<Renderer> ().material = rock;
+			break;
+		}
+
 		if (this.gameObject.GetComponent<Rigidbody> ().isKinematic == true) {
 			switch (damageType) {
 			case Damage.Weak:

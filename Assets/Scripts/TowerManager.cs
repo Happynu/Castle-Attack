@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour {
 
 	List<GameObject> bricks = new List<GameObject>();
+	private bool collapsing;
 
 	// Use this for initialization
 	void Start () {
@@ -22,28 +23,44 @@ public class TowerManager : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.collider.gameObject.GetComponent<Brick> () != null) {
 					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
-					//if (hit.collider.gameObject.transform.parent.name == "NorthWall") {
-
+					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
+					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
 					foreach (Collider brickCollider in Physics.OverlapSphere(hit.transform.position, 10)) {
-						if (brickCollider.gameObject.GetComponent<Brick> () != null) {
+						if (brickCollider.gameObject.GetComponent<Brick> () != null && hit.collider.gameObject != brickCollider.gameObject) {
 							brickCollider.gameObject.GetComponent<Brick> ().weakened = true;
-							hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
-							//Destroy(brickCollider.gameObject);
 						}
 					}
-
-					//}
 				}
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.R)) {
 			foreach (GameObject brick in bricks) {
-				if (brick.GetComponent<Brick>().weakened == true) {
+				//if (brick.GetComponent<Brick>().weakened == true) {
 					brick.GetComponent<Rigidbody> ().isKinematic = false;
-				}
-				brick.GetComponent<Rigidbody> ().AddForce (transform.forward * 500);
+				//}
+				StartCoroutine (DestroyBricks ());
 			}
 		}
+	}
+
+	public void Collapse(){
+		Collider[] colliders = Physics.OverlapSphere (GameObject.Find ("ExplosionPosition").transform.position, 200f);
+		foreach (Collider collider in colliders) {
+			Rigidbody body = collider.GetComponent<Rigidbody> ();
+			if (body != null) {
+				body.AddRelativeForce (transform.forward * 2f, ForceMode.Force);
+			}
+		}
+	}
+
+	IEnumerator DestroyBricks(){
+		foreach (GameObject brick in bricks) {
+			if (brick != null && brick.GetComponent<Brick> ().damageType == Damage.Heavy) {
+				Destroy (brick.gameObject);
+				yield return new WaitForSecondsRealtime (.1f);
+			}
+		}
+		Collapse ();
 	}
 }

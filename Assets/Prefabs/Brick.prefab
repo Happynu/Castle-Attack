@@ -290,6 +290,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakened: 0
+  damageType: 0
+  rock: {fileID: 2100000, guid: 02d1e1adbf2ddec4aba685694c90c655, type: 2}
+  rockDamagedWeak: {fileID: 2100000, guid: 8bb928245f2df8945835bbae4f9ec790, type: 2}
+  rockDamagedMedium: {fileID: 2100000, guid: a8292a03d751a0649806469d1b5deefe, type: 2}
+  rockDamagedHeavy: {fileID: 2100000, guid: 80e7923e31a7387448dbaef8a301a346, type: 2}
 --- !u!114 &114912849263860156
 MonoBehaviour:
   m_ObjectHideFlags: 1
