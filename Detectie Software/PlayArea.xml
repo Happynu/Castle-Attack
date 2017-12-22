@@ -2,8 +2,14 @@
 <PlayAreaDataContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ImageCorners>
     <Point>
+<<<<<<< Updated upstream
       <X>741</X>
       <Y>122</Y>
+=======
+<<<<<<< Updated upstream
+      <X>658</X>
+      <Y>105</Y>
+>>>>>>> Stashed changes
     </Point>
     <Point>
       <X>1290</X>
@@ -14,14 +20,41 @@
       <Y>542</Y>
     </Point>
     <Point>
+<<<<<<< Updated upstream
       <X>1307</X>
       <Y>536</Y>
+=======
+      <X>1361</X>
+      <Y>570</Y>
+=======
+      <X>609</X>
+      <Y>110</Y>
+    </Point>
+    <Point>
+      <X>1239</X>
+      <Y>109</Y>
+    </Point>
+    <Point>
+      <X>569</X>
+      <Y>569</Y>
+    </Point>
+    <Point>
+      <X>1281</X>
+      <Y>563</Y>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </Point>
   </ImageCorners>
   <DepthCorners>
     <Point>
+<<<<<<< Updated upstream
       <X>174</X>
       <Y>59</Y>
+=======
+<<<<<<< Updated upstream
+      <X>147</X>
+      <Y>54</Y>
+>>>>>>> Stashed changes
     </Point>
     <Point>
       <X>364</X>
@@ -32,8 +65,29 @@
       <Y>204</Y>
     </Point>
     <Point>
+<<<<<<< Updated upstream
       <X>368</X>
       <Y>203</Y>
+=======
+      <X>387</X>
+      <Y>216</Y>
+=======
+      <X>129</X>
+      <Y>55</Y>
+    </Point>
+    <Point>
+      <X>346</X>
+      <Y>56</Y>
+    </Point>
+    <Point>
+      <X>113</X>
+      <Y>213</Y>
+    </Point>
+    <Point>
+      <X>359</X>
+      <Y>212</Y>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </Point>
   </DepthCorners>
   <Bounds>
