@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuButton : Interactable {
+public class MainMenuButton : Interactable
+{
 
     void Start()
     {
@@ -11,7 +12,6 @@ public class MainMenuButton : Interactable {
 
     public override void Interact()
     {
-		Debug.Log("Hoi");
-		Application.LoadLevel ("ja");
+        Application.LoadLevel(1);
     }
 }
