@@ -17,7 +17,6 @@ public class OperationBlock : Interactable
     {
         if (GameManager.instance.timedout == false)
         {
-            GameManager.instance.StartHitTimout();
             Debug.Log("Multiply block hit");
             GameManager.instance.HitBrick(this); 
         }
