@@ -5,7 +5,9 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour {
 
 	List<GameObject> bricks = new List<GameObject>();
+	public Camera mainCamera;
 	private bool collapsing;
+	private int stage;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +24,6 @@ public class TowerManager : MonoBehaviour {
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.collider.gameObject.GetComponent<Brick> () != null) {
-					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
-					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
 					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
 					foreach (Collider brickCollider in Physics.OverlapSphere(hit.transform.position, 10)) {
 						if (brickCollider.gameObject.GetComponent<Brick> () != null && hit.collider.gameObject != brickCollider.gameObject) {
@@ -42,6 +42,40 @@ public class TowerManager : MonoBehaviour {
 				StartCoroutine (DestroyBricks ());
 			}
 		}
+
+		if (Input.GetKeyDown (KeyCode.T)) {
+			NextStage ();
+		}
+	}
+
+	public void NextStage(){
+		stage += 1;
+		if (stage > 5) {
+			//Game Over
+		}
+		MoveCameraToStage ();
+	}
+
+	public void MoveCameraToStage(){
+		int cameraYLocation = 270;
+		switch (stage) {
+		case 1:
+			cameraYLocation = 270;
+			break;
+		case 2:
+			cameraYLocation = 210;
+			break;
+		case 3: 
+			cameraYLocation = 150;
+			break;
+		case 4:
+			cameraYLocation = 90;
+			break;
+		case 5: 
+			cameraYLocation = 30;
+			break;
+		}
+		mainCamera.transform.position = new Vector3 (mainCamera.transform.position.x, cameraYLocation, mainCamera.transform.position.z);
 	}
 
 	public void Collapse(){
