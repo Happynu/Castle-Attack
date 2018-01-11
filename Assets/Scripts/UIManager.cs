@@ -152,23 +152,58 @@ public class UIManager : MonoBehaviour
 
     public void RemoveBrick(Interactable brick, Team team)
     {
-        switch (team.color)
-        {
-            case "blue":
-                StartCoroutine(MoveBrick(brick, BlueteamBanner.transform.position));
-                break;
-
-            case "red":
-                StartCoroutine(MoveBrick(brick, RedteamBanner.transform.position));
-                break;
-
-            default:
-                Debug.Log("Teamcolor is unknown");
-                break;
-        }
+        StartCoroutine(MoveNumber(brick, LabelPosition(team)));
     }
 
-    private IEnumerator MoveBrick(Interactable brick, Vector3 dest)
+    Vector3 LabelPosition(Team team)
+    {
+        if (team.color == "blue")
+        {
+            switch (team.process)
+            {
+                //First number
+                case 1:
+                    return number1Blue.transform.position;
+
+                //Operation
+                case 2:
+                    return operationBlue.transform.position;
+
+                //Second number
+                case 3:
+                    return number2Blue.transform.position;
+
+                //Calculate
+                case 4:
+                    throw new System.NotImplementedException("calculate not inplemented yet");
+            }
+        }
+        else //if (team.color == "blue")
+        {
+            switch (team.process)
+            {
+                //First number
+                case 1:
+                    return number1Red.transform.position;
+
+                //Operation
+                case 2:
+                    return operationRed.transform.position;
+
+                //Second number
+                case 3:
+                    return number2Red.transform.position;
+
+                //Calculate
+                case 4:
+                    throw new System.NotImplementedException("calculate not inplemented yet");
+            }
+        }
+
+        throw new System.NotImplementedException();
+    }
+
+    private IEnumerator MoveNumber(Interactable brick, Vector3 dest)
     {
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
@@ -181,12 +216,10 @@ public class UIManager : MonoBehaviour
             canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
 
             //labelClone.transform.localScale *= 0.95f;
-            Debug.Log("in while");
             yield return null;
         }
 
         //Destroy label
-        Debug.Log("destroying");
         Destroy(canvas.gameObject);
 
         //Next turn

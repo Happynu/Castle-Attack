@@ -21,8 +21,13 @@ public class Team : MonoBehaviour
     public Multiplier operation;
     public int number2;
     public int result;
+    public int process;
 
-    public int score = 0;
+    public int score; 
+    //1 = Need to get First number
+    //2 = Need to get multiplier
+    //3 = Need to get Second number
+    //4 = Need to calculate
 
     public bool won = false;
     public bool started = false;
@@ -35,6 +40,8 @@ public class Team : MonoBehaviour
         operation = Multiplier.NONE;
         number2 = -1;
         result = -1;
+
+        process = 1;
     }
 
     void CheckWin()
@@ -58,11 +65,14 @@ public class Team : MonoBehaviour
             started = true;
             number1 = b.number;
             operationRound = true;
+
+            process = 2;
         }
         else
         {
             number2 = b.number;
             Calculate();
+            process = 3;
             operationRound = true;
         }
     }
@@ -78,12 +88,13 @@ public class Team : MonoBehaviour
         }
 
         operation = b.multiplier;
+        process = 3;
+
         operationRound = false;
     }
 
     public void Calculate()
     { 
-
         switch (operation)
         {
             case Multiplier.PLUS:
@@ -99,7 +110,7 @@ public class Team : MonoBehaviour
                 throw new NotImplementedException();
         }
 
+        process = 1;
         CheckWin();
-        
     }
 }
