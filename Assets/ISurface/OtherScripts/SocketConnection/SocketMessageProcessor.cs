@@ -58,7 +58,10 @@ public class SocketMessageProcessor : MonoBehaviour {
     private void Disconnect()
     {
         _Connection.Disconnect();
-        Reciever.SetConnected(false);
+        if (_ConnectionState == State.CONNECTED)
+        {
+            Reciever.SetConnected(false);
+        }
     }
 
     public void Reconnect()

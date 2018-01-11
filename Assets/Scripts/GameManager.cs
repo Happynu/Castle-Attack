@@ -222,4 +222,10 @@ public class GameManager : MonoBehaviour
         SwitchTeam();
         return true;
     }
+
+    public void ResetGame()
+    {
+        //Reset scene
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }

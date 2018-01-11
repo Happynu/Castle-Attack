@@ -31,10 +31,7 @@ public class Team : MonoBehaviour
     // Use this for initialization 
     void Start()
     {
-        number1 = -1;
-        operation = Multiplier.NONE;
-        number2 = -1;
-        result = -1;
+        InitializeTeam();
     }
 
     void CheckWin()
@@ -101,5 +98,16 @@ public class Team : MonoBehaviour
 
         CheckWin();
         
+    }
+
+    public void InitializeTeam()
+    {
+        number1 = -1;
+        operation = Multiplier.NONE;
+        number2 = -1;
+        result = -1;
+        won = false;
+        started = false;
+        operationRound = false;
     }
 }
