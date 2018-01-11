@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void SwitchTeam()
+    public void SwitchTeam()
     {
         ui.UpdateUI(currentTeam);
 
@@ -154,7 +154,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="brick">the brick you hit.</param>
     /// <returns>Whether the move was allowed or not.</returns>
-
     public bool HitBrick(Interactable brick)
     {
         //At the start of the game, pick a start number.
@@ -208,7 +207,6 @@ public class GameManager : MonoBehaviour
         StartHitTimout();
 
         ui.RemoveBrick(brick, currentTeam);
-        SwitchTeam();
         return true;
     }
 }

@@ -178,7 +178,7 @@ public class UIManager : MonoBehaviour
         //Move label to UI
         while(labelClone.transform.position != dest)
         {
-            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, 0.0005f);
+            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, 1f);
             //labelClone.transform.localScale *= 0.95f;
             Debug.Log("in while");
             yield return null;
@@ -193,7 +193,7 @@ public class UIManager : MonoBehaviour
         yield return null;
 
         //Next turn
-
+        GameManager.instance.SwitchTeam();
     }
 
     string ConvertMultiplier(Multiplier m)
