@@ -7,22 +7,21 @@ public class OperationBlock : Interactable
 {
     public Text text;
     public Multiplier multiplier;
-    
-    void Start ()
+
+    void Start()
     {
-        UpdateText();
-	}
+    }
 
     public override void Interact()
     {
         if (GameManager.instance.timedout == false)
         {
             Debug.Log("Multiply block hit");
-            GameManager.instance.HitBrick(this); 
+            GameManager.instance.HitBrick(this);
         }
     }
 
-    void UpdateText()
+    public void UpdateText()
     {
         if (multiplier == Multiplier.PLUS)
         {

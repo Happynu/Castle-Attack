@@ -52,10 +52,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4908619883803390}
   - component: {fileID: 33221531917031034}
-  - component: {fileID: 65135078998195572}
   - component: {fileID: 23704886510488660}
   - component: {fileID: 54899269459874892}
+  - component: {fileID: 114238198489527218}
+  - component: {fileID: 114365861994508050}
   - component: {fileID: 114684298584646098}
+  - component: {fileID: 65317624080287736}
+  - component: {fileID: 114761116035522862}
   m_Layer: 8
   m_Name: Brick
   m_TagString: Brick
@@ -185,7 +188,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65135078998195572
+--- !u!65 &65317624080287736
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -193,10 +196,23 @@ BoxCollider:
   m_GameObject: {fileID: 1487670636638082}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.000000059604645, y: 0, z: 0}
+--- !u!114 &114238198489527218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1487670636638082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb71ab2e894ebc4f8b8b6ab363124f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 114248186223471818}
+  multiplier: 3
 --- !u!114 &114248186223471818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,6 +246,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114365861994508050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1487670636638082}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5cb381916581a4d8892ee13ed7130e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 114248186223471818}
+  number: 0
 --- !u!114 &114382947703375886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,6 +324,17 @@ MonoBehaviour:
   rockDamagedWeak: {fileID: 2100000, guid: 8bb928245f2df8945835bbae4f9ec790, type: 2}
   rockDamagedMedium: {fileID: 2100000, guid: a8292a03d751a0649806469d1b5deefe, type: 2}
   rockDamagedHeavy: {fileID: 2100000, guid: 80e7923e31a7387448dbaef8a301a346, type: 2}
+--- !u!114 &114761116035522862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1487670636638082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4c6e63eaaf20d459a4aab8b6ccb4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114912849263860156
 MonoBehaviour:
   m_ObjectHideFlags: 1

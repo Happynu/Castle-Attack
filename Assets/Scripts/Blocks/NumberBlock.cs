@@ -10,7 +10,6 @@ public class NumberBlock : Interactable
 
     void Start()
     {
-        UpdateText();
     }
 
     public override void Interact()
@@ -21,7 +20,7 @@ public class NumberBlock : Interactable
             if (GameManager.instance.HitBrick(this))
             {
                 GameManager.instance.SpawnNewNumberBrick(new Vector2(this.transform.position.x, this.transform.position.y), number);
-                Destroy(this.gameObject);
+             //   Destroy(this.gameObject);
             }
         }
     }
