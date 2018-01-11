@@ -150,9 +150,15 @@ public class UIManager : MonoBehaviour
         Edge.color = myColor;
     }
 
-    public void RemoveBrick(Interactable brick, Team team)
+    public void StartMoveNumberBrick(Interactable brick, Team team)
     {
-        StartCoroutine(MoveNumber(brick, LabelPosition(team)));
+        StartCoroutine(MoveNumberBrick(brick, LabelPosition(team)));
+    }
+
+    public void StartMoveOperationBrick(Interactable brick, Team team)
+    {
+        StartCoroutine(MoveOperationBrick(brick, LabelPosition(team)));
+
     }
 
     Vector3 LabelPosition(Team team)
@@ -203,7 +209,7 @@ public class UIManager : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
-    private IEnumerator MoveNumber(Interactable brick, Vector3 dest)
+    private IEnumerator MoveNumberBrick(Interactable brick, Vector3 dest)
     {
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
@@ -211,8 +217,7 @@ public class UIManager : MonoBehaviour
         float speed = 25f;
 
         float startDistance = Vector3.Distance(canvas.transform.position, dest);
-        float currentDistance = Vector3.Distance(canvas.transform.position, dest);
-
+        float currentDistance = startDistance;
 
         //Move label to UI
         while (canvas.transform.position != dest)
@@ -232,14 +237,7 @@ public class UIManager : MonoBehaviour
             }
 
             Debug.Log("in while");
-            yield return new WaitForEndOfFrame();
-        }
-
-        if (brick) {
-            //Destroy label
-            Debug.Log("destroying");
-            Debug.Log("in while");
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         //Destroy label
@@ -250,6 +248,46 @@ public class UIManager : MonoBehaviour
         GameManager.instance.SwitchTeam();
         GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
         Destroy(brick.gameObject);
+    }
+
+    private IEnumerator MoveOperationBrick(Interactable brick, Vector3 dest)
+    {
+        //detach label from brick
+        GameObject goBrick = brick.transform.Find("Canvas").gameObject;
+        Transform canvasCopy = Instantiate(goBrick, goBrick.transform).transform;
+
+        float speed = 25f;
+
+        float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
+        float currentDistance = startDistance;
+
+        //Move label to UI
+        while (canvasCopy.transform.position != dest)
+        {
+            //Move
+            canvasCopy.transform.position = Vector3.MoveTowards(canvasCopy.transform.position, dest, speed * Time.deltaTime);
+
+            //Scale
+            currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
+            if (currentDistance > (startDistance / 1.75))
+            {
+                canvasCopy.transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
+            }
+            else
+            {
+                canvasCopy.transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
+            }
+
+            Debug.Log("in while");
+            yield return new WaitForFixedUpdate();
+        }
+
+        //Destroy label
+        Debug.Log("destroying");
+        Destroy(canvasCopy.gameObject);
+
+        //Next turn
+        GameManager.instance.SwitchTeam();
     }
 
     string ConvertMultiplier(Multiplier m)

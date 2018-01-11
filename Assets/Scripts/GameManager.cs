@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
             {
                 currentTeam.HitNumberBrick(brick, true);
                 currentTeam.started = true;
-                ui.RemoveBrick(brick, currentTeam);
+                ui.StartMoveNumberBrick(brick, currentTeam);
             }
             else
             {
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
                 if (!currentTeam.operationRound)
                 {
                     currentTeam.HitNumberBrick(num);
-                    ui.RemoveBrick(brick, currentTeam);
+                    ui.StartMoveNumberBrick(brick, currentTeam);
                 }
                 else
                 {
@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
                 if (currentTeam.operationRound)
                 {
                     currentTeam.HitOperationBrick(brick);
-                    SwitchTeam();
+                    ui.StartMoveOperationBrick(brick, currentTeam);
                 }
                 else
                 {
