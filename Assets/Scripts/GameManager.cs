@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour
                 if (currentTeam.operationRound)
                 {
                     currentTeam.HitOperationBrick(brick);
+                    SwitchTeam();
                 }
                 else
                 {

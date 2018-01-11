@@ -173,7 +173,7 @@ public class UIManager : MonoBehaviour
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
 
-        float speed = 0.1f;
+        float speed = 5f;
 
         //Move label to UI
         while(canvas.transform.position != dest)
@@ -185,19 +185,14 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("destroying");
-
         //Destroy label
+        Debug.Log("destroying");
         Destroy(canvas.gameObject);
-
-        //Update UI
-        Destroy(labelClone.gameObject);
-        yield return null;
 
         //Next turn
         GameManager.instance.SwitchTeam();
         GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
-        Destroy(brick);
+        Destroy(brick.gameObject);
     }
 
     string ConvertMultiplier(Multiplier m)
