@@ -89,7 +89,6 @@ public class Team : MonoBehaviour
 
         operation = b.multiplier;
         process = 3;
-
         operationRound = false;
     }
 

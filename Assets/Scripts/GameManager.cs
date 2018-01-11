@@ -197,8 +197,8 @@ public class GameManager : MonoBehaviour
                 //Only if there is currently no multiplier you are allowed to hit one.
                 if (currentTeam.operationRound)
                 {
-                    currentTeam.HitOperationBrick(brick);
                     ui.StartMoveOperationBrick(brick, currentTeam);
+                    currentTeam.HitOperationBrick(brick);
                 }
                 else
                 {
