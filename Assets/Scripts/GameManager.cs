@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private BrickManager brickManager;
 
     [Space(10)]
+    public GameObject resetBox;
     public Image win;
     public Text textRed;
     public Text textBlue;
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
     public void EndRound()
     {
         win.gameObject.SetActive(true);
+        resetBox.SetActive(true);
         if (teamBlue.score == 1)
         {
             textBlue.gameObject.SetActive(true);
@@ -221,11 +223,5 @@ public class GameManager : MonoBehaviour
         ui.RemoveBrick(brick, currentTeam);
         SwitchTeam();
         return true;
-    }
-
-    public void ResetGame()
-    {
-        //Reset scene
-        Application.LoadLevel(Application.loadedLevel);
     }
 }
