@@ -170,25 +170,24 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator MoveBrick(Interactable brick, Vector3 dest)
     {
-        Transform label = brick.transform.Find("Canvas/Text");
-        Transform labelClone = Instantiate(label);
-
         //detach label from brick
+        Transform label = brick.transform.Find("Canvas");
+
+        float speed = 4;
 
         //Move label to UI
-        while(labelClone.transform.position != dest)
+        while(label.transform.position != dest)
         {
-            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, 0.1f * Time.deltaTime);
+            label.transform.position = Vector3.MoveTowards(label.transform.position, dest, speed * Time.deltaTime);
             //labelClone.transform.localScale *= 0.95f;
             Debug.Log("N-nani?");
             yield return new WaitForSeconds(1f);
         }
 
         //Destroy label
+        Destroy(label.gameObject);
 
         //Update UI
-        Destroy(labelClone.gameObject);
-        yield return null;
 
         //Next turn
 
