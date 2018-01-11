@@ -224,11 +224,11 @@ public class UIManager : MonoBehaviour
             currentDistance = Vector3.Distance(canvas.transform.position, dest);
             if (currentDistance > (startDistance / 1.75))
             {
-                canvas.transform.localScale /= 0.98f;
+                canvas.transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvas.transform.localScale *= 0.98f;
+                canvas.transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
             }
 
             Debug.Log("in while");
