@@ -214,13 +214,13 @@ public class UIManager : MonoBehaviour
 
             //Scale
             currentDistance = Vector3.Distance(canvas.transform.transform.position, dest);
-            if (currentDistance > (startDistance / 1.75))
+            if (currentDistance > (startDistance / 1.40))
             {
                 canvas.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvas.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
+                canvas.transform.localScale -= Vector3.one * Time.deltaTime * 1.02f;
             }
 
             yield return null;
@@ -259,13 +259,13 @@ public class UIManager : MonoBehaviour
 
             //Scale
             currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
-            if (currentDistance > (startDistance / 1.75))
+            if (currentDistance > (startDistance / 1.40))
             {
                 canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.02f;
             }
 
             yield return null;
