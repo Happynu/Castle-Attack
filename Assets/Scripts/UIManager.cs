@@ -214,7 +214,7 @@ public class UIManager : MonoBehaviour
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
 
-        float speed = 25f;
+        float speed = 30f;
 
         float startDistance = Vector3.Distance(canvas.transform.position, dest);
         float currentDistance = startDistance;
@@ -262,7 +262,7 @@ public class UIManager : MonoBehaviour
         GameObject goBrick = brick.transform.Find("Canvas").gameObject;
         Transform canvasCopy = Instantiate(goBrick, goBrick.transform).transform;
 
-        float speed = 25f;
+        float speed = 30f;
 
         float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
         float currentDistance = startDistance;
@@ -275,21 +275,19 @@ public class UIManager : MonoBehaviour
 
             //Scale
             currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
-            if (currentDistance > (startDistance / 1.75))
+            if (currentDistance > (startDistance / 1.70))
             {
-                canvasCopy.transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
+                canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvasCopy.transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
             }
 
-            Debug.Log("in while");
             yield return new WaitForFixedUpdate();
         }
 
         //Destroy label
-        Debug.Log("destroying");
         Destroy(canvasCopy.gameObject);
 
         //Next turn
