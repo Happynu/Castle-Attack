@@ -72,7 +72,7 @@ public class Team : MonoBehaviour
         {
             number2 = b.number;
             Calculate();
-            process = 3;
+            process = 2;
             operationRound = true;
         }
     }
@@ -110,7 +110,6 @@ public class Team : MonoBehaviour
                 throw new NotImplementedException();
         }
 
-        process = 1;
         CheckWin();
     }
 }
