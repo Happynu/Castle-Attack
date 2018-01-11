@@ -173,14 +173,25 @@ public class UIManager : MonoBehaviour
         Transform label = brick.transform.Find("Canvas/Text");
         Transform labelClone = Instantiate(label);
 
+        //detach label from brick
+
+        //Move label to UI
         while(labelClone.transform.position != dest)
         {
-            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, Time.deltaTime);
-            labelClone.transform.localScale *= 0.95f;
+            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, 0.1f * Time.deltaTime);
+            //labelClone.transform.localScale *= 0.95f;
+            Debug.Log("N-nani?");
+            yield return new WaitForSeconds(1f);
         }
 
+        //Destroy label
+
+        //Update UI
         Destroy(labelClone.gameObject);
         yield return null;
+
+        //Next turn
+
     }
 
     string ConvertMultiplier(Multiplier m)
