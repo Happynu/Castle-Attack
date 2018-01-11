@@ -171,14 +171,14 @@ public class UIManager : MonoBehaviour
     private IEnumerator MoveBrick(Interactable brick, Vector3 dest)
     {
         //detach label from brick
-        Transform label = brick.transform.Find("Canvas");
+        Transform canvas = brick.transform.Find("Canvas");
 
-        float speed = 4;
+        float speed = 0.1f;
 
         //Move label to UI
-        while(label.transform.position != dest)
+        while(canvas.transform.position != dest)
         {
-            label.transform.position = Vector3.MoveTowards(label.transform.position, dest, speed * Time.deltaTime);
+            canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
 
             //labelClone.transform.localScale *= 0.95f;
             Debug.Log("in while");
@@ -188,7 +188,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("destroying");
 
         //Destroy label
-        Destroy(label.gameObject);
+        Destroy(canvas.gameObject);
 
         //Update UI
 
