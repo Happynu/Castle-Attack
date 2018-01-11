@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         {
             if (brick is NumberBlock)
             {
-                ui.RemoveBrick(brick, currentTeam);
+                ui.StartMoveNumberBrick(brick, currentTeam);
                 currentTeam.HitNumberBrick(brick, true);
                 currentTeam.started = true;
             }
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
                 //Only if there is a multiplier selected, you are allowed to hit a number.
                 if (!currentTeam.operationRound)
                 {
-                    ui.RemoveBrick(brick, currentTeam);
+                    ui.StartMoveNumberBrick(brick, currentTeam);
                     currentTeam.HitNumberBrick(num);
                 }
                 else
@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
                 if (currentTeam.operationRound)
                 {
                     currentTeam.HitOperationBrick(brick);
-                    SwitchTeam();
+                    ui.StartMoveOperationBrick(brick, currentTeam);
                 }
                 else
                 {
