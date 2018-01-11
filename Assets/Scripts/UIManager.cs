@@ -28,18 +28,6 @@ public class UIManager : MonoBehaviour
 
     public Image Edge;
 
-    // Use this for initialization 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame 
-    void Update()
-    {
-
-    }
-
     public void StartUI()
     {
         number1Blue.text = "";
@@ -158,7 +146,6 @@ public class UIManager : MonoBehaviour
     public void StartMoveOperationBrick(Interactable brick, Team team)
     {
         StartCoroutine(MoveOperationBrick(brick, LabelPosition(team)));
-
     }
 
     Vector3 LabelPosition(Team team)
@@ -220,28 +207,26 @@ public class UIManager : MonoBehaviour
         float currentDistance = startDistance;
 
         //Move label to UI
-        while (canvas.transform.position != dest)
+        while (canvas.transform.position.x != dest.x && canvas.transform.position.y != dest.y)
         {
             //Move
             canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
 
             //Scale
-            currentDistance = Vector3.Distance(canvas.transform.position, dest);
+            currentDistance = Vector3.Distance(canvas.transform.transform.position, dest);
             if (currentDistance > (startDistance / 1.75))
             {
-                canvas.transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
+                canvas.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvas.transform.localScale -= new Vector3(1, 1, 1) * Time.deltaTime * 1.01f;
+                canvas.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
             }
 
-            Debug.Log("in while");
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         //Destroy label
-        Debug.Log("destroying");
         Destroy(canvas.gameObject);
 
         //Next turn
@@ -258,9 +243,8 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator MoveOperationBrick(Interactable brick, Vector3 dest)
     {
-        //detach label from brick
-        GameObject goBrick = brick.transform.Find("Canvas").gameObject;
-        Transform canvasCopy = Instantiate(goBrick, goBrick.transform).transform;
+        Transform canvas = brick.transform.Find("Canvas");
+        Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
 
         float speed = 30f;
 
@@ -268,14 +252,14 @@ public class UIManager : MonoBehaviour
         float currentDistance = startDistance;
 
         //Move label to UI
-        while (canvasCopy.transform.position != dest)
+        while (canvasCopy.transform.position.x != dest.x && canvasCopy.transform.position.y != dest.y)
         {
             //Move
             canvasCopy.transform.position = Vector3.MoveTowards(canvasCopy.transform.position, dest, speed * Time.deltaTime);
 
             //Scale
             currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
-            if (currentDistance > (startDistance / 1.70))
+            if (currentDistance > (startDistance / 1.75))
             {
                 canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
@@ -284,10 +268,10 @@ public class UIManager : MonoBehaviour
                 canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
             }
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
-        //Destroy label
+        //Destroy label copy
         Destroy(canvasCopy.gameObject);
 
         //Next turn

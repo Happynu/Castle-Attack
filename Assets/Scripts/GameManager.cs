@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private List<int> brickNumbers;
 
     [Space(10)]
-    private Algorithm algorithm = new Algorithm();
+    public Algorithm algorithm;
     private BrickManager brickManager;
 
     [Space(10)]
