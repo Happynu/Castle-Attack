@@ -20,10 +20,10 @@ public class TowerManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown (0)) {
-			RaycastHit hit;
+            RaycastHit hit;
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast (ray, out hit)) {
-				if (hit.collider.gameObject.GetComponent<Brick> () != null) {
+				if (hit.collider.gameObject.GetComponent<Brick> () != null) {                 
 					hit.collider.gameObject.GetComponent<Brick> ().IncreaseDamageType ();
 					foreach (Collider brickCollider in Physics.OverlapSphere(hit.transform.position, 10)) {
 						if (brickCollider.gameObject.GetComponent<Brick> () != null && hit.collider.gameObject != brickCollider.gameObject) {
