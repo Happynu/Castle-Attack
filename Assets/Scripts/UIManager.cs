@@ -252,6 +252,12 @@ public class UIManager : MonoBehaviour
         Destroy(brick.gameObject);
     }
 
+    private IEnumerator CalculateAnimation()
+    {
+        //make sum bigger and smaller (pulse), while fading in the equals symbol
+        yield return null;
+    }
+
     string ConvertMultiplier(Multiplier m)
     {
         switch(m)
