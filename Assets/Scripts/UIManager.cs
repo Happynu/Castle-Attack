@@ -179,10 +179,13 @@ public class UIManager : MonoBehaviour
         while(label.transform.position != dest)
         {
             label.transform.position = Vector3.MoveTowards(label.transform.position, dest, speed * Time.deltaTime);
+
             //labelClone.transform.localScale *= 0.95f;
-            Debug.Log("N-nani?");
-            yield return new WaitForSeconds(1f);
+            Debug.Log("in while");
+            yield return null;
         }
+
+        Debug.Log("destroying");
 
         //Destroy label
         Destroy(label.gameObject);
@@ -190,7 +193,7 @@ public class UIManager : MonoBehaviour
         //Update UI
 
         //Next turn
-
+        GameManager.instance.SwitchTeam();
     }
 
     string ConvertMultiplier(Multiplier m)
