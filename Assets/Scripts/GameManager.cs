@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when this team has hit a brick
+    /// Called when a team has hit a brick
     /// </summary>
     /// <param name="brick">the brick you hit.</param>
     /// <returns>Whether the move was allowed or not.</returns>
@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
             {
                 currentTeam.HitNumberBrick(brick, true);
                 currentTeam.started = true;
+                ui.RemoveBrick(brick, currentTeam);
             }
             else
             {
@@ -182,6 +183,7 @@ public class GameManager : MonoBehaviour
                 if (!currentTeam.operationRound)
                 {
                     currentTeam.HitNumberBrick(num);
+                    ui.RemoveBrick(brick, currentTeam);
                 }
                 else
                 {
@@ -206,7 +208,6 @@ public class GameManager : MonoBehaviour
 
         StartHitTimout();
 
-        ui.RemoveBrick(brick, currentTeam);
         return true;
     }
 }

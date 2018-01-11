@@ -191,9 +191,13 @@ public class UIManager : MonoBehaviour
         Destroy(canvas.gameObject);
 
         //Update UI
+        Destroy(labelClone.gameObject);
+        yield return null;
 
         //Next turn
         GameManager.instance.SwitchTeam();
+        GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
+        Destroy(brick);
     }
 
     string ConvertMultiplier(Multiplier m)
@@ -213,3 +217,4 @@ public class UIManager : MonoBehaviour
         }
     }
 }
+        //Update UI & go to 
