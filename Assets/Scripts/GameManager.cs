@@ -12,9 +12,6 @@ public class GameManager : MonoBehaviour
     public Team teamBlue;
     public Team teamRed;
 
-    [Space(10)]
-    public EndRoundScreenManager endRoundScreenManager;
-
     [HideInInspector]
     public Team currentTeam;
 
@@ -42,13 +39,6 @@ public class GameManager : MonoBehaviour
     {
         GameManager.instance.timedout = true;
         yield return new WaitForSeconds(1f);
-        GameManager.instance.timedout = false;
-    }
-
-    public IEnumerator RoundTimout()
-    {
-        GameManager.instance.timedout = true;
-        yield return new WaitForSeconds(4f);
         GameManager.instance.timedout = false;
     }
 
@@ -82,8 +72,6 @@ public class GameManager : MonoBehaviour
         {
             textRed.gameObject.SetActive(true);
         }
-        //endRoundScreenManager.gameObject.SetActive(true);
-        //endRoundScreenManager.StartEndRoundScreen(teamRed.score, teamBlue.score);
         
     }
 
