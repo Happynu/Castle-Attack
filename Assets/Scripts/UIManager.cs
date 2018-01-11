@@ -220,7 +220,24 @@ public class UIManager : MonoBehaviour
             //Move
             canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
 
-            //labelClone.transform.localScale *= 0.95f;
+            //Scale
+            currentDistance = Vector3.Distance(canvas.transform.position, dest);
+            if (currentDistance > (startDistance / 1.75))
+            {
+                canvas.transform.localScale /= 0.98f;
+            }
+            else
+            {
+                canvas.transform.localScale *= 0.98f;
+            }
+
+            Debug.Log("in while");
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (brick) {
+            //Destroy label
+            Debug.Log("destroying");
             Debug.Log("in while");
             yield return null;
         }
@@ -252,22 +269,3 @@ public class UIManager : MonoBehaviour
         }
     }
 }
-        //Update UI & go to 
-            //Scale
-            currentDistance = Vector3.Distance(canvas.transform.position, dest);
-            if (currentDistance > (startDistance / 1.75))
-            {
-                canvas.transform.localScale /= 0.98f;
-            }
-            else
-            {
-                canvas.transform.localScale *= 0.98f;
-            }
-            Debug.Log("in while");
-            yield return new WaitForEndOfFrame();
-        }
-
-        if (brick )
-
-        //Destroy label
-        Debug.Log("destroying");
