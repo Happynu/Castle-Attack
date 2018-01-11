@@ -178,11 +178,13 @@ public class UIManager : MonoBehaviour
         //Move label to UI
         while(labelClone.transform.position != dest)
         {
-            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, 0.1f * Time.deltaTime);
+            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, 0.0005f);
             //labelClone.transform.localScale *= 0.95f;
-            Debug.Log("N-nani?");
-            yield return new WaitForSeconds(1f);
+            Debug.Log("in while");
+            yield return null;
         }
+
+        Debug.Log("destroying");
 
         //Destroy label
 
