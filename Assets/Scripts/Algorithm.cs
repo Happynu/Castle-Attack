@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Algorithm : MonoBehaviour
+public class Algorithm
 {
     private List<int> brickNumbers = new List<int> { };
     private List<int> possibleAnswers = new List<int>();

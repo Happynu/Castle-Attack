@@ -173,17 +173,33 @@ public class UIManager : MonoBehaviour
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
 
-        float speed = 5f;
+        float speed = 25f;
+
+        float startDistance = Vector3.Distance(canvas.transform.position, dest);
+        float currentDistance = Vector3.Distance(canvas.transform.position, dest);
+
 
         //Move label to UI
-        while(canvas.transform.position != dest)
+        while (canvas.transform.position != dest)
         {
+            //Move
             canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
 
-            //labelClone.transform.localScale *= 0.95f;
+            //Scale
+            currentDistance = Vector3.Distance(canvas.transform.position, dest);
+            if (currentDistance > (startDistance / 1.75))
+            {
+                canvas.transform.localScale /= 0.98f;
+            }
+            else
+            {
+                canvas.transform.localScale *= 0.98f;
+            }
             Debug.Log("in while");
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
+
+        if (brick )
 
         //Destroy label
         Debug.Log("destroying");
