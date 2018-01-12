@@ -252,8 +252,6 @@ public class UIManager : MonoBehaviour
         //Next turn
         GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
 
-    }
-
         UpdateUI(team);
 
         if (team.process == 4)
