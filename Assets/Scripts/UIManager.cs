@@ -200,39 +200,41 @@ public class UIManager : MonoBehaviour
     {
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
+        Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
+        canvas.gameObject.GetComponentInChildren<Text>().text = "";
 
-        float speed = 30f;
+        float speed = 5f;
 
-        float startDistance = Vector3.Distance(canvas.transform.position, dest);
+        float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
         float currentDistance = startDistance;
 
         //Move label to UI
-        while (canvas.transform.position.x != dest.x && canvas.transform.position.y != dest.y)
+        while (canvasCopy.transform.position.x != dest.x && canvasCopy.transform.position.y != dest.y)
         {
             //Move
-            canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
+            canvasCopy.transform.position = Vector3.MoveTowards(canvasCopy.transform.position, dest, speed * Time.deltaTime);
 
             //Scale
-            currentDistance = Vector3.Distance(canvas.transform.transform.position, dest);
-            if (currentDistance > (startDistance / 1.40))
+            currentDistance = Vector3.Distance(canvasCopy.transform.transform.position, dest);
+            if (currentDistance > (startDistance / 0.3))
             {
-                canvas.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
+                canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvas.transform.localScale -= Vector3.one * Time.deltaTime * 1.02f;
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
             }
 
             yield return null;
         }
 
-        //Destroy label
-        Destroy(canvas.gameObject);
+        //Reset label
+        Destroy(canvasCopy.gameObject);
 
         //Next turn
-        GameManager.instance.SwitchTeam();
         GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
-        Destroy(brick.gameObject);
+        GameManager.instance.SwitchTeam();
+
     }
 
     private IEnumerator CalculateAnimation()
@@ -246,7 +248,7 @@ public class UIManager : MonoBehaviour
         Transform canvas = brick.transform.Find("Canvas");
         Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
 
-        float speed = 30f;
+        float speed = 5f;
 
         float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
         float currentDistance = startDistance;
@@ -259,13 +261,13 @@ public class UIManager : MonoBehaviour
 
             //Scale
             currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
-            if (currentDistance > (startDistance / 1.40))
+            if (currentDistance > (startDistance / 0.3))
             {
                 canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.02f;
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
             }
 
             yield return null;

@@ -88,9 +88,11 @@ public class BrickManager : MonoBehaviour
         if (numberObject != null)
         {
             NumberBlock numberBlock = numberObject.GetComponent<NumberBlock>();
+            if (numberBlock == null) Debug.Log("null");
             numberBlock.text.text = "";
-            Destroy(numberBlock);
             activeBricks.Remove(numberObject);
+            Destroy(numberBlock);
+
         }
     }
 
