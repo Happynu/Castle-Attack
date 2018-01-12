@@ -8,17 +8,13 @@ public class NumberBlock : Interactable
     public Text text;
     public int number;
 
-    void Start()
-    {
-    }
-
     public override void Interact()
     {
         if (GameManager.instance.timedout == false)
         {
             Debug.Log("Number block hit");
+            Debug.Log("my number: " + number);
             GameManager.instance.HitBrick(this);
-           
         }
     }
 

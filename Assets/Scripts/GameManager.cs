@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         brickNumbers.Remove(number);
         brickManager.RemoveBrick(oldPosition);
         int newNumber = algorithm.GenerateNewBrick(currentTeam.result, brickNumbers);
+        Debug.Log("LOGGGG: "+ newNumber);
         brickManager.SpawnNewBrick(newNumber);
         brickNumbers.Add(newNumber);
         ChangeRoundType();

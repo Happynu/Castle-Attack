@@ -8,6 +8,8 @@ public class BrickManager : MonoBehaviour
     public List<GameObject> bricks;
     private List<GameObject> activeBricks;
 
+    private Vector2 lastLocation;
+
     void Start()
     {
         activeBricks = new List<GameObject>();
@@ -66,13 +68,13 @@ public class BrickManager : MonoBehaviour
             numberBlock.number = i;
             numberBlock.UpdateText();
             activeBricks.Add(go);
-
         }
     }
 
     public void RemoveBrick(Vector2 location)
     {
         GameObject numberObject = null;
+        lastLocation = location;
 
         foreach (GameObject go in activeBricks)
         {
@@ -81,18 +83,18 @@ public class BrickManager : MonoBehaviour
                 if (go.transform.position.x == location.x && go.transform.position.y == location.y)
                 {
                     numberObject = go;
+                    break;
                 }
             }
 
         }
         if (numberObject != null)
         {
+            numberObject.GetComponentInChildren<Text>().text = "";
             NumberBlock numberBlock = numberObject.GetComponent<NumberBlock>();
-            if (numberBlock == null) Debug.Log("null");
-            numberBlock.text.text = "";
+            Debug.Log("numberremove: " + numberBlock.number);
             activeBricks.Remove(numberObject);
             Destroy(numberBlock);
-
         }
     }
 
@@ -105,17 +107,19 @@ public class BrickManager : MonoBehaviour
         randomIndex = Random.Range(0, bricks.Count - 1);
         go = bricks[randomIndex];
 
-        while (activeBricks.Contains(go))
+        while (activeBricks.Contains(go) || (go.transform.position.x == lastLocation.x && go.transform.position.y == lastLocation.y))
         {
             randomIndex = Random.Range(0, bricks.Count - 1);
             go = bricks[randomIndex];
         }
+
         go.AddComponent<NumberBlock>();
         numberBlock = go.GetComponent<NumberBlock>();
         numberBlock.text = go.transform.Find("Canvas").gameObject.transform.Find("Text").GetComponent<Text>();
         numberBlock.number = number;
         numberBlock.UpdateText();
         activeBricks.Add(go);
+        Debug.Log("number: " + numberBlock.number);
     }
 
     public void StartNumberRound()
