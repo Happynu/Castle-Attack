@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public UIManager ui;
+    public LightManager spotlight;
 
     [Space(10)]
     public Team teamBlue;
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour
             currentTeam = teamBlue;
         }
 
+        spotlight.ChangeTeamLight(currentTeam);
         ui.ChangeEdgeColor(currentTeam);
         ChangeRoundType();
 
@@ -117,6 +119,7 @@ public class GameManager : MonoBehaviour
         }
 
         ui.StartUI();
+        spotlight.ChangeTeamLight(currentTeam);
         ui.ChangeEdgeColor(currentTeam);
 
         //Generating bricks
