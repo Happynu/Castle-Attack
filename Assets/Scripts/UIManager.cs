@@ -469,24 +469,27 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator _SwitchTeamFlags(Team currentTeam)
     {
-        Vector3 dest = teamFlags.transform.position;
-        switch (currentTeam.color)
+        if (teamFlags != null)
         {
-            case "blue":
-                dest.x = -0.4f;
-                break;
-            case "red":
-                dest.x = 0.4f;
-                break;
-        }
+            Vector3 dest = teamFlags.transform.position;
+            switch (currentTeam.color)
+            {
+                case "blue":
+                    dest.x = -0.4f;
+                    break;
+                case "red":
+                    dest.x = 0.4f;
+                    break;
+            }
 
-        while (teamFlags.transform.position != dest)
-        {
-            teamFlags.transform.position = Vector3.MoveTowards(teamFlags.transform.position, dest, Time.deltaTime * 1.0f);
+            while (teamFlags.transform.position != dest)
+            {
+                teamFlags.transform.position = Vector3.MoveTowards(teamFlags.transform.position, dest, Time.deltaTime * 1.0f);
+                yield return null;
+            }
+
+            teamFlags.transform.position = dest;
             yield return null;
         }
-
-        teamFlags.transform.position = dest;
-        yield return null;
     }
 }

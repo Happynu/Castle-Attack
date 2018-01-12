@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(ui._DestroyFlags());
         tower.GetComponentInChildren<Flag>().SetWinner(currentTeam);
-        tower.GetComponentInChildren<TowerManager>().Collapse();
+        tower.GetComponent<TowerManager>().Collapse();
     }
 
     public void SwitchTeam()
