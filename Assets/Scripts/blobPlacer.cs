@@ -68,7 +68,6 @@ public class blobPlacer : MonoBehaviour {
 
     private void Click(RaycastHit hit)
     {
-        Debug.Log("click");
         if (hit.transform != null)
         {
             Interactable obj = hit.transform.GetComponent<Interactable>();
