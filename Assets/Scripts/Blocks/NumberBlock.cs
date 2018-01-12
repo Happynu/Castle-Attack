@@ -18,11 +18,8 @@ public class NumberBlock : Interactable
         if (GameManager.instance.timedout == false)
         {
             Debug.Log("Number block hit");
-            if (GameManager.instance.HitBrick(this))
-            {
-                GameManager.instance.SpawnNewNumberBrick(new Vector2(this.transform.position.x, this.transform.position.y), number);
-                Destroy(this.gameObject);
-            }
+            GameManager.instance.HitBrick(this);
+           
         }
     }
 

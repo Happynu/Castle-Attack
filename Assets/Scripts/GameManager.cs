@@ -12,9 +12,6 @@ public class GameManager : MonoBehaviour
     public Team teamBlue;
     public Team teamRed;
 
-    [Space(10)]
-    public EndRoundScreenManager endRoundScreenManager;
-
     [HideInInspector]
     public Team currentTeam;
 
@@ -27,7 +24,7 @@ public class GameManager : MonoBehaviour
     private List<int> brickNumbers;
 
     [Space(10)]
-    private Algorithm algorithm = new Algorithm();
+    public Algorithm algorithm;
     private BrickManager brickManager;
 
     [Space(10)]
@@ -42,13 +39,6 @@ public class GameManager : MonoBehaviour
     {
         GameManager.instance.timedout = true;
         yield return new WaitForSeconds(1f);
-        GameManager.instance.timedout = false;
-    }
-
-    public IEnumerator RoundTimout()
-    {
-        GameManager.instance.timedout = true;
-        yield return new WaitForSeconds(4f);
         GameManager.instance.timedout = false;
     }
 
@@ -82,12 +72,10 @@ public class GameManager : MonoBehaviour
         {
             textRed.gameObject.SetActive(true);
         }
-        //endRoundScreenManager.gameObject.SetActive(true);
-        //endRoundScreenManager.StartEndRoundScreen(teamRed.score, teamBlue.score);
         
     }
 
-    void SwitchTeam()
+    public void SwitchTeam()
     {
         ui.UpdateUI(currentTeam);
 
@@ -162,11 +150,10 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when this team has hit a brick
+    /// Called when a team has hit a brick
     /// </summary>
     /// <param name="brick">the brick you hit.</param>
     /// <returns>Whether the move was allowed or not.</returns>
-
     public bool HitBrick(Interactable brick)
     {
         //At the start of the game, pick a start number.
@@ -174,6 +161,7 @@ public class GameManager : MonoBehaviour
         {
             if (brick is NumberBlock)
             {
+                ui.StartMoveNumberBrick(brick, currentTeam);
                 currentTeam.HitNumberBrick(brick, true);
                 currentTeam.started = true;
             }
@@ -194,6 +182,7 @@ public class GameManager : MonoBehaviour
                 //Only if there is a multiplier selected, you are allowed to hit a number.
                 if (!currentTeam.operationRound)
                 {
+                    ui.StartMoveNumberBrick(brick, currentTeam);
                     currentTeam.HitNumberBrick(num);
                 }
                 else
@@ -208,6 +197,7 @@ public class GameManager : MonoBehaviour
                 //Only if there is currently no multiplier you are allowed to hit one.
                 if (currentTeam.operationRound)
                 {
+                    ui.StartMoveOperationBrick(brick, currentTeam);
                     currentTeam.HitOperationBrick(brick);
                 }
                 else
@@ -218,8 +208,7 @@ public class GameManager : MonoBehaviour
         }
 
         StartHitTimout();
-        ui.RemoveBrick(brick, currentTeam);
-        SwitchTeam();
+
         return true;
     }
 }

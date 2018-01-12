@@ -20,7 +20,7 @@ public class blobPlacer : MonoBehaviour {
         {
             if (OkayCheck(blob))
             {
-                SpawnCube(blob);
+                //SpawnCube(blob);
                 Click(Raycast(objectLayer, blob));
             }
         }

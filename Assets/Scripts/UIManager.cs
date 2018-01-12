@@ -28,18 +28,6 @@ public class UIManager : MonoBehaviour
 
     public Image Edge;
 
-    // Use this for initialization 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame 
-    void Update()
-    {
-
-    }
-
     public void StartUI()
     {
         number1Blue.text = "";
@@ -150,37 +138,144 @@ public class UIManager : MonoBehaviour
         Edge.color = myColor;
     }
 
-    public void RemoveBrick(Interactable brick, Team team)
+    public void StartMoveNumberBrick(Interactable brick, Team team)
     {
-        switch (team.color)
-        {
-            case "blue":
-                StartCoroutine(MoveBrick(brick, BlueteamBanner.transform.position));
-                break;
-
-            case "red":
-                StartCoroutine(MoveBrick(brick, RedteamBanner.transform.position));
-                break;
-
-            default:
-                Debug.Log("Teamcolor is unknown");
-                break;
-        }
+        StartCoroutine(MoveNumberBrick(brick, LabelPosition(team)));
     }
 
-    private IEnumerator MoveBrick(Interactable brick, Vector3 dest)
+    public void StartMoveOperationBrick(Interactable brick, Team team)
     {
-        Transform label = brick.transform.Find("Canvas/Text");
-        Transform labelClone = Instantiate(label);
+        StartCoroutine(MoveOperationBrick(brick, LabelPosition(team)));
+    }
 
-        while(labelClone.transform.position != dest)
+    Vector3 LabelPosition(Team team)
+    {
+        if (team.color == "blue")
         {
-            labelClone.transform.position = Vector3.MoveTowards(labelClone.transform.position, dest, Time.deltaTime);
-            labelClone.transform.localScale *= 0.95f;
+            switch (team.process)
+            {
+                //First number
+                case 1:
+                    return number1Blue.transform.position;
+
+                //Operation
+                case 2:
+                    return operationBlue.transform.position;
+
+                //Second number
+                case 3:
+                    return number2Blue.transform.position;
+
+                //Calculate
+                case 4:
+                    throw new System.NotImplementedException("calculate not inplemented yet");
+            }
+        }
+        else //if (team.color == "blue")
+        {
+            switch (team.process)
+            {
+                //First number
+                case 1:
+                    return number1Red.transform.position;
+
+                //Operation
+                case 2:
+                    return operationRed.transform.position;
+
+                //Second number
+                case 3:
+                    return number2Red.transform.position;
+
+                //Calculate
+                case 4:
+                    throw new System.NotImplementedException("calculate not inplemented yet");
+            }
         }
 
-        Destroy(labelClone.gameObject);
+        throw new System.NotImplementedException();
+    }
+
+    private IEnumerator MoveNumberBrick(Interactable brick, Vector3 dest)
+    {
+        //detach label from brick
+        Transform canvas = brick.transform.Find("Canvas");
+
+        float speed = 30f;
+
+        float startDistance = Vector3.Distance(canvas.transform.position, dest);
+        float currentDistance = startDistance;
+
+        //Move label to UI
+        while (canvas.transform.position.x != dest.x && canvas.transform.position.y != dest.y)
+        {
+            //Move
+            canvas.transform.position = Vector3.MoveTowards(canvas.transform.position, dest, speed * Time.deltaTime);
+
+            //Scale
+            currentDistance = Vector3.Distance(canvas.transform.transform.position, dest);
+            if (currentDistance > (startDistance / 1.40))
+            {
+                canvas.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
+            }
+            else
+            {
+                canvas.transform.localScale -= Vector3.one * Time.deltaTime * 1.02f;
+            }
+
+            yield return null;
+        }
+
+        //Destroy label
+        Destroy(canvas.gameObject);
+
+        //Next turn
+        GameManager.instance.SwitchTeam();
+        GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
+        Destroy(brick.gameObject);
+    }
+
+    private IEnumerator CalculateAnimation()
+    {
+        //make sum bigger and smaller (pulse), while fading in the equals symbol
         yield return null;
+    }
+
+    private IEnumerator MoveOperationBrick(Interactable brick, Vector3 dest)
+    {
+        Transform canvas = brick.transform.Find("Canvas");
+        Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
+
+        float speed = 30f;
+
+        float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
+        float currentDistance = startDistance;
+
+        //Move label to UI
+        while (canvasCopy.transform.position.x != dest.x && canvasCopy.transform.position.y != dest.y)
+        {
+            //Move
+            canvasCopy.transform.position = Vector3.MoveTowards(canvasCopy.transform.position, dest, speed * Time.deltaTime);
+
+            //Scale
+            currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
+            if (currentDistance > (startDistance / 1.40))
+            {
+                canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
+            }
+            else
+            {
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.02f;
+            }
+
+            yield return null;
+        }
+
+        //Destroy label copy
+        Destroy(canvasCopy.gameObject);
+
+        //Next turn
+        GameManager.instance.SwitchTeam();
     }
 
     string ConvertMultiplier(Multiplier m)
