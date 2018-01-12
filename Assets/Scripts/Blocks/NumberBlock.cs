@@ -10,7 +10,6 @@ public class NumberBlock : Interactable
 
     void Start()
     {
-        UpdateText();
     }
 
     public override void Interact()
