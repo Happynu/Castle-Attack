@@ -6130,6 +6130,8 @@ MonoBehaviour:
   Red: {fileID: 1886223593}
   Blue: {fileID: 769902137}
   Edge: {fileID: 1799824662}
+  animRed: {fileID: 906339996}
+  animBlue: {fileID: 1013263576}
 --- !u!4 &571938008
 Transform:
   m_ObjectHideFlags: 0
@@ -8927,6 +8929,7 @@ GameObject:
   - component: {fileID: 906339993}
   - component: {fileID: 906339995}
   - component: {fileID: 906339994}
+  - component: {fileID: 906339996}
   m_Layer: 5
   m_Name: Equation
   m_TagString: Untagged
@@ -8990,6 +8993,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 906339992}
+--- !u!95 &906339996
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 906339992}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 62f2e77ab1c356b4d835be881ad573ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &913200629 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1487670636638082, guid: 8babe74006464c64f9a1e0d308aececd,
@@ -10131,6 +10151,7 @@ GameObject:
   - component: {fileID: 1013263573}
   - component: {fileID: 1013263575}
   - component: {fileID: 1013263574}
+  - component: {fileID: 1013263576}
   m_Layer: 5
   m_Name: Equation
   m_TagString: Untagged
@@ -10194,6 +10215,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1013263572}
+--- !u!95 &1013263576
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1013263572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 62f2e77ab1c356b4d835be881ad573ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1021672690 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1487670636638082, guid: 8babe74006464c64f9a1e0d308aececd,

@@ -33,6 +33,8 @@ public class Team : MonoBehaviour
     public bool started = false;
     public bool operationRound = false;
 
+    UIManager UI;
+
     // Use this for initialization 
     void Start()
     {
@@ -67,8 +69,7 @@ public class Team : MonoBehaviour
         else
         {
             number2 = b.number;
-            Calculate();
-            process = 2;
+            process = 4;
             operationRound = true;
         }
     }
@@ -86,6 +87,16 @@ public class Team : MonoBehaviour
         operation = b.multiplier;
         process = 3;
         operationRound = false;
+    }
+
+    public void resetEquation()
+    {
+        number1 = result;
+        operation = Multiplier.NONE;
+        number2 = Int32.MaxValue;
+        result = Int32.MaxValue;
+
+        process = 2;
     }
 
     public void Calculate()

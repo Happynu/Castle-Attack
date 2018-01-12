@@ -29,6 +29,22 @@ public class UIManager : MonoBehaviour
 
     public Image Edge;
 
+    [Space(10)]
+    public Animator animRed;
+    public Animator animBlue;
+
+    // Use this for initialization 
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame 
+    void Update()
+    {
+
+    }
+
     public void StartUI()
     {
         number1Blue.text = "";
@@ -141,7 +157,7 @@ public class UIManager : MonoBehaviour
 
     public void StartMoveNumberBrick(Interactable brick, Team team)
     {
-        StartCoroutine(MoveNumberBrick(brick, LabelPosition(team)));
+        StartCoroutine(MoveNumberBrick(brick, team));
     }
 
     public void StartMoveOperationBrick(Interactable brick, Team team)
@@ -197,8 +213,9 @@ public class UIManager : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
-    private IEnumerator MoveNumberBrick(Interactable brick, Vector3 dest)
+    private IEnumerator MoveNumberBrick(Interactable brick, Team team)
     {
+        Vector3 dest = LabelPosition(team);
         //detach label from brick
         Transform canvas = brick.transform.Find("Canvas");
         Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
@@ -234,14 +251,17 @@ public class UIManager : MonoBehaviour
 
         //Next turn
         GameManager.instance.SpawnNewNumberBrick(new Vector2(brick.transform.position.x, brick.transform.position.y), (brick as NumberBlock).number);
-        GameManager.instance.SwitchTeam();
 
-    }
+        UpdateUI(team);
 
-    private IEnumerator CalculateAnimation()
-    {
-        //make sum bigger and smaller (pulse), while fading in the equals symbol
-        yield return null;
+        if (team.process == 4)
+        {
+            CalculateAnimation(team);
+        }
+        else
+        {
+            GameManager.instance.SwitchTeam();
+        }
     }
 
     private IEnumerator MoveOperationBrick(Interactable brick, Vector3 dest)
@@ -276,8 +296,128 @@ public class UIManager : MonoBehaviour
 
         //Destroy label copy
         Destroy(canvasCopy.gameObject);
+        GameManager.instance.SwitchTeam();
+    }
 
-        //Next turn
+    public void CalculateAnimation(Team team)
+    {
+        StartCoroutine(Calculateanimation(team));
+    }
+
+    private IEnumerator Calculateanimation(Team team)
+    {
+        GameManager.instance.timedout = true;
+
+        //Get teamlabels
+        List<Text> sum = new List<Text>();
+        Text number1;
+        Text operation;
+        Text number2;
+        Text eq;
+        Text result;
+
+        Animator anim;
+
+        if (team.color == "blue")
+        {
+            number1 = number1Blue;
+            operation = operationBlue;
+            number2 = number2Blue;
+            eq = equalsBlue;
+            result = resultBlue;
+
+            anim = animBlue;
+        }
+        else //if (team.color == "red")
+        {
+            number1 = number1Red;
+            operation = operationRed;
+            number2 = number2Red;
+            eq = equalsRed;
+            result = resultRed;
+
+            anim = animRed;
+        }
+
+        sum.Add(number1);
+        sum.Add(operation);
+        sum.Add(number2);
+        sum.Add(eq);
+
+        //make sum bigger and smaller (pulse), while fading in the equals symbol
+        eq.color = Color.clear;
+
+        anim.SetTrigger("Pulsate");
+
+        while (eq.color.a < 1)
+        {
+            eq.color = new Color(1, 1, 1, eq.color.a + 0.1f);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(0.75f);
+
+        team.Calculate();
+        UpdateUI(team);
+
+        anim.SetTrigger("ResultFade");
+        //Pulse with equals symbol while solution fades in fast
+        result.color = Color.clear;
+
+        while (result.color.a < 1)
+        {
+            result.color = new Color(1, 1, 1, eq.color.a + 0.1f);
+            Debug.Log("result fading in");
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        yield return new WaitForSeconds(3);
+
+        StartCoroutine(MoveResult(sum, result, team));
+    }
+
+    IEnumerator GetGoal(Text result)
+    {
+        yield return null;
+    }
+
+    IEnumerator MoveResult(List<Text> sum, Text result, Team team)
+    {
+        //Fade out sum and equals
+        while (sum[0].color.a > 0)
+        {
+            foreach (Text label in sum)
+            {
+                label.color = new Color(1, 1, 1, sum[3].color.a - 0.2f);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        //move solution to first slot
+        Text resultClone = Instantiate(result, result.transform.position, Quaternion.identity);
+        resultClone.transform.parent = result.transform.parent;
+        resultClone.transform.localScale = new Vector3(1, 1, 1);
+
+        result.text = "";
+
+        while (resultClone.transform.position != sum[0].transform.position)
+        {
+            Debug.Log(resultClone.transform.position.x);
+            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 30f * Time.deltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+
+        //reset variables
+        Destroy(resultClone);
+        foreach (Text label in sum)
+        {
+            label.color = new Color(1, 1, 1, 1);
+        }
+
+        team.resetEquation();
+
+        GameManager.instance.timedout = false;
         GameManager.instance.SwitchTeam();
     }
 
