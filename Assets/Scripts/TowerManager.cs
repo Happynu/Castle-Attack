@@ -54,21 +54,7 @@ public class TowerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             reset.SetActive(true);
-            cameraMoving = true;
-            foreach (GameObject brick in bricks)
-            {
-                if (brick != null)
-                {
-                    brick.GetComponent<Rigidbody>().isKinematic = false;
-                }
-            }
-            foreach(GameObject towerFloor in towerInterior)
-            {
-                if(towerFloor.GetComponent<Rigidbody>() != null)
-                {
-                    towerFloor.GetComponent<Rigidbody>().isKinematic = false;
-                }
-            }
+            
             Collapse();
         }
 
@@ -84,6 +70,22 @@ public class TowerManager : MonoBehaviour
 
     public void Collapse()
     {
+        cameraMoving = true;
+        foreach (GameObject brick in bricks)
+        {
+            if (brick != null)
+            {
+                brick.GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
+        foreach (GameObject towerFloor in towerInterior)
+        {
+            if (towerFloor.GetComponent<Rigidbody>() != null)
+            {
+                towerFloor.GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
+
         Collider[] colliders = Physics.OverlapSphere(GameObject.Find("ExplosionPosition").transform.position, 20f);
         foreach (Collider collider in colliders)
         {
