@@ -394,7 +394,7 @@ public class UIManager : MonoBehaviour
         while (resultClone.transform.position != sum[0].transform.position)
         {
             Debug.Log(resultClone.transform.position.x);
-            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 30f * Time.deltaTime);
+            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 3f * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 
