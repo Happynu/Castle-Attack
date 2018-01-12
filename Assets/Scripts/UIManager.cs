@@ -325,8 +325,8 @@ public class UIManager : MonoBehaviour
 
         while (blueFlag.transform.position != dest && redFlag.transform.position != dest)
         {
-            blueFlag.transform.position = Vector3.MoveTowards(blueFlag.transform.position, dest, Time.deltaTime * 1.0f);
-            redFlag.transform.position = Vector3.MoveTowards(redFlag.transform.position, dest, Time.deltaTime * 1.0f);
+            blueFlag.transform.position = Vector3.MoveTowards(blueFlag.transform.position, dest, Time.deltaTime * 2.0f);
+            redFlag.transform.position = Vector3.MoveTowards(redFlag.transform.position, dest, Time.deltaTime * 2.0f);
             yield return null;
         }
         Destroy(teamFlags);

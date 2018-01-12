@@ -128,11 +128,13 @@ public class BrickManager : MonoBehaviour
         {
             if (go.GetComponent<NumberBlock>() != null)
             {
-                go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
+                StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().HideTexture());
+                // go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
             }
             else
             {
-                go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(true);
+                StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().ShowTexture());
+                //go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(true);
             }
         }
     }
@@ -143,18 +145,21 @@ public class BrickManager : MonoBehaviour
         {
             if (go.GetComponent<NumberBlock>() != null)
             {
-                go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(true);
+                StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().ShowTexture());
+                //go.transform.Find("Moss").gameObject.transform.Find("Lock").gameObject.SetActive(true);
             }
             else
             {
-                go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
+                StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().HideTexture());
+                // go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
             }
         }
         foreach (GameObject go in bricks)
         {
             if (!activeBricks.Contains(go))
             {
-                go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
+                StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().HideTexture());
+                //go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
             }
         }
     }
