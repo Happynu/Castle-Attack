@@ -1678,7 +1678,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1312381118
 MonoBehaviour:
@@ -1691,12 +1691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9ae1da84355ef44be3c8fa5aebdeea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  red1: {fileID: 0}
-  red2: {fileID: 0}
-  red3: {fileID: 0}
-  blue1: {fileID: 0}
-  blue2: {fileID: 0}
-  blue3: {fileID: 0}
 --- !u!1 &1483123566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,7 +2082,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4219704579985202, guid: e1c1fb9e28f37704295956178fffba49, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1c1fb9e28f37704295956178fffba49, type: 2}
@@ -2126,6 +2120,7 @@ MonoBehaviour:
   teamRed: {fileID: 1483123568}
   currentTeam: {fileID: 0}
   EndNumber: {fileID: 1118810695}
+  algorithm: {fileID: 1659455408}
   resetBox: {fileID: 1921181083}
   win: {fileID: 978266405}
   textRed: {fileID: 1874621812}
@@ -2613,7 +2608,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921181083
 GameObject:
@@ -2849,7 +2844,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4908619883803390, guid: c1ab9bdce3f15464abfff0640d5f8b0a, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1ab9bdce3f15464abfff0640d5f8b0a, type: 2}
