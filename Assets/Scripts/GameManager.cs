@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     public Text textRed;
     public Text textBlue;
 
+    [SerializeField]
+    private GameObject tower;
+
     //For hitting bricks too many times, don't touch
     public bool timedout = false;
 
@@ -77,6 +80,8 @@ public class GameManager : MonoBehaviour
             textRed.gameObject.SetActive(true);
         }
         StartCoroutine(ui.DestroyFlags());
+        tower.GetComponentInChildren<Flag>().SetWinner(currentTeam);
+        tower.GetComponentInChildren<TowerManager>().Collapse();
     }
 
     public void SwitchTeam()
