@@ -92,7 +92,7 @@ public class TowerManager : MonoBehaviour
             {
                 body = collider.GetComponent<Rigidbody>();
             }
-            else if (collider.transform.parent.GetComponent<Rigidbody>() != null)
+            else if (collider.transform.parent != null && collider.transform.parent.GetComponent<Rigidbody>() != null)
             {
                 body = collider.transform.parent.GetComponent<Rigidbody>();
             }
