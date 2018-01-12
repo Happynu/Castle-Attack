@@ -93,8 +93,8 @@ public class Team : MonoBehaviour
     {
         number1 = result;
         operation = Multiplier.NONE;
-        number2 = Int32.MaxValue;
-        result = Int32.MaxValue;
+        number2 = Int32.MinValue;
+        result = Int32.MinValue;
 
         process = 2;
     }
