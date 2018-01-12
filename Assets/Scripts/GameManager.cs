@@ -76,7 +76,8 @@ public class GameManager : MonoBehaviour
         {
             textRed.gameObject.SetActive(true);
         }
-        StartCoroutine(ui.DestroyFlags());
+
+        ui.DestroyFlags();
     }
 
     public void SwitchTeam()
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour
 
         spotlight.ChangeTeamLight(currentTeam);
         ui.ChangeEdgeColor(currentTeam);
+        ui.SwitchTeamFlags(currentTeam);
         ChangeRoundType();
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
@@ -139,7 +141,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("LOGGGG: " + newNumber);
         brickManager.SpawnNewBrick(newNumber);
         brickNumbers.Add(newNumber);
-        ChangeRoundType();
     }
 
     //Changes the currentteam's round type, so they can either hit number or operation bricks

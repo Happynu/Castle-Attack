@@ -118,10 +118,6 @@ public class UIManager : MonoBehaviour
                 Debug.Log("Teamcolor is unknown");
                 break;
         }
-
-        ChangeEdgeColor(team);
-        StartCoroutine(SwitchTeamFlags(team));
-        Debug.Log("edge changed");
     }
 
     public void ChangeEdgeColor(Team t)
@@ -443,7 +439,12 @@ public class UIManager : MonoBehaviour
         teamFlags.transform.position = dest;
     }
 
-    public IEnumerator DestroyFlags()
+    public void DestroyFlags()
+    {
+        StartCoroutine(_DestroyFlags());
+    }
+
+    public IEnumerator _DestroyFlags()
     {
         GameObject blueFlag = teamFlags.transform.Find("Flag-Blue").gameObject;
         GameObject redFlag = teamFlags.transform.Find("Flag-Red").gameObject;
@@ -456,20 +457,26 @@ public class UIManager : MonoBehaviour
             redFlag.transform.position = Vector3.MoveTowards(redFlag.transform.position, dest, Time.deltaTime * 2.0f);
             yield return null;
         }
+
         Destroy(teamFlags);
         yield return null;
     }
 
-    public IEnumerator SwitchTeamFlags(Team currentTeam)
+    public void SwitchTeamFlags(Team currentTeam)
+    {
+        StartCoroutine(_SwitchTeamFlags(currentTeam));
+    }
+
+    public IEnumerator _SwitchTeamFlags(Team currentTeam)
     {
         Vector3 dest = teamFlags.transform.position;
         switch (currentTeam.color)
         {
             case "blue":
-                dest.x = 0.4f;
+                dest.x = -0.4f;
                 break;
             case "red":
-                dest.x = -0.4f;
+                dest.x = 0.4f;
                 break;
         }
 
@@ -478,6 +485,7 @@ public class UIManager : MonoBehaviour
             teamFlags.transform.position = Vector3.MoveTowards(teamFlags.transform.position, dest, Time.deltaTime * 1.0f);
             yield return null;
         }
+
         teamFlags.transform.position = dest;
         yield return null;
     }
