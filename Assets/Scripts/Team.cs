@@ -79,8 +79,8 @@ public class Team : MonoBehaviour
         if (operation != Multiplier.NONE)
         {
             number1 = result;
-            number2 = -1;
-            result = -1;
+            number2 = Int32.MinValue;
+            result = Int32.MinValue;
         }
 
         operation = b.multiplier;
@@ -110,10 +110,10 @@ public class Team : MonoBehaviour
 
     public void InitializeTeam()
     {
-        number1 = -1;
+        number1 = Int32.MinValue;
         operation = Multiplier.NONE;
-        number2 = -1;
-        result = -1;
+        number2 = Int32.MinValue;
+        result = Int32.MinValue;
         won = false;
         started = false;
         operationRound = false;

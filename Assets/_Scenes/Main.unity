@@ -15158,6 +15158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f726499363bcf4459cc49d55d9f777a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reset: {fileID: 1319431383}
   cameraStep: 0.3
   collapseForceMin: 150
   collapseForceMax: 300

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +48,7 @@ public class UIManager : MonoBehaviour
         switch (team.color)
         {
             case "blue":
-                if (Blue.number1 != -1)
+                if (Blue.number1 != Int32.MinValue)
                 {
                     number1Blue.text = Blue.number1.ToString();
                 }
@@ -58,7 +59,7 @@ public class UIManager : MonoBehaviour
 
                 operationBlue.text = ConvertMultiplier(Blue.operation);
 
-                if (Blue.number2 != -1)
+                if (Blue.number2 != Int32.MinValue)
                 {
                     number2Blue.text = Blue.number2.ToString();
                 }
@@ -67,7 +68,7 @@ public class UIManager : MonoBehaviour
                     number2Blue.text = "";
                 }
 
-                if (Blue.result != -1)
+                if (Blue.result != Int32.MinValue)
                 {
                     resultBlue.text = Blue.result.ToString();
                 }
@@ -78,7 +79,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case "red":
-                if (Red.number1 != -1)
+                if (Red.number1 != Int32.MinValue)
                 {
                     number1Red.text = Red.number1.ToString();
                 }
@@ -89,7 +90,7 @@ public class UIManager : MonoBehaviour
 
                 operationRed.text = ConvertMultiplier(Red.operation);
 
-                if (Red.number2 != -1)
+                if (Red.number2 != Int32.MinValue)
                 {
                     number2Red.text = Red.number2.ToString();
                 }
@@ -98,7 +99,7 @@ public class UIManager : MonoBehaviour
                     number2Red.text = "";
                 }
 
-                if (Red.result != -1)
+                if (Red.result != Int32.MinValue)
                 {
                     resultRed.text = Red.result.ToString();
                 }
