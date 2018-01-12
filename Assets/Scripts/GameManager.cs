@@ -79,11 +79,9 @@ public class GameManager : MonoBehaviour
         {
             textRed.gameObject.SetActive(true);
         }
-        StartCoroutine(ui.DestroyFlags());
+        StartCoroutine(ui._DestroyFlags());
         tower.GetComponentInChildren<Flag>().SetWinner(currentTeam);
         tower.GetComponentInChildren<TowerManager>().Collapse();
-
-        ui.DestroyFlags();
     }
 
     public void SwitchTeam()
