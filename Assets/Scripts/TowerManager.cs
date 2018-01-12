@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     List<GameObject> bricks = new List<GameObject>();
+    public GameObject reset;
     private Transform cameraDestination;
     private bool cameraMoving;
     [SerializeField]
@@ -52,6 +53,7 @@ public class TowerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            reset.SetActive(true);
             cameraMoving = true;
             foreach (GameObject brick in bricks)
             {
