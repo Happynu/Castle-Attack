@@ -71,11 +71,12 @@ public class GameManager : MonoBehaviour
         if (teamBlue.score == 1)
         {
             textBlue.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             textRed.gameObject.SetActive(true);
         }
-        
+        StartCoroutine(ui.DestroyFlags());
     }
 
     public void SwitchTeam()
@@ -94,7 +95,6 @@ public class GameManager : MonoBehaviour
         spotlight.ChangeTeamLight(currentTeam);
         ui.ChangeEdgeColor(currentTeam);
         ChangeRoundType();
-
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
     }
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
             currentTeam = teamRed;
         }
 
-        ui.StartUI();
+        ui.StartUI(currentTeam);
         spotlight.ChangeTeamLight(currentTeam);
         ui.ChangeEdgeColor(currentTeam);
 
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
         brickNumbers.Remove(number);
         brickManager.RemoveBrick(oldPosition);
         int newNumber = algorithm.GenerateNewBrick(currentTeam.result, brickNumbers);
-        Debug.Log("LOGGGG: "+ newNumber);
+        Debug.Log("LOGGGG: " + newNumber);
         brickManager.SpawnNewBrick(newNumber);
         brickNumbers.Add(newNumber);
         ChangeRoundType();
@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
             //An operation block
             else if (brick is OperationBlock)
             {
-                
+
                 //Only if there is currently no multiplier you are allowed to hit one.
                 if (currentTeam.operationRound)
                 {
