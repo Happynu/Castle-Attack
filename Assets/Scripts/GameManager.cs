@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public Image win;
     public Text textRed;
     public Text textBlue;
+
+    [SerializeField]
+    private GameObject tower;
 
     //For hitting bricks too many times, don't touch
     public bool timedout = false;
@@ -76,8 +79,9 @@ public class GameManager : MonoBehaviour
         {
             textRed.gameObject.SetActive(true);
         }
-
-        ui.DestroyFlags();
+        StartCoroutine(ui._DestroyFlags());
+        tower.GetComponentInChildren<Flag>().SetWinner(currentTeam);
+        tower.GetComponent<TowerManager>().Collapse();
     }
 
     public void SwitchTeam()
