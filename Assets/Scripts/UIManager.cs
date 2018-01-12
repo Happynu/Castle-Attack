@@ -203,7 +203,7 @@ public class UIManager : MonoBehaviour
         Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
         canvas.gameObject.GetComponentInChildren<Text>().text = "";
 
-        float speed = 5f;
+        float speed = 3f;
 
         float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
         float currentDistance = startDistance;
@@ -216,13 +216,13 @@ public class UIManager : MonoBehaviour
 
             //Scale
             currentDistance = Vector3.Distance(canvasCopy.transform.transform.position, dest);
-            if (currentDistance > (startDistance / 0.3))
+            if (currentDistance > (startDistance / 2))
             {
                 canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 2.75f;
             }
 
             yield return null;
@@ -248,7 +248,7 @@ public class UIManager : MonoBehaviour
         Transform canvas = brick.transform.Find("Canvas");
         Transform canvasCopy = Instantiate(canvas, canvas.transform).transform;
 
-        float speed = 5f;
+        float speed = 3f;
 
         float startDistance = Vector3.Distance(canvasCopy.transform.position, dest);
         float currentDistance = startDistance;
@@ -261,13 +261,13 @@ public class UIManager : MonoBehaviour
 
             //Scale
             currentDistance = Vector3.Distance(canvasCopy.transform.position, dest);
-            if (currentDistance > (startDistance / 0.3))
+            if (currentDistance > (startDistance / 2))
             {
                 canvasCopy.transform.localScale += Vector3.one * Time.deltaTime * 1.01f;
             }
             else
             {
-                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 1.01f;
+                canvasCopy.transform.localScale -= Vector3.one * Time.deltaTime * 2.75f;
             }
 
             yield return null;
