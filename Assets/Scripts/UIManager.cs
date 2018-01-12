@@ -381,9 +381,9 @@ public class UIManager : MonoBehaviour
         }
 
         //move solution to first slot
-        Text resultClone = Instantiate(result, result.transform.position, Quaternion.identity);
-        resultClone.transform.parent = result.transform.parent;
-        resultClone.transform.localScale = new Vector3(1, 1, 1);
+        Transform resultClone = Instantiate(result, result.transform.parent).transform;
+        //resultClone.transform.parent = result.transform.parent;
+        //resultClone.transform.localScale = new Vector3(1, 1, 1);
 
         result.text = "";
 
@@ -395,7 +395,7 @@ public class UIManager : MonoBehaviour
         }
 
         //reset variables
-        Destroy(resultClone);
+        Destroy(resultClone.gameObject);
         foreach (Text label in sum)
         {
             label.color = new Color(1, 1, 1, 1);
