@@ -28,7 +28,9 @@ public class UIManager : MonoBehaviour
 
     public Image Edge;
 
-    public void StartUI()
+    public GameObject teamFlags;
+
+    public void StartUI(Team currentTeam)
     {
         number1Blue.text = "";
         number2Blue.text = "";
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
         number2Red.text = "";
         operationRed.text = "";
         resultRed.text = "";
+        SetFlagPosition(currentTeam);
     }
 
 
@@ -114,6 +117,7 @@ public class UIManager : MonoBehaviour
         }
 
         ChangeEdgeColor(team);
+        StartCoroutine(SwitchTeamFlags(team));
         Debug.Log("edge changed");
     }
 
@@ -282,7 +286,7 @@ public class UIManager : MonoBehaviour
 
     string ConvertMultiplier(Multiplier m)
     {
-        switch(m)
+        switch (m)
         {
             case Multiplier.PLUS:
                 return "+";
@@ -295,5 +299,59 @@ public class UIManager : MonoBehaviour
             default:
                 throw new System.NotImplementedException();
         }
+    }
+
+    public void SetFlagPosition(Team currentTeam)
+    {
+        Vector3 dest = teamFlags.transform.position;
+        switch (currentTeam.color)
+        {
+            case "blue":
+                dest.x = -0.4f;
+                break;
+            case "red":
+                dest.x = 0.4f;
+                break;
+        }
+        teamFlags.transform.position = dest;
+    }
+
+    public IEnumerator DestroyFlags()
+    {
+        GameObject blueFlag = teamFlags.transform.Find("Flag-Blue").gameObject;
+        GameObject redFlag = teamFlags.transform.Find("Flag-Red").gameObject;
+        Vector3 dest = teamFlags.transform.position;
+        dest.x = 0;
+
+        while (blueFlag.transform.position != dest && redFlag.transform.position != dest)
+        {
+            blueFlag.transform.position = Vector3.MoveTowards(blueFlag.transform.position, dest, Time.deltaTime * 1.0f);
+            redFlag.transform.position = Vector3.MoveTowards(redFlag.transform.position, dest, Time.deltaTime * 1.0f);
+            yield return null;
+        }
+        Destroy(teamFlags);
+        yield return null;
+    }
+
+    public IEnumerator SwitchTeamFlags(Team currentTeam)
+    {
+        Vector3 dest = teamFlags.transform.position;
+        switch (currentTeam.color)
+        {
+            case "blue":
+                dest.x = 0.4f;
+                break;
+            case "red":
+                dest.x = -0.4f;
+                break;
+        }
+
+        while (teamFlags.transform.position != dest)
+        {
+            teamFlags.transform.position = Vector3.MoveTowards(teamFlags.transform.position, dest, Time.deltaTime * 1.0f);
+            yield return null;
+        }
+        teamFlags.transform.position = dest;
+        yield return null;
     }
 }
