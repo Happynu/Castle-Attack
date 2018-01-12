@@ -9,12 +9,12 @@ public class TowerManager : MonoBehaviour
     private bool cameraMoving;
     [SerializeField]
     private float cameraStep;
+
     [SerializeField]
     private float collapseForceMin;
+
     [SerializeField]
     private float collapseForceMax;
-    [SerializeField]
-    private List<GameObject> towerInterior;
 
     // Use this for initialization
     void Start()
@@ -60,11 +60,7 @@ public class TowerManager : MonoBehaviour
                     brick.GetComponent<Rigidbody>().isKinematic = false;
                 }
             }
-            foreach (GameObject interiorItem in towerInterior)
-            {
-                interiorItem.GetComponent<Rigidbody>().isKinematic = false;
-            }
-            Collapse();
+            StartCoroutine(DestroyBricks());
         }
 
         if (cameraMoving)
@@ -82,20 +78,24 @@ public class TowerManager : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(GameObject.Find("ExplosionPosition").transform.position, 20f);
         foreach (Collider collider in colliders)
         {
-            Rigidbody body;
-            if (collider.GetComponent<Rigidbody>() != null)
-            {
-                body = collider.GetComponent<Rigidbody>();
-            }
-            else
-            {
-                body = collider.transform.parent.GetComponent<Rigidbody>();
-            }
-
+            Rigidbody body = collider.GetComponent<Rigidbody>();
             if (body != null)
             {
                 body.AddExplosionForce(Random.Range(collapseForceMin, collapseForceMax), GameObject.Find("ExplosionPosition").transform.position, 50);
             }
         }
+    }
+
+    IEnumerator DestroyBricks()
+    {
+        foreach (GameObject brick in bricks)
+        {
+            if (brick != null && brick.GetComponent<Brick>().damageType == Damage.Heavy)
+            {
+                Destroy(brick.gameObject);
+                yield return new WaitForSecondsRealtime(.1f);
+            }
+        }
+        Collapse();
     }
 }
