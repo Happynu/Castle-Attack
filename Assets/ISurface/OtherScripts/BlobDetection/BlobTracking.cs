@@ -19,7 +19,7 @@ public class BlobTracking : MonoBehaviour, I_MessageReciever {
     {
         if(Instance == null)
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             Instance = this;
         }
         else
