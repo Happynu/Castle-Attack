@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     public GameObject teamFlags;
 
     public Animator goalNumber;
+    public GameObject goalNumberDest;
 
     public void StartUI(Team currentTeam)
     {
@@ -292,6 +293,43 @@ public class UIManager : MonoBehaviour
         GameManager.instance.SwitchTeam();
     }
 
+    IEnumerator Intro()
+    {
+        GameManager.instance.timedout = true;
+        GameManager.instance.StartGame();
+
+        goalNumber.SetTrigger("ResultFade");
+        yield return new WaitForSeconds(2);
+
+        Vector3 startpoint = goalNumber.transform.position;
+        Vector3 currentpoint = goalNumber.transform.position;
+        Vector3 endpoint = goalNumberDest.transform.position;
+
+        float distance = Vector3.Distance(startpoint, endpoint);
+        float currentdis = Vector3.Distance(currentpoint, startpoint);
+        float percent = currentdis * distance / 100;
+
+        while (percent != 100)
+        {
+            goalNumber.transform.position = Vector3.MoveTowards(goalNumber.transform.position, endpoint, Time.deltaTime / 2.5f);
+
+            currentpoint = goalNumber.transform.position;
+            currentdis = Vector3.Distance(currentpoint, startpoint);
+            percent = currentdis * 100 / distance;
+
+            float scale = -1.5f / 100 * percent + 2.5f;
+            goalNumber.transform.localScale = new Vector3(scale, scale, 1);
+            yield return null;
+        }
+
+        GameManager.instance.timedout = false;
+    }
+
+    public void ShowIntro()
+    {
+        StartCoroutine(Intro());
+    }
+
     public void CalculateAnimation(Team team)
     {
         StartCoroutine(Calculateanimation(team));
@@ -458,6 +496,8 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator _DestroyFlags()
     {
+        GameManager.instance.timedout = true;
+
         GameObject blueFlag = teamFlags.transform.Find("Flag-Blue").gameObject;
         GameObject redFlag = teamFlags.transform.Find("Flag-Red").gameObject;
         Vector3 dest = teamFlags.transform.position;
@@ -471,7 +511,8 @@ public class UIManager : MonoBehaviour
         }
 
         Destroy(teamFlags);
-        yield return null;
+
+        GameManager.instance.timedout = false;
     }
 
     public void SwitchTeamFlags(Team currentTeam)

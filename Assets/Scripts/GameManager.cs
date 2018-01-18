@@ -64,14 +64,14 @@ public class GameManager : MonoBehaviour
     {
         brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
 
-        StartGame();
+        ui.ShowIntro();
     }
 
     public void EndRound()
     {
         win.gameObject.SetActive(true);
         resetBox.SetActive(true);
-        if (teamBlue.won)
+        if (teamBlue.score == 1)
         {
             textBlue.gameObject.SetActive(true);
         }
@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             textRed.gameObject.SetActive(true);
         }
+
         StartCoroutine(ui._DestroyFlags());
         tower.GetComponentInChildren<Flag>().SetWinner(currentTeam);
         tower.GetComponent<TowerManager>().Collapse();
@@ -105,9 +106,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
     }
 
-    void StartGame()
+    public void StartGame()
     {
-        goalNumber = Random.Range(11, 25); //Temp
+        goalNumber = Random.Range(10, 25); //Temp
         teamBlue.goalNumber = goalNumber;
         teamRed.goalNumber = goalNumber;
         EndNumber.text = goalNumber.ToString();
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
         ui.ChangeEdgeColor(currentTeam);
 
         //Generating bricks
+        goalNumber = Random.Range(20, 50); //Temp
         numberOfBricks = 5;
         brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
         brickManager.SpawnBricks(brickNumbers);
