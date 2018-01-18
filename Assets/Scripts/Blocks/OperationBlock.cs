@@ -7,10 +7,7 @@ public class OperationBlock : Interactable
 {
     public Text text;
     public Multiplier multiplier;
-
-    void Start()
-    {
-    }
+    public Brick brick;
 
     public override void Interact()
     {
@@ -18,6 +15,7 @@ public class OperationBlock : Interactable
         {
             Debug.Log("Multiply block hit");
             GameManager.instance.HitBrick(this);
+            brick.IncreaseDamageType();
         }
     }
 

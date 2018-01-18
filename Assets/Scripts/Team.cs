@@ -35,7 +35,6 @@ public class Team : MonoBehaviour
 
     UIManager UI;
 
-    // Use this for initialization 
     void Start()
     {
         process = 1;

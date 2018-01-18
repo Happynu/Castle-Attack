@@ -389,9 +389,6 @@ public class UIManager : MonoBehaviour
 
         //move solution to first slot
         Transform resultClone = Instantiate(result, result.transform.parent).transform;
-        //resultClone.transform.parent = result.transform.parent;
-        //resultClone.transform.localScale = new Vector3(1, 1, 1);
-
         result.text = "";
 
         while (resultClone.transform.position != sum[0].transform.position)
