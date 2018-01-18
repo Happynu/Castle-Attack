@@ -51,13 +51,6 @@ public class TowerManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            reset.SetActive(true);
-            
-            Collapse();
-        }
-
         if (cameraMoving)
         {
             Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, cameraDestination.position, cameraStep);
