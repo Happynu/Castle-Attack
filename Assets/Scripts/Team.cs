@@ -35,24 +35,21 @@ public class Team : MonoBehaviour
 
     UIManager UI;
 
-    // Use this for initialization 
     void Start()
     {
         process = 1;
         InitializeTeam();
     }
 
-    void CheckWin()
+    public bool CheckWin()
     {
         if (result == goalNumber)
         {
-            score++;
-            if (score == 3)
-            {
-                won = true;
-            }
-            GameManager.instance.EndRound();
+            won = true;
+            return true;
         }
+
+        return false;
     }
 
     public void HitNumberBrick(Interactable i, bool start = false)
@@ -115,8 +112,6 @@ public class Team : MonoBehaviour
             default:
                 throw new NotImplementedException();
         }
-
-        CheckWin();
     }
 
     public void InitializeTeam()

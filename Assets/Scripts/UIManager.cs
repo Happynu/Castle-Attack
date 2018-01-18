@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
     public Animator animBlue;
     public GameObject teamFlags;
 
+    public Animator goalNumber;
+
     public void StartUI(Team currentTeam)
     {
         number1Blue.text = "";
@@ -47,6 +49,11 @@ public class UIManager : MonoBehaviour
         SetFlagPosition(currentTeam);
     }
 
+    private void Start()
+    {
+        equalsBlue.color = new Color(1, 1, 1, 0);
+        equalsRed.color = new Color(1, 1, 1, 0);
+    }
 
     public void UpdateUI(Team team)
     {
@@ -330,36 +337,44 @@ public class UIManager : MonoBehaviour
         sum.Add(number2);
         sum.Add(eq);
 
-        //make sum bigger and smaller (pulse), while fading in the equals symbol
-        eq.color = Color.clear;
-
+        //make sum bigger and smaller (pulse)
         anim.SetTrigger("Pulsate");
 
-        while (eq.color.a < 1)
-        {
-            eq.color = new Color(1, 1, 1, eq.color.a + 0.1f);
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1f);
 
         team.Calculate();
         UpdateUI(team);
 
-        anim.SetTrigger("ResultFade");
+
         //Pulse with equals symbol while solution fades in fast
         result.color = Color.clear;
+        eq.color = Color.clear;
 
         while (result.color.a < 1)
         {
-            result.color = new Color(1, 1, 1, eq.color.a + 0.1f);
-            Debug.Log("result fading in");
-            yield return new WaitForSeconds(0.25f);
+            eq.color = new Color(1, 1, 1, eq.color.a + 0.1f);
+            result.color = new Color(1, 1, 1, result.color.a + 0.1f);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(3);
+        team.CheckWin();
 
-        StartCoroutine(MoveResult(sum, result, team));
+        if (GameManager.instance.currentTeam.won)
+        {
+            goalNumber.SetTrigger("ResultFade");
+        }
+
+        anim.SetTrigger("ResultFade");
+        yield return new WaitForSeconds(1);
+
+        if (!GameManager.instance.currentTeam.won)
+        {
+            StartCoroutine(MoveResult(sum, result, team));
+        }
+        else
+        {
+            GameManager.instance.EndRound();
+        }
     }
 
     IEnumerator GetGoal(Text result)
@@ -387,7 +402,7 @@ public class UIManager : MonoBehaviour
         while (resultClone.transform.position != sum[0].transform.position)
         {
             Debug.Log(resultClone.transform.position.x);
-            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 3f * Time.deltaTime);
+            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 2f * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 

@@ -7,7 +7,6 @@ public class BrickManager : MonoBehaviour
 {
     public List<GameObject> bricks;
     private List<GameObject> activeBricks;
-
     private Vector2 lastLocation;
 
     void Start()
@@ -28,6 +27,7 @@ public class BrickManager : MonoBehaviour
         operationBlock = go.GetComponent<OperationBlock>();
         operationBlock.text = go.transform.Find("Canvas").gameObject.transform.Find("Text").GetComponent<Text>();
         operationBlock.multiplier = Multiplier.PLUS;
+        operationBlock.brick = go.GetComponent<Brick>();
         operationBlock.UpdateText();
         activeBricks.Add(go);
 
@@ -40,6 +40,7 @@ public class BrickManager : MonoBehaviour
         operationBlock = go.GetComponent<OperationBlock>();
         operationBlock.text = go.transform.Find("Canvas").gameObject.transform.Find("Text").GetComponent<Text>();
         operationBlock.multiplier = Multiplier.MINUS;
+        operationBlock.brick = go.GetComponent<Brick>();
         operationBlock.UpdateText();
         activeBricks.Add(go);
 
@@ -52,6 +53,7 @@ public class BrickManager : MonoBehaviour
         operationBlock = go.GetComponent<OperationBlock>();
         operationBlock.text = go.transform.Find("Canvas").gameObject.transform.Find("Text").GetComponent<Text>();
         operationBlock.multiplier = Multiplier.MULTIPLY;
+        operationBlock.brick = go.GetComponent<Brick>();
         operationBlock.UpdateText();
         activeBricks.Add(go);
 
@@ -66,6 +68,7 @@ public class BrickManager : MonoBehaviour
             numberBlock = go.GetComponent<NumberBlock>();
             numberBlock.text = go.transform.Find("Canvas").gameObject.transform.Find("Text").GetComponent<Text>();
             numberBlock.number = i;
+            numberBlock.brick = go.GetComponent<Brick>();
             numberBlock.UpdateText();
             activeBricks.Add(go);
         }
@@ -92,7 +95,6 @@ public class BrickManager : MonoBehaviour
         {
             numberObject.GetComponentInChildren<Text>().text = "";
             NumberBlock numberBlock = numberObject.GetComponent<NumberBlock>();
-            Debug.Log("numberremove: " + numberBlock.number);
             activeBricks.Remove(numberObject);
             Destroy(numberBlock);
         }
@@ -117,9 +119,9 @@ public class BrickManager : MonoBehaviour
         numberBlock = go.GetComponent<NumberBlock>();
         numberBlock.text = go.transform.Find("Canvas").gameObject.transform.Find("Text").GetComponent<Text>();
         numberBlock.number = number;
+        numberBlock.brick = go.GetComponent<Brick>();
         numberBlock.UpdateText();
         activeBricks.Add(go);
-        Debug.Log("number: " + numberBlock.number);
     }
 
     public void StartNumberRound()
@@ -129,12 +131,10 @@ public class BrickManager : MonoBehaviour
             if (go.GetComponent<NumberBlock>() != null)
             {
                 StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().HideTexture());
-                // go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
             }
             else
             {
                 StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().ShowTexture());
-                //go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(true);
             }
         }
     }
@@ -146,12 +146,10 @@ public class BrickManager : MonoBehaviour
             if (go.GetComponent<NumberBlock>() != null)
             {
                 StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().ShowTexture());
-                //go.transform.Find("Moss").gameObject.transform.Find("Lock").gameObject.SetActive(true);
             }
             else
             {
                 StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().HideTexture());
-                // go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
             }
         }
         foreach (GameObject go in bricks)
@@ -159,7 +157,6 @@ public class BrickManager : MonoBehaviour
             if (!activeBricks.Contains(go))
             {
                 StartCoroutine(go.transform.Find("Canvas/Moss").GetComponent<MossTextureChanger>().HideTexture());
-                //go.transform.Find("Canvas").gameObject.transform.Find("Lock").gameObject.SetActive(false);
             }
         }
     }

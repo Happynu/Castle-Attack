@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         win.gameObject.SetActive(true);
         resetBox.SetActive(true);
-        if (teamBlue.score == 1)
+        if (teamBlue.won)
         {
             textBlue.gameObject.SetActive(true);
         }
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
-        goalNumber = Random.Range(10, 25); //Temp
+        goalNumber = Random.Range(11, 25); //Temp
         teamBlue.goalNumber = goalNumber;
         teamRed.goalNumber = goalNumber;
         EndNumber.text = goalNumber.ToString();
@@ -129,7 +129,6 @@ public class GameManager : MonoBehaviour
         ui.ChangeEdgeColor(currentTeam);
 
         //Generating bricks
-        goalNumber = Random.Range(20, 50); //Temp
         numberOfBricks = 5;
         brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
         brickManager.SpawnBricks(brickNumbers);
@@ -142,7 +141,6 @@ public class GameManager : MonoBehaviour
         brickNumbers.Remove(number);
         brickManager.RemoveBrick(oldPosition);
         int newNumber = algorithm.GenerateNewBrick(currentTeam.result, brickNumbers);
-        Debug.Log("LOGGGG: " + newNumber);
         brickManager.SpawnNewBrick(newNumber);
         brickNumbers.Add(newNumber);
     }
