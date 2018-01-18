@@ -47,6 +47,11 @@ public class UIManager : MonoBehaviour
         SetFlagPosition(currentTeam);
     }
 
+    private void Start()
+    {
+        equalsBlue.color = new Color(1, 1, 1, 0);
+        equalsRed.color = new Color(1, 1, 1, 0);
+    }
 
     public void UpdateUI(Team team)
     {
@@ -341,11 +346,12 @@ public class UIManager : MonoBehaviour
         anim.SetTrigger("ResultFade");
         //Pulse with equals symbol while solution fades in fast
         result.color = Color.clear;
+        eq.color = Color.clear;
 
         while (result.color.a < 1)
         {
+            eq.color = new Color(1, 1, 1, eq.color.a + 0.1f);
             result.color = new Color(1, 1, 1, result.color.a + 0.1f);
-            Debug.Log("result fading in");
             yield return new WaitForSeconds(0.1f);
         }
 
