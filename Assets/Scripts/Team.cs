@@ -35,7 +35,6 @@ public class Team : MonoBehaviour
 
     UIManager UI;
 
-    // Use this for initialization 
     void Start()
     {
         process = 1;
@@ -46,11 +45,7 @@ public class Team : MonoBehaviour
     {
         if (result == goalNumber)
         {
-            score++;
-            if (score == 3)
-            {
-                won = true;
-            }
+            won = true;
             GameManager.instance.EndRound();
         }
     }

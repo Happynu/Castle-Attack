@@ -7,6 +7,7 @@ public class NumberBlock : Interactable
 {
     public Text text;
     public int number;
+    public Brick brick;
 
     public override void Interact()
     {
@@ -15,6 +16,7 @@ public class NumberBlock : Interactable
             Debug.Log("Number block hit");
             Debug.Log("my number: " + number);
             GameManager.instance.HitBrick(this);
+            brick.IncreaseDamageType();
         }
     }
 

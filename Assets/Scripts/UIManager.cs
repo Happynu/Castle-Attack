@@ -359,7 +359,14 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(3);
 
-        StartCoroutine(MoveResult(sum, result, team));
+        if (GameManager.instance.currentTeam.won)
+        {
+            //do nothing
+        }
+        else
+        {
+            StartCoroutine(MoveResult(sum, result, team));
+        }
     }
 
     IEnumerator GetGoal(Text result)
