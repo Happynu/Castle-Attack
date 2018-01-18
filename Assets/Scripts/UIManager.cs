@@ -333,7 +333,7 @@ public class UIManager : MonoBehaviour
         //make sum bigger and smaller (pulse)
         anim.SetTrigger("Pulsate");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         team.Calculate();
         UpdateUI(team);
@@ -349,7 +349,7 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         if (GameManager.instance.currentTeam.won)
         {
