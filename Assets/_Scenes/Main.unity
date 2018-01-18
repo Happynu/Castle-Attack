@@ -10437,7 +10437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blobberPrefap: {fileID: 1022976248895128, guid: a703509ffaf435a4b8a4fdbda27ce05f,
     type: 2}
-  cam: {fileID: 1333821245}
+  cam: {fileID: 1211545466}
   objectLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -13479,7 +13479,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30.335194, y: 15.817442, z: 5.485924}
+  m_Size: {x: 30.335194, y: 15.817442, z: 0.2}
   m_Center: {x: 0.5969486, y: 7.408721, z: -2.242962}
 --- !u!4 &1319431386
 Transform:

@@ -2,48 +2,48 @@
 <PlayAreaDataContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ImageCorners>
     <Point>
-      <X>728</X>
-      <Y>70</Y>
+      <X>558</X>
+      <Y>46</Y>
     </Point>
     <Point>
-      <X>1413</X>
-      <Y>81</Y>
+      <X>1143</X>
+      <Y>47</Y>
     </Point>
     <Point>
-      <X>720</X>
-      <Y>592</Y>
+      <X>518</X>
+      <Y>515</Y>
     </Point>
     <Point>
-      <X>1433</X>
-      <Y>598</Y>
+      <X>1152</X>
+      <Y>518</Y>
     </Point>
   </ImageCorners>
   <DepthCorners>
     <Point>
-      <X>172</X>
-      <Y>40</Y>
+      <X>114</X>
+      <Y>35</Y>
     </Point>
     <Point>
-      <X>408</X>
-      <Y>46</Y>
+      <X>315</X>
+      <Y>35</Y>
     </Point>
     <Point>
-      <X>169</X>
-      <Y>220</Y>
+      <X>96</X>
+      <Y>195</Y>
     </Point>
     <Point>
-      <X>414</X>
-      <Y>223</Y>
+      <X>316</X>
+      <Y>198</Y>
     </Point>
   </DepthCorners>
   <Bounds>
     <Point>
-      <X>169</X>
-      <Y>40</Y>
+      <X>62</X>
+      <Y>35</Y>
     </Point>
     <Point>
-      <X>425</X>
-      <Y>224</Y>
+      <X>384</X>
+      <Y>204</Y>
     </Point>
   </Bounds>
 </PlayAreaDataContainer>
