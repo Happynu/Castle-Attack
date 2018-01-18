@@ -330,18 +330,10 @@ public class UIManager : MonoBehaviour
         sum.Add(number2);
         sum.Add(eq);
 
-        //make sum bigger and smaller (pulse), while fading in the equals symbol
-        eq.color = Color.clear;
-
+        //make sum bigger and smaller (pulse)
         anim.SetTrigger("Pulsate");
 
-        while (eq.color.a < 1)
-        {
-            eq.color = new Color(1, 1, 1, eq.color.a + 0.1f);
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(2f);
 
         team.Calculate();
         UpdateUI(team);
@@ -352,12 +344,12 @@ public class UIManager : MonoBehaviour
 
         while (result.color.a < 1)
         {
-            result.color = new Color(1, 1, 1, eq.color.a + 0.1f);
+            result.color = new Color(1, 1, 1, result.color.a + 0.1f);
             Debug.Log("result fading in");
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         if (GameManager.instance.currentTeam.won)
         {
@@ -394,7 +386,7 @@ public class UIManager : MonoBehaviour
         while (resultClone.transform.position != sum[0].transform.position)
         {
             Debug.Log(resultClone.transform.position.x);
-            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 3f * Time.deltaTime);
+            resultClone.transform.position = Vector3.MoveTowards(resultClone.transform.position, sum[0].transform.position, 2f * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 
