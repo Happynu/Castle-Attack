@@ -2277,6 +2277,7 @@ GameObject:
   - component: {fileID: 222473949}
   - component: {fileID: 222473951}
   - component: {fileID: 222473950}
+  - component: {fileID: 222473952}
   m_Layer: 5
   m_Name: EndNumber
   m_TagString: Untagged
@@ -2337,6 +2338,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 222473948}
+--- !u!95 &222473952
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 222473948}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aed117fa09ae07041bbc2bc52a9f000f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &223378774
 GameObject:
   m_ObjectHideFlags: 0
@@ -4676,7 +4694,7 @@ GameObject:
   - component: {fileID: 415536940}
   - component: {fileID: 415536939}
   m_Layer: 5
-  m_Name: Number
+  m_Name: Answer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6037,6 +6055,7 @@ MonoBehaviour:
   animRed: {fileID: 906339996}
   animBlue: {fileID: 1013263576}
   teamFlags: {fileID: 2030418863}
+  goalNumber: {fileID: 222473952}
 --- !u!4 &571938008
 Transform:
   m_ObjectHideFlags: 0
@@ -9906,7 +9925,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c4f7f2b5bf6f0c6469977f2b9eb97751, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 426268b5ac8cf9149bb4aae639310f16, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12381,7 +12400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1212765939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19285,7 +19304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1846937999
 RectTransform:
   m_ObjectHideFlags: 0
