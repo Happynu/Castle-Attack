@@ -41,13 +41,15 @@ public class Team : MonoBehaviour
         InitializeTeam();
     }
 
-    void CheckWin()
+    public bool CheckWin()
     {
         if (result == goalNumber)
         {
             won = true;
-            GameManager.instance.EndRound();
+            return true;
         }
+
+        return false;
     }
 
     public void HitNumberBrick(Interactable i, bool start = false)
@@ -110,8 +112,6 @@ public class Team : MonoBehaviour
             default:
                 throw new NotImplementedException();
         }
-
-        CheckWin();
     }
 
     public void InitializeTeam()

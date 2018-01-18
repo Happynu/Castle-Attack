@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
     public Animator animBlue;
     public GameObject teamFlags;
 
+    public Animator goalNumber;
+
     public void StartUI(Team currentTeam)
     {
         number1Blue.text = "";
@@ -343,7 +345,7 @@ public class UIManager : MonoBehaviour
         team.Calculate();
         UpdateUI(team);
 
-        anim.SetTrigger("ResultFade");
+
         //Pulse with equals symbol while solution fades in fast
         result.color = Color.clear;
         eq.color = Color.clear;
@@ -355,15 +357,23 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(1);
+        team.CheckWin();
 
         if (GameManager.instance.currentTeam.won)
         {
-            //do nothing
+            goalNumber.SetTrigger("ResultFade");
+        }
+
+        anim.SetTrigger("ResultFade");
+        yield return new WaitForSeconds(1);
+
+        if (!GameManager.instance.currentTeam.won)
+        {
+            StartCoroutine(MoveResult(sum, result, team));
         }
         else
         {
-            StartCoroutine(MoveResult(sum, result, team));
+            GameManager.instance.EndRound();
         }
     }
 
