@@ -46,11 +46,7 @@ public class Team : MonoBehaviour
     {
         if (result == goalNumber)
         {
-            score++;
-            if (score == 3)
-            {
-                won = true;
-            }
+            won = true;
             GameManager.instance.EndRound();
         }
     }
