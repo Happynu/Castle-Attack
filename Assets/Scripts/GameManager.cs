@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         win.gameObject.SetActive(true);
         resetBox.SetActive(true);
-        if (teamBlue.score == 1)
+        if (teamBlue.won)
         {
             textBlue.gameObject.SetActive(true);
         }
