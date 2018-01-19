@@ -7,20 +7,14 @@ public class blobPlacer : MonoBehaviour {
     public GameObject blobberPrefap;
     public Camera cam;
     public LayerMask objectLayer;
-
-    // Use this for initialization
-    void Start ()
-    {
-
-    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
         foreach (Blob blob in BlobTracking.Blobs)
         {
             if (OkayCheck(blob))
             {
-                SpawnCube(blob);
+                //SpawnCube(blob);
                 Click(Raycast(objectLayer, blob));
             }
         }
@@ -50,7 +44,7 @@ public class blobPlacer : MonoBehaviour {
         float width = height * cam.aspect;
 
         return new Vector3(((cam.transform.position.x) + (x * width) - (width/2)),
-            ((cam.transform.position.y) + (y * height) - (height / 2)), -1f);
+            ((cam.transform.position.y) + (y * height) - (height / 2)), -3f);
     }
 
     //Spawns a raycast at the position for debugging.
@@ -68,7 +62,6 @@ public class blobPlacer : MonoBehaviour {
 
     private void Click(RaycastHit hit)
     {
-        Debug.Log("click");
         if (hit.transform != null)
         {
             Interactable obj = hit.transform.GetComponent<Interactable>();

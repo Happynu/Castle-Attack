@@ -7,23 +7,20 @@ public class NumberBlock : Interactable
 {
     public Text text;
     public int number;
-
-    void Start ()
-    {
-        UpdateText();
-    }
+    public Brick brick;
 
     public override void Interact()
     {
-        Debug.Log(number + " block hit");
-        bool succes = GameManager.instance.HitBrick(this);
-        if (succes)
+        if (GameManager.instance.timedout == false)
         {
-            Destroy(this.gameObject);
+            Debug.Log("Number block hit");
+            Debug.Log("my number: " + number);
+            GameManager.instance.HitBrick(this);
+            brick.IncreaseDamageType();
         }
     }
 
-    void UpdateText()
+    public void UpdateText()
     {
         text.text = number.ToString();
     }

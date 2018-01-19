@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Multiplier
 {
@@ -15,116 +17,111 @@ public class Team : MonoBehaviour
     public string color;
     public int goalNumber;
 
-    private bool won = false;
-    private bool started = false;
+    public int number1;
+    public Multiplier operation;
+    public int number2;
+    public int result;
+    public int process;
 
-    private int currentNumber;
-    private Multiplier currentMultiplier = Multiplier.NONE;
+    public int score; 
+    //1 = Need to get First number
+    //2 = Need to get multiplier
+    //3 = Need to get Second number
+    //4 = Need to calculate
 
-    /// <summary>
-    /// Called when this team has hit a brick
-    /// </summary>
-    /// <param name="brick">the brick you hit.</param>
-    /// <returns>Whether the move was allowed or not.</returns>
-    public bool HitBrick(Interactable brick)
+    public bool won = false;
+    public bool started = false;
+    public bool operationRound = false;
+
+    UIManager UI;
+
+    void Start()
     {
-        if (started == false)
-        {
-            if (brick is NumberBlock)
-            {
-                NumberBlock num = brick as NumberBlock;
-
-                currentNumber = num.number;
-                started = true;
-                Debug.Log("Team " + color + " hit number: " + num.number);
-                return true;
-            }
-            else return false;
-        }
-
-        //During the rest of the game, we have to check which brick was hit.
-        else
-        {
-            //A Number block
-            if (brick is NumberBlock)
-            {
-                NumberBlock num = brick as NumberBlock;
-
-                //Only if there is a multiplier selected, you are allowed to hit a number.
-                if (currentMultiplier != Multiplier.NONE)
-                {
-                    Calculate(num);
-                    Debug.Log("Team " + color + " hit number: " + num.number);
-                    return true;
-                }
-                else return false;
-            }
-            //A Plus block
-            else if (brick is PlusBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.PLUS;
-                    Debug.Log("Team " + color + " hit multiplier: plus");
-                    return true;
-                }
-                else return false;
-            }
-            //A Minus block
-            else if (brick is MinusBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.MINUS;
-                    Debug.Log("Team " + color + " hit multiplier: minus");
-                    return true;
-                }
-                else return false;
-            }
-            //A Multiply block
-            else if (brick is MultiplyBlock)
-            {
-                //Only if there is currently no multiplier you are allowed to hit one.
-                if (currentMultiplier == Multiplier.NONE)
-                {
-                    currentMultiplier = Multiplier.MULTIPLY;
-                    Debug.Log("Team " + color + " hit multiplier: multiply");
-                    return true;
-                }
-                else return false;
-            }
-        }
-            return false;
+        process = 1;
+        InitializeTeam();
     }
 
-    void Calculate(NumberBlock num)
+    public bool CheckWin()
     {
-        switch (currentMultiplier)
-        {
-            case Multiplier.PLUS:
-                currentNumber = currentNumber + num.number;
-                break;
-            case Multiplier.MINUS:
-                currentNumber = currentNumber - num.number;
-                break;
-            case Multiplier.MULTIPLY:
-                currentNumber = currentNumber * num.number;
-                break;
-        }
-        currentMultiplier = Multiplier.NONE;
-        CheckWin();
-
-        Debug.Log("currentNumber: " + currentNumber);
-    }
-
-    void CheckWin()
-    {
-        if (currentNumber == goalNumber)
+        if (result == goalNumber)
         {
             won = true;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void HitNumberBrick(Interactable i, bool start = false)
+    {
+        NumberBlock b = i as NumberBlock;
+        if (start)
+        {
+            started = true;
+            number1 = b.number;
+            operationRound = true;
+
+            process = 2;
+        }
+        else
+        {
+            number2 = b.number;
+            process = 4;
+            operationRound = true;
         }
     }
-        
+
+    public void HitOperationBrick(Interactable i)
+    {
+        OperationBlock b = i as OperationBlock;
+        if (operation != Multiplier.NONE)
+        {
+            number1 = result;
+            number2 = Int32.MinValue;
+            result = Int32.MinValue;
+        }
+
+        operation = b.multiplier;
+        process = 3;
+        operationRound = false;
+    }
+
+    public void resetEquation()
+    {
+        number1 = result;
+        operation = Multiplier.NONE;
+        number2 = Int32.MinValue;
+        result = Int32.MinValue;
+
+        process = 2;
+    }
+
+    public void Calculate()
+    { 
+        switch (operation)
+        {
+            case Multiplier.PLUS:
+                result = number1 + number2;
+                break;
+            case Multiplier.MINUS:
+                result = number1 - number2;
+                break;
+            case Multiplier.MULTIPLY:
+                result = number1 * number2;
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+    }
+
+    public void InitializeTeam()
+    {
+        number1 = Int32.MinValue;
+        operation = Multiplier.NONE;
+        number2 = Int32.MinValue;
+        result = Int32.MinValue;
+        won = false;
+        started = false;
+        operationRound = false;
+    }
 }

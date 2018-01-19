@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,90 +6,220 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public UIManager ui;
+    public LightManager spotlight;
 
     [Space(10)]
-    public Team teamA;
-    public Team teamB;
+    public Team teamBlue;
+    public Team teamRed;
 
-    [Space(10)]
+    [HideInInspector]
     public Team currentTeam;
 
     [Space(10)]
-    public Text EndNumberA;
-    public Text EndNumberB;
+    public Text EndNumber;
 
     [Space(10)]
-    public Text EquationA;
-    public Text EquationB;
+    private int goalNumber;
+    private int numberOfBricks;
+    private List<int> brickNumbers;
 
-    void Awake ()
+    [Space(10)]
+    public Algorithm algorithm;
+    private BrickManager brickManager;
+
+    [Space(10)]
+    public GameObject resetBox;
+    public Image win;
+    public Text textRed;
+    public Text textBlue;
+
+    [SerializeField]
+    private GameObject tower;
+
+    //For hitting bricks too many times, don't touch
+    public bool timedout = false;
+
+    public IEnumerator HitTimout()
     {
-		if (instance == null)
+        GameManager.instance.timedout = true;
+        yield return new WaitForSeconds(1f);
+        GameManager.instance.timedout = false;
+    }
+
+    public void StartHitTimout()
+    {
+        StartCoroutine(HitTimout());
+    }
+
+    void Awake()
+    {
+        if (instance == null)
         {
             instance = this;
         }
-	}
+    }
 
     void Start()
     {
-        if (currentTeam == null)
-        {
-            currentTeam = teamA;
-        }
+        brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
 
-        StartGame();
+        ui.ShowIntro();
     }
 
-    void Update ()
+    public void EndRound()
     {
-		
-	}
-
-    public bool HitBrick(Interactable brick)
-    {
-        bool succes = currentTeam.HitBrick(brick);
-        if (succes)
+        win.gameObject.SetActive(true);
+        resetBox.SetActive(true);
+        if (teamBlue.won)
         {
-            SwitchTeam();
-        }
-        return succes;
-    }
-
-    void SwitchTeam()
-    {
-        if (currentTeam == teamA)
-        {
-            currentTeam = teamB;
+            textBlue.gameObject.SetActive(true);
         }
         else
         {
-            currentTeam = teamA;
+            textRed.gameObject.SetActive(true);
         }
+
+        StartCoroutine(ui._DestroyFlags());
+        tower.GetComponentInChildren<Flag>().SetWinner(currentTeam);
+        tower.GetComponent<TowerManager>().Collapse();
+    }
+
+    public void SwitchTeam()
+    {
+        ui.UpdateUI(currentTeam);
+
+        if (currentTeam == teamBlue)
+        {
+            currentTeam = teamRed;
+        }
+        else
+        {
+            currentTeam = teamBlue;
+        }
+
+        spotlight.ChangeTeamLight(currentTeam);
+        ui.ChangeEdgeColor(currentTeam);
+        ui.SwitchTeamFlags(currentTeam);
+        ChangeRoundType();
 
         Debug.Log("TEAM " + currentTeam.color + "'s TURN");
     }
 
-    void StartGame()
-    {  
-        teamA.goalNumber = Random.Range(10, 20);
-        EndNumberA.text = teamA.goalNumber.ToString();
-
-        teamB.goalNumber = Random.Range(10, 20);
-        EndNumberB.text = teamB.goalNumber.ToString();
-
-        EquationA.text = "";
-        EquationB.text = "";
+    public void StartGame()
+    {
+        goalNumber = Random.Range(10, 25); //Temp
+        teamBlue.goalNumber = goalNumber;
+        teamRed.goalNumber = goalNumber;
+        EndNumber.text = goalNumber.ToString();
 
         //randomly select starting team
-        int startteam = Random.Range(0, 1);
+        int startteam = Random.Range(0, 2);
 
         if (startteam == 0)
         {
-            currentTeam = teamA;
+            currentTeam = teamBlue;
         }
         else
         {
-            currentTeam = teamB;
+            currentTeam = teamRed;
         }
+
+        ui.StartUI(currentTeam);
+        spotlight.ChangeTeamLight(currentTeam);
+        ui.ChangeEdgeColor(currentTeam);
+
+        //Generating bricks
+        goalNumber = Random.Range(20, 50); //Temp
+        numberOfBricks = 5;
+        brickNumbers = algorithm.GenerateBrickNumbers(goalNumber, numberOfBricks);
+        brickManager.SpawnBricks(brickNumbers);
+        brickManager.StartNumberRound();
+    }
+
+    //Spawns a new number brick, based om the algorithm
+    public void SpawnNewNumberBrick(Vector2 oldPosition, int number)
+    {
+        brickNumbers.Remove(number);
+        brickManager.RemoveBrick(oldPosition);
+        int newNumber = algorithm.GenerateNewBrick(currentTeam.result, brickNumbers);
+        brickManager.SpawnNewBrick(newNumber);
+        brickNumbers.Add(newNumber);
+    }
+
+    //Changes the currentteam's round type, so they can either hit number or operation bricks
+    private void ChangeRoundType()
+    {
+        if (currentTeam.operationRound)
+        {
+            brickManager.StartOperationRound();
+        }
+        else
+        {
+            brickManager.StartNumberRound();
+        }
+    }
+
+    /// <summary>
+    /// Called when a team has hit a brick
+    /// </summary>
+    /// <param name="brick">the brick you hit.</param>
+    /// <returns>Whether the move was allowed or not.</returns>
+    public bool HitBrick(Interactable brick)
+    {
+        //At the start of the game, pick a start number.
+        if (currentTeam.started == false)
+        {
+            if (brick is NumberBlock)
+            {
+                ui.StartMoveNumberBrick(brick, currentTeam);
+                currentTeam.HitNumberBrick(brick, true);
+                currentTeam.started = true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //During the rest of the game, we have to check which brick was hit.
+        else
+        {
+            //A Number block
+            if (brick is NumberBlock)
+            {
+                NumberBlock num = brick as NumberBlock;
+
+                //Only if there is a multiplier selected, you are allowed to hit a number.
+                if (!currentTeam.operationRound)
+                {
+                    ui.StartMoveNumberBrick(brick, currentTeam);
+                    currentTeam.HitNumberBrick(num);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            //An operation block
+            else if (brick is OperationBlock)
+            {
+
+                //Only if there is currently no multiplier you are allowed to hit one.
+                if (currentTeam.operationRound)
+                {
+                    ui.StartMoveOperationBrick(brick, currentTeam);
+                    currentTeam.HitOperationBrick(brick);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        StartHitTimout();
+
+        return true;
     }
 }
